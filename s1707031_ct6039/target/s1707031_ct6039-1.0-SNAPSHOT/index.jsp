@@ -1,17 +1,20 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%--Landing Index page for all users.--%>
+<%--Landing Index page for all users--%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>JSP - Hello World</title>
+    <title>Homepage</title>
 </head>
+    <body>
     <div class="navbar">
 
     </div>
-    <body>
-    <h1><%= "Hello!" %></h1>
+
+    <h1><%= "Welcome!" %></h1>
     <br/>
-    <a href="hello-servlet">Hello Servlet (goes to HelloServlet endpoint!)</a>
+
+    <a href=${pageContext.request.contextPath}/servlets/Redirects?location=home>&nbsp;Return Home&nbsp;</a>
+    <a href=${pageContext.request.contextPath}/servlets/Redirects?location=child-login>&nbsp;Child Login&nbsp;</a>
 
     <div class="footer">
 

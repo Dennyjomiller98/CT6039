@@ -1,0 +1,118 @@
+package com.uog.miller.s1707031_ct6039.servlets;
+
+import java.io.IOException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.log4j.Logger;
+
+@WebServlet(name = "Redirects")
+public class Redirects extends HttpServlet
+{
+	static final Logger LOG = Logger.getLogger(Redirects.class);
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	{
+		//When user clicks on an operation to redirect to new page, GET request called
+		String location = request.getParameter("location");
+		if(location != null)
+		{
+			//Select redirect based on location
+			LOG.debug("Found location: " + location + ", attempting to redirect.");
+			try
+			{
+				String redirect = switchFindLocation(location);
+				response.sendRedirect(request.getContextPath() + redirect);
+			}
+			catch(IOException e)
+			{
+				LOG.error("Unable to redirect using location:" + location);
+			}
+		}
+		else
+		{
+			//Error, redirect to error page.
+			try
+			{
+				LOG.error("No location specified, returning to homepage");
+				response.sendRedirect(request.getContextPath() + "/index.jsp");
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+
+		}
+	}
+
+	private String switchFindLocation(String location)
+	{
+		//Switch case uses request param to redirect user to correct page. If no location is specified, return to index homepage
+		//(A lot cleaner than multiple servlet mappings for every redirect)
+		String ret;
+		switch (location)
+		{
+			case "child-login":
+				ret = "/jsp/users/child/childlogin.jsp";
+				break;
+			case "child-register":
+				ret = "/jsp/users/child/childregistration.jsp";
+				break;
+			case "child-profile":
+				ret = "/jsp/users/child/childprofile.jsp";
+				break;
+
+			case "parent-login":
+				ret = "/jsp/users/parent/parentlogin.jsp";
+				break;
+			case "parent-register":
+				ret = "/jsp/users/parent/parentregistration.jsp";
+				break;
+			case "parent-profile":
+				ret = "/jsp/users/parent/parentprofile.jsp";
+				break;
+
+			case "teacher-login":
+				ret = "/jsp/users/teacher/teacherlogin.jsp";
+				break;
+			case "teacher-register":
+				ret = "/jsp/users/teacher/teacherregistration.jsp";
+				break;
+			case "teacher-profile":
+				ret = "/jsp/users/teacher/teacherprofile.jsp";
+				break;
+
+			case "calender":
+				ret = "/jsp/actions/calender/viewcalender.jsp";
+				break;
+
+			case "lessons":
+				ret = "/jsp/actions/lessons/join.jsp";
+				break;
+
+			case "progress-request":
+				ret = "/jsp/actions/progress/requestprogress.jsp";
+				break;
+			case "progress-submit":
+				ret = "/jsp/actions/progress/submitprogress.jsp";
+				break;
+			case "progress-view":
+				ret = "/jsp/actions/progress/viewprogress.jsp";
+				break;
+
+			case "home":
+			default:
+				ret = "/index.jsp";
+				break;
+		}
+		return ret;
+	}
+
+	@Override
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+	{
+		//Empty (for now)
+	}
+}
