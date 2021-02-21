@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
+/**
+ *	Action Servlet for Redirect operations (Mainly Navbar uses).
+ */
 @WebServlet(name = "Redirects")
 public class Redirects extends HttpServlet
 {

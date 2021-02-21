@@ -14,4 +14,79 @@
         <url-pattern>/servlets/Redirects</url-pattern>
     </servlet-mapping>
 
+    <!--Parent/Child/Teacher servlets-->
+    <servlet>
+        <servlet-name>childregistration</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.users.child.ChildRegistration</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>childregistration</servlet-name>
+        <url-pattern>/servlets/users/child/ChildRegistration</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>parentregistration</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.users.parent.ParentRegistration</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>parentregistration</servlet-name>
+        <url-pattern>/servlets/users/parent/ParentRegistration</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>teacherregistration</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.users.teacher.TeacherRegistration</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>teacherregistration</servlet-name>
+        <url-pattern>/servlets/users/teacher/TeacherRegistration</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>childlogin</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.users.child.ChildLogin</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>childlogin</servlet-name>
+        <url-pattern>/servlets/users/child/ChildLogin</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>parentlogin</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.users.parent.ParentLogin</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>parentlogin</servlet-name>
+        <url-pattern>/servlets/users/parent/ParentLogin</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>teacherlogin</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.users.teacher.TeacherLogin</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>teacherlogin</servlet-name>
+        <url-pattern>/servlets/users/teacher/TeacherLogin</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>childprofile</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.users.child.ChildProfile</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>childprofile</servlet-name>
+        <url-pattern>/servlets/users/child/ChildProfile</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>parentprofile</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.users.parent.ParentProfile</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>parentprofile</servlet-name>
+        <url-pattern>/servlets/users/parent/ParentProfile</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>teacherprofile</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.users.teacher.TeacherProfile</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>teacherprofile</servlet-name>
+        <url-pattern>/servlets/users/teacher/TeacherProfile</url-pattern>
+    </servlet-mapping>
 </web-app>
