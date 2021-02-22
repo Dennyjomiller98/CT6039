@@ -60,6 +60,9 @@ public class Redirects extends HttpServlet
 			case "child-login":
 				ret = "/jsp/users/child/childlogin.jsp";
 				break;
+			case "parent-logout":
+				ret = "/jsp/users/child/childlogout.jsp";
+				break;
 			case "child-register":
 				ret = "/jsp/users/child/childregistration.jsp";
 				break;
@@ -70,6 +73,9 @@ public class Redirects extends HttpServlet
 			case "parent-login":
 				ret = "/jsp/users/parent/parentlogin.jsp";
 				break;
+			case "parent-log":
+				ret = "/jsp/users/parent/parentlogout.jsp";
+				break;
 			case "parent-register":
 				ret = "/jsp/users/parent/parentregistration.jsp";
 				break;
@@ -79,6 +85,9 @@ public class Redirects extends HttpServlet
 
 			case "teacher-login":
 				ret = "/jsp/users/teacher/teacherlogin.jsp";
+				break;
+			case "teacher-logout":
+				ret = "/jsp/users/teacher/teacherlogout.jsp";
 				break;
 			case "teacher-register":
 				ret = "/jsp/users/teacher/teacherregistration.jsp";
@@ -105,8 +114,15 @@ public class Redirects extends HttpServlet
 				ret = "/jsp/actions/progress/viewprogress.jsp";
 				break;
 
+			case "homework-view":
+				ret = "/jsp/actions/homework/viewhomework.jsp";
+				break;
+
 			case "login":
 				ret = "/jsp/users/loginindex.jsp";
+				break;
+			case "logout":
+				ret = "/jsp/users/logoutindex.jsp";
 				break;
 			case "register":
 				ret = "/jsp/users/registerindex.jsp";

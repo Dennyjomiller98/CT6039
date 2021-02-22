@@ -15,61 +15,145 @@
         <jsp:include page="../../required.jsp"/>
         <link rel="stylesheet" href="../../../css/main.css">
 
-        <div class="navbar">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="${pageContext.request.contextPath}/servlets/Redirects?location=home"><%="School Site"%></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/servlets/Redirects?location=home">Home</a>
+                        </li>
+                        <%--If logged in, show nav links, else just have home & account signup/login visible--%>
+                        <% String email = (String) session.getAttribute("email");
+                            if(email != null) { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=calender">Calender</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=progress-view">Progress</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=homework-view">Homework</a>
+                        </li>
+                        <%} else { %>
+                        <li class="nav-item">
+                            <a class="nav-link">You must be signed in to access site features</a>
+                        </li>
+                        <% } %>
+                    </ul>
+                    <%--Login/Register Side of navbar. if logged in, show logout/account links--%>
+                    <span class="navbar-text">
+                        <% if(email != null) { %>
+                            <% String isChild = (String) session.getAttribute("isChild");
+                                String isTeacher = (String) session.getAttribute("isTeacher");
+                                String isParent = (String) session.getAttribute("isParent");
+                                if(isChild != null) { %>
+                                    <a class="nav-link navbar-login-info"><%="Logged in as: "%><%=email%></a>
+                                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                                        <a href=${pageContext.request.contextPath}/servlets/Redirects?location=child-profile>&nbsp;My account&nbsp;</a>
+                                    </button>
+                                    &nbsp;
+                                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                                        <a href=${pageContext.request.contextPath}/servlets/Redirects?location=child-logout>&nbsp;Logout&nbsp;</a>
+                                    </button>
+                                <% } else if(isParent != null) { %>
+                                    <a class="nav-link navbar-login-info"><%="Logged in as: "%><%=email%></a>
+                                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                                        <a href=${pageContext.request.contextPath}/servlets/Redirects?location=parent-profile>&nbsp;My account&nbsp;</a>
+                                    </button>
+                                    &nbsp;
+                                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                                        <a href=${pageContext.request.contextPath}/servlets/Redirects?location=parent-logout>&nbsp;Logout&nbsp;</a>
+                                    </button>
+                                <% } else if(isTeacher != null) { %>
+                                    <a class="nav-link navbar-login-info"><%="Logged in as: "%><%=email%></a>
+                                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                                        <a href=${pageContext.request.contextPath}/servlets/Redirects?location=teacher-profile>&nbsp;My account&nbsp;</a>
+                                    </button>
+                                    &nbsp;
+                                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                                        <a href=${pageContext.request.contextPath}/servlets/Redirects?location=teacher-logout>&nbsp;Logout&nbsp;</a>
+                                    </button>
+                                <% } %>
+                        <%} else { %>
+                            <a class="nav-link navbar-login-info"><%="You are not logged in"%></a>
+                            <button class="btn btn-sm btn-outline-secondary" type="button">
+                            <a href=${pageContext.request.contextPath}/servlets/Redirects?location=login>&nbsp;Login&nbsp;</a>
+                            </button>
+                            &nbsp;
+                            <button class="btn btn-sm btn-outline-secondary" type="button">
+                                <a href=${pageContext.request.contextPath}/servlets/Redirects?location=register>&nbsp;Register&nbsp;</a>
+                            </button>
+                        <% } %>
+                    </span>
+                </div>
+            </div>
+        </nav>
 
+        <%--Title--%>
+        <div class="main-body-content">
+            <h1><%="Register Child Account"%></h1>
+            <br/>
         </div>
 
-        <h1><%="Register Child Account" %></h1>
-        <br/>
-
-        <p>
-            <%= "From here, you can register a child account and assign them to a year."%>
+        <p class="main-body-text">
+            <%="From here, you can register a child account and assign them to a year."%>
             <%="Once the account is created and assigned to a year, the child can be added to a Class. If a child is added to a class, they can join class lessons, access class materials and submit homework."%>
         </p>
 
-        <form action="${pageContext.request.contextPath}/servlets/users/child/ChildRegistration" method="POST">
+        <form class="reg-form" action="${pageContext.request.contextPath}/servlets/users/child/ChildRegistration" method="POST">
+            <strong id="address-value" hidden></strong>
+
             <% String errors = (String) session.getAttribute("formErrors");
             if(errors != null) { %>
             <div class="alert alert-danger" role="alert" id="formErrors"><%=errors%></div>
             <%}%>
             <br/>
-            <label for="firstname"><%="Firstname:"%></label>
-            <input type="text" name="firstname" id="firstname" required/>
+            <label for="firstname" class="form-label"><%="Firstname"%></label>
+            <input type="text" name="firstname" id="firstname" class="form-control" required/>
             <br/>
-            <label for="surname"><%="Surname:"%></label>
-            <input type="text" name="surname" id="surname" required/>
+            <label for="surname" class="form-label"><%="Surname"%></label>
+            <input type="text" name="surname" id="surname" class="form-control" required/>
             <br/>
-            <label for="email"><%="Email:"%></label>
-            <input type="email" name="email" id="email" required/>
+            <label for="email" class="form-label"><%="Email"%></label>
+            <input type="email" name="email" id="email" class="form-control" required/>
             <br/>
-            <label for="dob"><%="Date of Birth:"%></label>
-            <input type="date" name="dob" id="dob" required/>
+            <label for="dob" class="form-label"><%="Date of Birth"%></label>
+            <input type="date" name="dob" id="dob" class="form-control" required/>
             <br/>
-            <label for="address"><%="Address (Start Typing to auto-fill):"%></label>
+            <label for="address" class="form-label"><%="Address (Start Typing to auto-fill)"%></label>
             <input type="search" id="address" class="form-control" placeholder="Begin Entering your address..." />
-            <strong id="address-value" hidden></strong>
             <br/>
-            <label for="year"><%="Year:"%></label>
-            <select class="select-css" style="width: 50%; display:inline-block" name="year" id="year" required>
+            <label for="year" class="form-label"><%="Year"%></label>
+            <select class="select-css form-control" name="year" id="year" required>
                 <%--Iterate each year, in DB reception has ID 0, and name "reception". Use these for options --%>
+                <option value="None">None</option>
+                <option value="None2">None 2</option>
             </select>
             <br/>
-            <label for="pword"><%="Password:"%></label>
-            <input type="password" name="pword" id="pword" minlength="8" required/>
+            <label for="pword" class="form-label"><%="Password"%></label>
+            <input type="password" name="pword" id="pword" minlength="8" class="form-control" required/>
             <br/>
-            <label for="pwordConfirm"><%="Confirm Password:"%></label>
-            <input type="password" name="pwordConfirm" id="pwordConfirm" minlength="8" required/>
+            <label for="pwordConfirm" class="form-label"><%="Confirm Password"%></label>
+            <input type="password" name="pwordConfirm" id="pwordConfirm" minlength="8" class="form-control" required/>
             <br/>
             <div class="alert alert-warning" role="alert" id="pwordErrors" style="display: none">Passwords do not match!</div>
             <input class="btn btn-primary" type="reset" value="Clear">
             <input class="btn btn-primary" type="submit" id="submit-btn" value="Submit">
         </form>
-        <a href=${pageContext.request.contextPath}/servlets/Redirects?location=home>&nbsp;Return Home&nbsp;</a>
-        <a href=${pageContext.request.contextPath}/servlets/Redirects?location=child-login>&nbsp;Child Login&nbsp;</a>
 
-        <div class="footer">
-
-        </div>
+        <footer class="footer">
+            <div class="">
+                <span class="text-muted">CT6039 Project by S1707031 &copy;2021</span>
+                <a href=${pageContext.request.contextPath}/servlets/Redirects?location=home>&nbsp;Return Home&nbsp;</a>
+                <a href=${pageContext.request.contextPath}/servlets/Redirects?location=child-login>&nbsp;Child Login&nbsp;</a>
+                <a href=${pageContext.request.contextPath}/servlets/Redirects?location=parent-login>&nbsp;Parent Login&nbsp;</a>
+                <a href=${pageContext.request.contextPath}/servlets/Redirects?location=teacher-login>&nbsp;Teacher Login&nbsp;</a>
+            </div>
+        </footer>
 
         <script>
             //Address Search

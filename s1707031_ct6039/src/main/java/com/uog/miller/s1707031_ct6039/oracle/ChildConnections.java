@@ -73,9 +73,54 @@ public class ChildConnections extends AbstractOracleConnections
 		oracleClient.close();
 	}
 
-	public void login()
+	public ChildBean login(String email, String pword)
 	{
-		//Needs Auth
+		ChildBean ret = null;
+		boolean userExists = checkUserExists(email);
+		if(userExists)
+		{
+			ret = validateCredentials(email, pword);
+		}
+		return ret;
+	}
+
+	private ChildBean validateCredentials(String email, String pword)
+	{
+		//Default to true in case of an error.
+		ChildBean ret = null;
+
+		//Connect to DB, check if email is present
+		setOracleDriver();
+		try
+		{
+			AbstractOracleConnections conn = new AbstractOracleConnections();
+			Connection oracleClient = conn.getOracleClient();
+			if(oracleClient != null)
+			{
+				//Select Query
+				String query = "SELECT * FROM " + CHILDRENS_COLLECTION + "WHERE EMAIL='" + email +"' AND PWORD='" + pword + "'";
+				//Execute query
+				ArrayList<ChildBean> allChildren = executeQuery(oracleClient, query);
+				if(allChildren.size() == 1)
+				{
+					ret = allChildren.get(0);
+				}
+				else
+				{
+					LOG.error("Multiple matching users found, this shouldn't happen.");
+				}
+			}
+			else
+			{
+				LOG.error("connection failure");
+			}
+		}
+		catch(Exception e)
+		{
+			LOG.error("Unable to retrieve user from Oracle", e);
+		}
+
+		return ret;
 	}
 
 	public void logout()
@@ -121,7 +166,7 @@ public class ChildConnections extends AbstractOracleConnections
 		}
 		catch(Exception e)
 		{
-			LOG.error("Unable to retrieve all students from Oracle", e);
+			LOG.error("Unable to see if child exists", e);
 		}
 
 		return ret;
