@@ -8,10 +8,36 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <!Doctype HTML>
 <html lang="en">
-<head>
-    <title>Title</title>
-</head>
-<body>
+    <head>
+        <title>Parent Login</title>
+    </head>
 
-</body>
+    <body>
+        <jsp:include page="../../required.jsp"/>
+
+        <div class="navbar">
+
+        </div>
+
+        <h1><%="Parent Account Login Portal" %></h1>
+        <br/>
+
+        <p>
+            <%="From this portal, you can log in with your Parent account credentials."%>
+        </p>
+        <form action="${pageContext.request.contextPath}/servlets/users/parent/ParentLogin" method="GET">
+            <label for="email"><%="Email:"%></label>
+            <input type="email" name="email" id="email" required/>
+            <br/>
+            <label for="pword"><%="Password:"%></label>
+            <input type="password" name="pword" id="pword" minlength="8" required/>
+            <br/>
+            <input class="btn btn-primary" type="reset" value="Clear">
+            <input class="btn btn-primary" type="submit" value="Submit">
+        </form>
+
+        <div class="footer">
+
+        </div>
+    </body>
 </html>

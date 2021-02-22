@@ -9,9 +9,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Login</title>
+    <title>Login Index</title>
 </head>
 <body>
 
+<%--3 cards, each has login forms for each section--%>
 </body>
 </html>

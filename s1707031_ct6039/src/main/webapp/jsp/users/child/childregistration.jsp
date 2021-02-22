@@ -13,6 +13,7 @@
     </head>
     <body>
         <jsp:include page="../../required.jsp"/>
+        <link rel="stylesheet" href="../../../css/main.css">
 
         <div class="navbar">
 
@@ -27,6 +28,11 @@
         </p>
 
         <form action="${pageContext.request.contextPath}/servlets/users/child/ChildRegistration" method="POST">
+            <% String errors = (String) session.getAttribute("formErrors");
+            if(errors != null) { %>
+            <div class="alert alert-danger" role="alert" id="formErrors"><%=errors%></div>
+            <%}%>
+            <br/>
             <label for="firstname"><%="Firstname:"%></label>
             <input type="text" name="firstname" id="firstname" required/>
             <br/>
@@ -54,8 +60,9 @@
             <label for="pwordConfirm"><%="Confirm Password:"%></label>
             <input type="password" name="pwordConfirm" id="pwordConfirm" minlength="8" required/>
             <br/>
-            <input type="reset" value="Clear">
-            <input type="submit" value="Submit">
+            <div class="alert alert-warning" role="alert" id="pwordErrors" style="display: none">Passwords do not match!</div>
+            <input class="btn btn-primary" type="reset" value="Clear">
+            <input class="btn btn-primary" type="submit" id="submit-btn" value="Submit">
         </form>
         <a href=${pageContext.request.contextPath}/servlets/Redirects?location=home>&nbsp;Return Home&nbsp;</a>
         <a href=${pageContext.request.contextPath}/servlets/Redirects?location=child-login>&nbsp;Child Login&nbsp;</a>
@@ -65,12 +72,13 @@
         </div>
 
         <script>
+            //Address Search
             (function() {
-                var placesAutocomplete = places({
+                let placesAutocomplete = places({
                     container: document.querySelector('#address')
                 });
 
-                var $address = document.querySelector('#address-value')
+                let $address = document.querySelector('#address-value')
                 placesAutocomplete.on('change', function(e) {
                     $address.textContent = e.suggestion.value
                 });
@@ -80,6 +88,25 @@
                 });
 
             })();
+
+            //Password validation
+            let pword = $("#pword");
+            let pwordConfirm = $("#pwordConfirm");
+            function verifyPword() {
+                let pwordErrors = $("#pwordErrors");
+                if (pword.val() !== pwordConfirm.val()) {
+                    pwordErrors.show();
+                } else {
+                    pwordErrors.hide();
+                }
+            }
+
+            pword.keyup(function() {
+                verifyPword();
+            });
+            pwordConfirm.keyup(function() {
+                verifyPword();
+            });
         </script>
     </body>
 </html>

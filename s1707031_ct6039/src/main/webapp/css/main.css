@@ -1,0 +1,11 @@
+.main-body-content{
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+.card-index{
+    /*For 3 index cards in one*/
+    width: 90%;
+    margin: auto;
+    text-align: center;
+}

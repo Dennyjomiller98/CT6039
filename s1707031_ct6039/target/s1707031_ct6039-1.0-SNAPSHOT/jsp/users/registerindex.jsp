@@ -12,6 +12,7 @@
     <title>Register</title>
 </head>
 <body>
+<%--3 cards, each has registration buttons for each section, DONT DYNAMIC REG FORMS here--%>
 
 </body>
 </html>

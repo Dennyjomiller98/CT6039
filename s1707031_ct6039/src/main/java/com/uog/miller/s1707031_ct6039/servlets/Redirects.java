@@ -105,6 +105,13 @@ public class Redirects extends HttpServlet
 				ret = "/jsp/actions/progress/viewprogress.jsp";
 				break;
 
+			case "login":
+				ret = "/jsp/users/loginindex.jsp";
+				break;
+			case "register":
+				ret = "/jsp/users/registerindex.jsp";
+				break;
+
 			case "home":
 			default:
 				ret = "/index.jsp";

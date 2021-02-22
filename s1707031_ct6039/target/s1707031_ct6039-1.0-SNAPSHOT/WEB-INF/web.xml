@@ -15,6 +15,7 @@
     </servlet-mapping>
 
     <!--Parent/Child/Teacher servlets-->
+    <!--REGISTRATION-->
     <servlet>
         <servlet-name>childregistration</servlet-name>
         <servlet-class>com.uog.miller.s1707031_ct6039.servlets.users.child.ChildRegistration</servlet-class>
@@ -39,7 +40,7 @@
         <servlet-name>teacherregistration</servlet-name>
         <url-pattern>/servlets/users/teacher/TeacherRegistration</url-pattern>
     </servlet-mapping>
-
+    <!--LOGINS-->
     <servlet>
         <servlet-name>childlogin</servlet-name>
         <servlet-class>com.uog.miller.s1707031_ct6039.servlets.users.child.ChildLogin</servlet-class>
@@ -64,7 +65,32 @@
         <servlet-name>teacherlogin</servlet-name>
         <url-pattern>/servlets/users/teacher/TeacherLogin</url-pattern>
     </servlet-mapping>
-
+    <!--LOGOUTS-->
+    <servlet>
+        <servlet-name>childlogout</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.users.child.ChildLogout</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>childlogout</servlet-name>
+        <url-pattern>/servlets/users/child/ChildLogout</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>parentlogout</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.users.parent.ParentLogout</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>parentlogout</servlet-name>
+        <url-pattern>/servlets/users/parent/ParentLogout</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>teacherlogout</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.users.teacher.TeacherLogout</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>teacherlogout</servlet-name>
+        <url-pattern>/servlets/users/teacher/TeacherLogout</url-pattern>
+    </servlet-mapping>
+    <!--PROFILE-->
     <servlet>
         <servlet-name>childprofile</servlet-name>
         <servlet-class>com.uog.miller.s1707031_ct6039.servlets.users.child.ChildProfile</servlet-class>
@@ -89,4 +115,5 @@
         <servlet-name>teacherprofile</servlet-name>
         <url-pattern>/servlets/users/teacher/TeacherProfile</url-pattern>
     </servlet-mapping>
+
 </web-app>
