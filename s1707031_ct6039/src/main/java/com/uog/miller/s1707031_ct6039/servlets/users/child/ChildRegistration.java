@@ -36,6 +36,7 @@ public class ChildRegistration extends HttpServlet
 			LOG.error("Passwords should have matched!");
 			//Redirect Back to Registration Page
 			request.getSession(true).setAttribute("formErrors", "Passwords did not match despite passing checks. Please re-enter and try again");
+			request.getSession(true).removeAttribute("formSuccess");
 			try
 			{
 				response.sendRedirect(request.getContextPath() + "/jsp/users/child/childregistration.jsp");
@@ -53,6 +54,7 @@ public class ChildRegistration extends HttpServlet
 				LOG.error("Registration of User: " + email + " failed, as account already exists");
 				//Redirect Back to Registration Page
 				request.getSession(true).setAttribute("formErrors", "There is already an account linked with:" + email);
+				request.getSession(true).removeAttribute("formSuccess");
 				try
 				{
 					response.sendRedirect(request.getContextPath() + "/jsp/users/child/childregistration.jsp");
@@ -60,21 +62,23 @@ public class ChildRegistration extends HttpServlet
 					LOG.error("Failure to redirect.", e);
 				}
 			}
-
-			//Populate Bean for Registration
-			ChildBean bean = new ChildBean();
-			bean.setFirstname(firstname);
-			bean.setSurname(surname);
-			bean.setEmail(email);
-			bean.setDOB(dob);
-			bean.setAddress(address);
-			bean.setYear(year);
-			bean.setPword(pword);
-			//Get 'Default' account settings for new user
-			bean.setEmailForHomework(true);
-			bean.setEmailForCalender(true);
-			bean.setEmailForProfile(true);
-			attemptChildRegistration(request, response, bean);
+			else
+			{
+				//Populate Bean for Registration
+				ChildBean bean = new ChildBean();
+				bean.setFirstname(firstname);
+				bean.setSurname(surname);
+				bean.setEmail(email.toLowerCase());
+				bean.setDOB(dob);
+				bean.setAddress(address);
+				bean.setYear(year);
+				bean.setPword(pword);
+				//Get 'Default' account settings for new user
+				bean.setEmailForHomework(true);
+				bean.setEmailForCalender(true);
+				bean.setEmailForProfile(true);
+				attemptChildRegistration(request, response, bean);
+			}
 		}
 	}
 
@@ -88,6 +92,7 @@ public class ChildRegistration extends HttpServlet
 		{
 			//Redirect happy path, remove errors (if any)
 			request.getSession(true).removeAttribute("formErrors");
+			request.getSession(true).setAttribute("formSuccess", "Account created successfully.");
 			try
 			{
 				response.sendRedirect(request.getContextPath() + "/jsp/users/child/childlogin.jsp");
@@ -100,6 +105,7 @@ public class ChildRegistration extends HttpServlet
 			LOG.error("Unknown error occurred whilst attempting to create new User: " + bean.getEmail());
 			//Redirect Back to Registration Page
 			request.getSession(true).setAttribute("formErrors", "Unknown Error. The account was not created.");
+			request.getSession(true).removeAttribute("formSuccess");
 			try
 			{
 				response.sendRedirect(request.getContextPath() + "/jsp/users/child/childregistration.jsp");

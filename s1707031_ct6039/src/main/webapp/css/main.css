@@ -5,7 +5,7 @@
 }
 .card-index{
     /*For 3 index cards in one*/
-    width: 90%;
+    width: 100%;
     margin: auto;
     text-align: center;
 }
@@ -42,4 +42,11 @@ body{
 }
 .content {
     flex: 1;
+}
+#formErrors{
+    text-align: center;
+    margin: auto;
+}
+#formSuccess{
+    text-align: center;
 }

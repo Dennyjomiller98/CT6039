@@ -26,6 +26,7 @@ public class Redirects extends HttpServlet
 			LOG.debug("Found location: " + location + ", attempting to redirect.");
 			try
 			{
+				removeAlerts(request);
 				String redirect = switchFindLocation(location);
 				response.sendRedirect(request.getContextPath() + redirect);
 			}
@@ -50,6 +51,14 @@ public class Redirects extends HttpServlet
 		}
 	}
 
+	private void removeAlerts(HttpServletRequest request)
+	{
+		//Otherwise (For example) you log in, browse pages, "Logged in Successfully" will retain. This way the alert is used for the relevant pages.
+		request.getSession(true).removeAttribute("formErrors");
+		request.getSession(true).removeAttribute("formSuccess");
+
+	}
+
 	private String switchFindLocation(String location)
 	{
 		//Switch case uses request param to redirect user to correct page. If no location is specified, return to index homepage
@@ -59,9 +68,6 @@ public class Redirects extends HttpServlet
 		{
 			case "child-login":
 				ret = "/jsp/users/child/childlogin.jsp";
-				break;
-			case "parent-logout":
-				ret = "/jsp/users/child/childlogout.jsp";
 				break;
 			case "child-register":
 				ret = "/jsp/users/child/childregistration.jsp";
@@ -73,9 +79,6 @@ public class Redirects extends HttpServlet
 			case "parent-login":
 				ret = "/jsp/users/parent/parentlogin.jsp";
 				break;
-			case "parent-log":
-				ret = "/jsp/users/parent/parentlogout.jsp";
-				break;
 			case "parent-register":
 				ret = "/jsp/users/parent/parentregistration.jsp";
 				break;
@@ -85,9 +88,6 @@ public class Redirects extends HttpServlet
 
 			case "teacher-login":
 				ret = "/jsp/users/teacher/teacherlogin.jsp";
-				break;
-			case "teacher-logout":
-				ret = "/jsp/users/teacher/teacherlogout.jsp";
 				break;
 			case "teacher-register":
 				ret = "/jsp/users/teacher/teacherregistration.jsp";

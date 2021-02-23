@@ -1,9 +1,13 @@
 package com.uog.miller.s1707031_ct6039.beans;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import org.apache.log4j.Logger;
 
 public class ChildBean
 {
+	static final Logger LOG = Logger.getLogger(ChildBean.class);
+
 	private String fName;
 	private String fSurname;
 	private String fEmail;
@@ -22,7 +26,23 @@ public class ChildBean
 
 	public ChildBean(ResultSet resultSet)
 	{
-		//fName = resultSet.name etc...
+		try
+		{
+			fName = resultSet.getString("Firstname");
+			fSurname = resultSet.getString("Surname");
+			fEmail = resultSet.getString("Email");
+			fDOB = resultSet.getString("DOB");
+			fAddress = resultSet.getString("Address");
+			fYear = resultSet.getString("Year");
+			fPword = resultSet.getString("Pword");
+			fHomeworkEmail = resultSet.getBoolean("Homework_Email");
+			fCalenderEmail = resultSet.getBoolean("Calender_Email");
+			fProfileEmail = resultSet.getBoolean("Profile_Email");
+		}
+		catch (SQLException throwables)
+		{
+			LOG.error("Unable to create Bean from ResultSet", throwables);
+		}
 	}
 
 	public String getFirstname()

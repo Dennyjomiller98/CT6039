@@ -39,6 +39,7 @@ public class ChildLogin extends HttpServlet
 				LOG.debug("Login Success for user: " + email);
 				//Redirect to Profile Account Page
 				request.getSession(true).removeAttribute("formErrors");
+				request.getSession(true).setAttribute("formSuccess", "Logged in successfully.");
 				try
 				{
 					response.sendRedirect(request.getContextPath() + "/jsp/users/child/childprofile.jsp");
@@ -88,6 +89,6 @@ public class ChildLogin extends HttpServlet
 		request.getSession(true).setAttribute("calenderEmail", loggedInChildBean.getEmailForCalender());
 		request.getSession(true).setAttribute("profileEmail", loggedInChildBean.getEmailForProfile());
 		//Custom Child session login attribute
-		request.getSession(true).setAttribute("isChild", true);
+		request.getSession(true).setAttribute("isChild", "true");
 	}
 }

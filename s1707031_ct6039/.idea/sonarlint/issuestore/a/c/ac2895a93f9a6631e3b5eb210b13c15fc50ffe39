@@ -1,0 +1,12 @@
+
+m	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ºÿáÚ8ïŸœ×ü.
+|
+java:S1488"`Immediately return this expression instead of assigning it to the temporary variable "allYears".(ÕËá8î£š×ü.
+F
+java:S1172")Remove this unused method parameter "ID".(ºÿáÚ8©®×ü.
+}
+java:S1488"[Immediately return this expression instead of assigning it to the temporary variable "ret".(¿é§ÿÿÿÿÿ8©®×ü.
+}
+java:S1488"[Immediately return this expression instead of assigning it to the temporary variable "ret".(¿é§ÿÿÿÿÿ8æˆ×ü.
+M
+java:S1172"+Remove this unused method parameter "name".(ÜÎÙûÿÿÿÿ8æˆ×ü.
