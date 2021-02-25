@@ -15,28 +15,6 @@ public class YearConnections extends AbstractOracleConnections
 		//Empty Constructor
 	}
 
-	public Map<String, String> getAllYearsAndNames()
-	{
-		//Get Map<yearID, yearName> of all years in DB
-		Map<String, String> allYears = new HashMap<>();
-		return allYears;
-	}
-
-	public String getYearIDFromName(String name)
-	{
-		String ret = null;
-		return ret;
-	}
-
-	public String getYearNameFromID(String ID)
-	{
-		String ret = null;
-		return ret;
-	}
-
-
-
-
 	//Returns Map<ID/Name> of all ClassYears in the school (Recep/Yr1/etc)
 	public Map<String, String> getAllClassYears()
 	{

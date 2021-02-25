@@ -23,6 +23,11 @@ public class TeacherLogin extends HttpServlet
 	{
 		String email = request.getParameter("email");
 		String pword = request.getParameter("pword");
+		if(email == null && pword == null)
+		{
+			email = request.getParameter("teacherEmail");
+			pword = request.getParameter("teacherPword");
+		}
 
 		//Ensure values supplied not null
 		if(email != null && pword != null)

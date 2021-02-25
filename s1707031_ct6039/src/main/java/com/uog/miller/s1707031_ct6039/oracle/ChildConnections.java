@@ -26,13 +26,13 @@ public class ChildConnections extends AbstractOracleConnections
 			if(oracleClient != null)
 			{
 				//Add Child to DB
-				String values = "'" +beanToRegister.getFirstname()
-						+ "','" + beanToRegister.getSurname()
-						+ "','" + beanToRegister.getEmail()
+				String values = "'" +beanToRegister.getFirstname().replace("'", "''")
+						+ "','" + beanToRegister.getSurname().replace("'", "''")
+						+ "','" + beanToRegister.getEmail().replace("'", "''")
 						+ "','" + beanToRegister.getDOB()
-						+ "','" + beanToRegister.getAddress()
+						+ "','" + beanToRegister.getAddress().replace("'", "''")
 						+ "','" + beanToRegister.getYear()
-						+ "','" + beanToRegister.getPword()
+						+ "','" + beanToRegister.getPword().replace("'", "''")
 						+ "','" + beanToRegister.getEmailForHomework()
 						+ "','" + beanToRegister.getEmailForCalender()
 						+ "','" + beanToRegister.getEmailForProfile() + "'";
@@ -99,7 +99,7 @@ public class ChildConnections extends AbstractOracleConnections
 			if(oracleClient != null)
 			{
 				//Select Query
-				String query = "SELECT * FROM " + CHILDRENS_COLLECTION + " WHERE Email='" + email +"' AND Pword='" + pword + "'";
+				String query = "SELECT * FROM " + CHILDRENS_COLLECTION + " WHERE Email='" + email.replace("'", "''") +"' AND Pword='" + pword.replace("'", "''") + "'";
 				//Execute query
 				ArrayList<ChildBean> allChildren = executeQuery(oracleClient, query);
 				if(allChildren.size() == 1)
@@ -143,7 +143,7 @@ public class ChildConnections extends AbstractOracleConnections
 			if(oracleClient != null)
 			{
 				//Select Query
-				String query = "SELECT * FROM " + CHILDRENS_COLLECTION + " WHERE Email='" + email +"'";
+				String query = "SELECT * FROM " + CHILDRENS_COLLECTION + " WHERE Email='" + email.replace("'", "''") +"'";
 				//Execute query
 				ArrayList<ChildBean> allChildren = executeQuery(oracleClient, query);
 				if(allChildren.isEmpty())

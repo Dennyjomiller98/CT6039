@@ -26,14 +26,14 @@ public class TeacherConnections extends AbstractOracleConnections
 			if(oracleClient != null)
 			{
 				//Add Teacher to DB
-				String values = "'" +beanToRegister.getFirstname()
-						+ "','" + beanToRegister.getTitle()
-						+ "','" + beanToRegister.getSurname()
-						+ "','" + beanToRegister.getEmail()
+				String values = "'" +beanToRegister.getFirstname().replace("'", "''")
+						+ "','" + beanToRegister.getTitle().replace("'", "''")
+						+ "','" + beanToRegister.getSurname().replace("'", "''")
+						+ "','" + beanToRegister.getEmail().replace("'", "''")
 						+ "','" + beanToRegister.getDOB()
-						+ "','" + beanToRegister.getAddress()
+						+ "','" + beanToRegister.getAddress().replace("'", "''")
 						+ "','" + beanToRegister.getYear()
-						+ "','" + beanToRegister.getPword()
+						+ "','" + beanToRegister.getPword().replace("'", "''")
 						+ "','" + beanToRegister.getEmailForHomework()
 						+ "','" + beanToRegister.getEmailForCalender()
 						+ "','" + beanToRegister.getEmailForProfile() + "'";
@@ -100,7 +100,7 @@ public class TeacherConnections extends AbstractOracleConnections
 			if(oracleClient != null)
 			{
 				//Select Query
-				String query = "SELECT * FROM " + TEACHERS_COLLECTION + " WHERE Email='" + email +"' AND Pword='" + pword + "'";
+				String query = "SELECT * FROM " + TEACHERS_COLLECTION + " WHERE Email='" + email.replace("'", "''") +"' AND Pword='" + pword.replace("'", "''") + "'";
 				//Execute query
 				ArrayList<TeacherBean> allTeachers = executeQuery(oracleClient, query);
 				if(allTeachers.size() == 1)
@@ -139,7 +139,7 @@ public class TeacherConnections extends AbstractOracleConnections
 			if(oracleClient != null)
 			{
 				//Select Query
-				String query = "SELECT * FROM " + TEACHERS_COLLECTION + " WHERE Email='" + email +"'";
+				String query = "SELECT * FROM " + TEACHERS_COLLECTION + " WHERE Email='" + email.replace("'", "''") +"'";
 				//Execute query
 				ArrayList<TeacherBean> allTeachers = executeQuery(oracleClient, query);
 				if(allTeachers.isEmpty())
@@ -190,5 +190,4 @@ public class TeacherConnections extends AbstractOracleConnections
 	{
 		//Needs Auth
 	}
-
 }

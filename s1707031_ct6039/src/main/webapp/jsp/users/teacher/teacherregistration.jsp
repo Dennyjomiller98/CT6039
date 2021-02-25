@@ -118,6 +118,7 @@
                 <label for="title" class="form-label"><%="Title"%></label>
                 <select  class="form-control" class="selectpicker" name="title" id="title" data-live-search="true">
                     <%--Single select, use Titles. (Mr/Mrs/Other (specified field)--%>
+                    <option value=""></option>
                     <option value="Mr">Mr</option>
                     <option value="Mrs">Mrs</option>
                     <option value="Other">Other (Please Specify)</option>
@@ -126,7 +127,7 @@
                 <%--If Other selected, use textbox value. When select is changed, set value in this textbox and use this value when submitting--%>
                 <label for="title-value" class="form-label"><%="Title (Other)"%></label>
                 <%--HIDE THIS WHEN "Other" NOT SELECTED!--%>
-                <input class="form-control" type="text" name="title-value" id="title-value" <%--If "Other", required--%>required/>
+                <input class="form-control" type="text" name="title-value" id="title-value" <%--If "Other", required--%>/>
                 <br/>
                 <br/>
                 <label for="firstname" class="form-label"><%="Firstname"%></label>
@@ -143,7 +144,8 @@
                 <br/>
                 <label for="address" class="form-label"><%="Address (Start Typing to auto-fill)"%></label>
                 <input type="search" id="address" class="form-control" placeholder="Begin Entering your address..." />
-                <strong id="address-value" hidden></strong>
+                <label for="address-value"></label>
+                <input type="text" name="address-value" id="address-value" hidden/>
                 <br/>
                 <label for="tutor" class="form-label"><%="Tutor for Year"%></label>
                 <select class="form-control" class="select-css" name="tutor" id="tutor" required>

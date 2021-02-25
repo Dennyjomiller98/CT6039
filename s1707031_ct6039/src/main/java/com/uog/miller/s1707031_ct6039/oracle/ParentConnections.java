@@ -1,6 +1,5 @@
 package com.uog.miller.s1707031_ct6039.oracle;
 
-import com.uog.miller.s1707031_ct6039.beans.ChildBean;
 import com.uog.miller.s1707031_ct6039.beans.ParentBean;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,13 +26,13 @@ public class ParentConnections extends AbstractOracleConnections
 			if(oracleClient != null)
 			{
 				//Add Parent to DB
-				String values = "'" +beanToRegister.getFirstname()
-						+ "','" + beanToRegister.getSurname()
-						+ "','" + beanToRegister.getEmail()
+				String values = "'" +beanToRegister.getFirstname().replace("'", "''")
+						+ "','" + beanToRegister.getSurname().replace("'", "''")
+						+ "','" + beanToRegister.getEmail().replace("'", "''")
 						+ "','" + beanToRegister.getDOB()
-						+ "','" + beanToRegister.getAddress()
+						+ "','" + beanToRegister.getAddress().replace("'", "''")
 						+ "','" + beanToRegister.getLinkedChildIds()
-						+ "','" + beanToRegister.getPword()
+						+ "','" + beanToRegister.getPword().replace("'", "''")
 						+ "','" + beanToRegister.getEmailForHomework()
 						+ "','" + beanToRegister.getEmailForCalender()
 						+ "','" + beanToRegister.getEmailForProfile() + "'";
@@ -100,7 +99,7 @@ public class ParentConnections extends AbstractOracleConnections
 			if(oracleClient != null)
 			{
 				//Select Query
-				String query = "SELECT * FROM " + PARENTS_COLLECTION + " WHERE Email='" + email +"' AND Pword='" + pword + "'";
+				String query = "SELECT * FROM " + PARENTS_COLLECTION + " WHERE Email='" + email.replace("'", "''") +"' AND Pword='" + pword.replace("'", "''") + "'";
 				//Execute query
 				ArrayList<ParentBean> allParents = executeQuery(oracleClient, query);
 				if(allParents.size() == 1)
@@ -139,7 +138,7 @@ public class ParentConnections extends AbstractOracleConnections
 			if(oracleClient != null)
 			{
 				//Select Query
-				String query = "SELECT * FROM " + PARENTS_COLLECTION + " WHERE Email='" + email +"'";
+				String query = "SELECT * FROM " + PARENTS_COLLECTION + " WHERE Email='" + email.replace("'", "''") +"'";
 				//Execute query
 				ArrayList<ParentBean> allParents = executeQuery(oracleClient, query);
 				if(allParents.isEmpty())
@@ -189,13 +188,5 @@ public class ParentConnections extends AbstractOracleConnections
 	public void deleteAccount()
 	{
 		//Needs Auth
-	}
-
-	public ArrayList<ChildBean> getChildren()
-	{
-		//TODO
-		ArrayList<ChildBean> bean = new ArrayList<>();
-		//Any children linked are retrieved, allowing parent to view child's' progress/request feedback from teacher, etc
-		return bean;
 	}
 }

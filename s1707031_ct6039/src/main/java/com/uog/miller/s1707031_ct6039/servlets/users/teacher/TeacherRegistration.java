@@ -24,12 +24,13 @@ public class TeacherRegistration extends HttpServlet
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 	{
 		String title = request.getParameter("title");
+		String titleVal = request.getParameter("title-value");
 		String firstname = request.getParameter("firstname");
 		String surname = request.getParameter("surname");
 		String email = request.getParameter("email");
 		String dob = request.getParameter("dob");
 		String address = request.getParameter("address-value");
-		String year = request.getParameter("year");
+		String year = request.getParameter("tutor");
 		String pword = request.getParameter("pword");
 		String pwordConfirm = request.getParameter("pwordConfirm");
 
@@ -69,9 +70,17 @@ public class TeacherRegistration extends HttpServlet
 			}
 			else
 			{
+
 				//Populate Bean for Registration
 				TeacherBean bean = new TeacherBean();
-				bean.setTitle(title);
+				if(title.equals("Other") && (titleVal != null && !titleVal.equals("")) )
+				{
+					bean.setTitle(titleVal);
+				}
+				else
+				{
+					bean.setTitle(title);
+				}
 				bean.setFirstname(firstname);
 				bean.setSurname(surname);
 				bean.setEmail(email.toLowerCase());

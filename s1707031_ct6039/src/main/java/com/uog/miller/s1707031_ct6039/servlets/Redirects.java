@@ -127,9 +127,6 @@ public class Redirects extends HttpServlet
 			case "login":
 				ret = "/jsp/users/loginindex.jsp";
 				break;
-			case "logout":
-				ret = "/jsp/users/logoutindex.jsp";
-				break;
 			case "register":
 				ret = "/jsp/users/registerindex.jsp";
 				break;

@@ -129,7 +129,8 @@
                 <br/>
                 <label for="address" class="form-label"><%="Address (Start Typing to auto-fill)"%></label>
                 <input type="search" id="address" class="form-control" placeholder="Begin Entering your address..." />
-                <strong id="address-value" hidden></strong>
+                <label for="address-value"></label>
+                <input type="text" name="address-value" id="address-value" hidden/>
                 <br/>
                 <label for="childSelect" class="form-label"><%="Children"%></label>
                 <select class="form-control select-css selectpicker" name="childSelect" id="childSelect" multiple data-live-search="true">

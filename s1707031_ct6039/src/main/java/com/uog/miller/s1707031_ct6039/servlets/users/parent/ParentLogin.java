@@ -23,6 +23,11 @@ public class ParentLogin extends HttpServlet
 	{
 		String email = request.getParameter("email");
 		String pword = request.getParameter("pword");
+		if(email == null && pword == null)
+		{
+			email = request.getParameter("parentEmail");
+			pword = request.getParameter("parentPword");
+		}
 
 		//Ensure values supplied not null
 		if(email != null && pword != null)

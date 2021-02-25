@@ -112,8 +112,73 @@
             <p class="main-body-text">
                 <%="Please select how you want to log in."%>
             </p>
-        </div>
+            <br/>
 
+            <div class="row card-index" style="width: 100%">
+                <div style="width: 12.5%">
+                </div>
+                <div class="d-flex align-items-stretch" style="width:25%; display: inline-block">
+                    <div class="card">
+                        <form class="" action="${pageContext.request.contextPath}/servlets/users/parent/ParentLogin" method="GET">
+                            <div class="card-body">
+                                <h5 class="card-title">For Parents</h5>
+                                <label for="parentEmail" class="form-label"><%="Email"%></label>
+                                <input class="form-control" type="email" name="parentEmail" id="parentEmail" required/>
+                                <br/>
+                                <label for="parentPword" class="form-label"><%="Password"%></label>
+                                <input class="form-control" type="password" name="parentPword" id="parentPword" minlength="8" required/>
+                                <br/>
+                            </div>
+                            <div class="" style="margin:auto; padding-bottom: 10%">
+                                <input class="btn btn-primary" type="reset" value="Clear">
+                                <input class="btn btn-primary" type="submit" value="Submit">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="d-flex align-items-stretch" style="width:25%; display: inline-block">
+                    <div class="card">
+                        <form class="" action="${pageContext.request.contextPath}/servlets/users/child/ChildLogin" method="GET">
+                            <div class="card-body">
+                                <h5 class="card-title">For Children</h5>
+                                <label for="childEmail" class="form-label"><%="Email"%></label>
+                                <input class="form-control" type="email" name="childEmail" id="childEmail" required/>
+                                <br/>
+                                <label for="childPword" class="form-label"><%="Password"%></label>
+                                <input class="form-control" type="password" name="childPword" id="childPword" minlength="8" required/>
+                                <br/>
+                            </div>
+                            <div class="" style="margin:auto; padding-bottom: 10%">
+                                <input class="btn btn-primary" type="reset" value="Clear">
+                                <input class="btn btn-primary" type="submit" value="Submit">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="d-flex align-items-stretch" style="width:25%; display: inline-block">
+                    <div class="card">
+                        <form class="" action="${pageContext.request.contextPath}/servlets/users/teacher/TeacherLogin" method="GET">
+                            <div class="card-body">
+                                <h5 class="card-title">For Teachers</h5>
+                                <label for="teacherEmail" class="form-label"><%="Email"%></label>
+                                <input class="form-control" type="email" name="teacherEmail" id="teacherEmail" required/>
+                                <br/>
+                                <label for="teacherPword" class="form-label"><%="Password"%></label>
+                                <input class="form-control" type="password" name="teacherPword" id="teacherPword" minlength="8" required/>
+                                <br/>
+                            </div>
+                            <div class="" style="margin:auto; padding-bottom: 10%">
+                                <input class="btn btn-primary" type="reset" value="Clear">
+                                <input class="btn btn-primary" type="submit" value="Submit">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div style="width: 12.5%">
+                </div>
+            </div>
+            <br/>
+        </div>
         <footer class="footer">
             <div class="">
                 <span class="text-muted">CT6039 Project by S1707031 &copy;2021</span>
