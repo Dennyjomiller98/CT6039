@@ -2,7 +2,9 @@ package com.uog.miller.s1707031_ct6039.servlets.users.teacher;
 
 import com.uog.miller.s1707031_ct6039.beans.TeacherBean;
 import com.uog.miller.s1707031_ct6039.oracle.TeacherConnections;
+import com.uog.miller.s1707031_ct6039.oracle.YearConnections;
 import java.io.IOException;
+import java.util.Map;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -40,6 +42,7 @@ public class TeacherRegistration extends HttpServlet
 			request.getSession(true).removeAttribute("formSuccess");
 			try
 			{
+				addSessionAttributesForYear(request);
 				response.sendRedirect(request.getContextPath() + "/jsp/users/teacher/teacherregistration.jsp");
 			} catch (IOException e) {
 				LOG.error("Failure to redirect.", e);
@@ -58,6 +61,7 @@ public class TeacherRegistration extends HttpServlet
 				request.getSession(true).removeAttribute("formSuccess");
 				try
 				{
+					addSessionAttributesForYear(request);
 					response.sendRedirect(request.getContextPath() + "/jsp/users/teacher/teacherregistration.jsp");
 				} catch (IOException e) {
 					LOG.error("Failure to redirect.", e);
@@ -110,6 +114,7 @@ public class TeacherRegistration extends HttpServlet
 			request.getSession(true).removeAttribute("formSuccess");
 			try
 			{
+				addSessionAttributesForYear(request);
 				response.sendRedirect(request.getContextPath() + "/jsp/users/teacher/teacherregistration.jsp");
 			} catch (IOException e) {
 				LOG.error("Failure to redirect.", e);
@@ -122,5 +127,17 @@ public class TeacherRegistration extends HttpServlet
 		//Check DB for account linked to email
 		TeacherConnections teacherConnections = new TeacherConnections();
 		return teacherConnections.checkUserExists(email);
+	}
+
+	//Allows Registration forms/etc to populate Year select dropdown
+	private void addSessionAttributesForYear(HttpServletRequest request)
+	{
+		Map<String, String> allYears;
+		YearConnections yearConnections = new YearConnections();
+		allYears = yearConnections.getAllClassYears();
+		if(allYears != null)
+		{
+			request.getSession(true).setAttribute("allYears", allYears);
+		}
 	}
 }

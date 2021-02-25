@@ -167,8 +167,6 @@ e
 5src/main/webapp/jsp/actions/homework/viewhomework.jsp,d\4\d4e54fc8038433c5bb04a3072a13679968f5cf74
 s
 Csrc/main/java/com/uog/miller/s1707031_ct6039/beans/TeacherBean.java,b\2\b2d122340979f9e2fd5ee3e53c284bd7ba989e6c
-Z
-*src/main/resources/Config/log4j.properties,6\2\6271b1a61c062e51c9a94485c4246d212160fa3a
 {
 Ksrc/main/java/com/uog/miller/s1707031_ct6039/oracle/TeacherConnections.java,9\3\93f68abbadad98439ae16bb1e3c74e7a780c453d
 |
@@ -229,3 +227,13 @@ i
 9src/main/webapp/jsp/users/teacher/teacherregistration.jsp,6\4\64134b5efb968e723e6d56fc9a8b13103a1bfcd9
 ‚
 Rsrc/main/java/com/uog/miller/s1707031_ct6039/oracle/AbstractOracleConnections.java,3\4\3448e67b0190c69b9ec443161400ead49039023d
+j
+:.idea/dataSources/18876887-8e80-4bc3-af78-2a1e6dcbad31.xml,9\3\93dfefd925739752d653a3c20319dfd4e7e3b0c0
+‘
+a.idea/dataSources/18876887-8e80-4bc3-af78-2a1e6dcbad31/storage_v2/_src_/schema/PUBLIC.aaZQjQ.meta,9\b\9be578113492ee1ef78a1ad41eb37c27b28c4ff2
+“
+c.idea/dataSources/18876887-8e80-4bc3-af78-2a1e6dcbad31/storage_v2/_src_/schema/S1707031.DpGrLg.meta,b\6\b6a4e7f3f34234a28dcfa2d5fcbe287b1180e365
+Ž
+^.idea/dataSources/18876887-8e80-4bc3-af78-2a1e6dcbad31/storage_v2/_src_/schema/SYS.rUIBAA.meta,4\b\4bd0ed5dcb62dc2fad575f063d698d5b639bd9cb
+‘
+a.idea/dataSources/18876887-8e80-4bc3-af78-2a1e6dcbad31/storage_v2/_src_/schema/SYSTEM.L2avkg.meta,c\6\c60cdda86073bde7fd37b15da5a8399b1f0cce32

@@ -1,6 +1,8 @@
 package com.uog.miller.s1707031_ct6039.servlets;
 
+import com.uog.miller.s1707031_ct6039.oracle.YearConnections;
 import java.io.IOException;
+import java.util.Map;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +29,7 @@ public class Redirects extends HttpServlet
 			try
 			{
 				removeAlerts(request);
-				String redirect = switchFindLocation(location);
+				String redirect = switchFindLocation(location, request);
 				response.sendRedirect(request.getContextPath() + redirect);
 			}
 			catch(IOException e)
@@ -59,7 +61,7 @@ public class Redirects extends HttpServlet
 
 	}
 
-	private String switchFindLocation(String location)
+	private String switchFindLocation(String location, HttpServletRequest request)
 	{
 		//Switch case uses request param to redirect user to correct page. If no location is specified, return to index homepage
 		//(A lot cleaner than multiple servlet mappings for every redirect)
@@ -70,9 +72,11 @@ public class Redirects extends HttpServlet
 				ret = "/jsp/users/child/childlogin.jsp";
 				break;
 			case "child-register":
+				addSessionAttributesForYear(request);
 				ret = "/jsp/users/child/childregistration.jsp";
 				break;
 			case "child-profile":
+				addSessionAttributesForYear(request);
 				ret = "/jsp/users/child/childprofile.jsp";
 				break;
 
@@ -90,9 +94,11 @@ public class Redirects extends HttpServlet
 				ret = "/jsp/users/teacher/teacherlogin.jsp";
 				break;
 			case "teacher-register":
+				addSessionAttributesForYear(request);
 				ret = "/jsp/users/teacher/teacherregistration.jsp";
 				break;
 			case "teacher-profile":
+				addSessionAttributesForYear(request);
 				ret = "/jsp/users/teacher/teacherprofile.jsp";
 				break;
 
@@ -136,9 +142,15 @@ public class Redirects extends HttpServlet
 		return ret;
 	}
 
-	@Override
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
+	//Allows Registration forms/etc to populate Year select dropdown
+	private void addSessionAttributesForYear(HttpServletRequest request)
 	{
-		//Empty (for now)
+		Map<String, String> allYears;
+		YearConnections yearConnections = new YearConnections();
+		allYears = yearConnections.getAllClassYears();
+		if(allYears != null)
+		{
+			request.getSession(true).setAttribute("allYears", allYears);
+		}
 	}
 }

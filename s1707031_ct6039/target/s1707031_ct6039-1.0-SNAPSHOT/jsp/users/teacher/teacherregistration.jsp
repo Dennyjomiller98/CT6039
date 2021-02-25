@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.util.Map" %><%--
   Created by IntelliJ IDEA.
   User: Denny-Jo
   Date: 19/02/2021
@@ -145,11 +145,17 @@
                 <input type="search" id="address" class="form-control" placeholder="Begin Entering your address..." />
                 <strong id="address-value" hidden></strong>
                 <br/>
-                <label for="tutor" class="form-label"><%="Tutor for Class"%></label>
+                <label for="tutor" class="form-label"><%="Tutor for Year"%></label>
                 <select class="form-control" class="select-css" name="tutor" id="tutor" required>
-                    <%--Iterate each year, in DB reception has ID 0, and name "reception". Use these for options --%>
-                    <option value="None">None</option>
-                    <option value="None2">None 2</option>
+                    <%--Iterate each year, Use these for options --%>
+                    <option value="">None</option>
+                    <% Map<String,String> allYears = (Map<String,String>) session.getAttribute("allYears");
+                        if(allYears != null) {
+                            for (Map.Entry<String, String> entry : allYears.entrySet())
+                            {%>
+                        <option value="<%=entry.getKey()%>"><%=entry.getValue()%></option>
+                            <%}
+                        }%>
                 </select>
                 <br/>
                 <label for="pword" class="form-label"><%="Password"%></label>
