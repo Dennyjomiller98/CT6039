@@ -91,7 +91,7 @@ public class TeacherLogin extends HttpServlet
 		request.getSession(true).setAttribute("year", loggedInTeacherBean.getYear());
 		request.getSession(true).setAttribute("pword", loggedInTeacherBean.getPword());
 		request.getSession(true).setAttribute("homeworkEmail", loggedInTeacherBean.getEmailForHomework());
-		request.getSession(true).setAttribute("calenderEmail", loggedInTeacherBean.getEmailForCalender());
+		request.getSession(true).setAttribute("calendarEmail", loggedInTeacherBean.getEmailForCalendar());
 		request.getSession(true).setAttribute("profileEmail", loggedInTeacherBean.getEmailForProfile());
 		request.getSession(true).setAttribute("title", loggedInTeacherBean.getTitle());
 		//Custom Teacher session login attribute

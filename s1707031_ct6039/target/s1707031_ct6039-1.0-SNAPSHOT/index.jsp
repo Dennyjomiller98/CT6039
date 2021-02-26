@@ -25,7 +25,7 @@
                             <% String email = (String) session.getAttribute("email");
                                 if(email != null) { %>
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=calender">Calender</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=calendar">Calendar</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=progress-view">Progress</a>
@@ -103,52 +103,61 @@
                 <br/>
             </div>
 
-            <div class="row card-index" style="width: 100%">
-                <div style="width: 12.5%">
+            <% if(email != null) { %>
+                <div class="main-body-content">
+                    <p>
+                        <%="You are already logged in! Please use the menu at the top of the page to go to a page you want."%>
+                    </p>
                 </div>
-                <div class="d-flex align-items-stretch" style="width:25%; display: inline-block">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">For Parents/Guardians</h5>
-                            <p class="card-text-center">Using this Portal allows you to check your child's progress, including homework submission dates.</p>
-                        </div>
-                        <div class="" style="margin:auto; padding-bottom: 10%">
-                            <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=parent-login>&nbsp;Parent Login&nbsp;</a>
-                            &nbsp;
-                            <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=parent-register>&nbsp;Register Parent&nbsp;</a>
+            <%} else { %>
+                <div class="row card-index" style="width: 100%">
+                    <div style="width: 12.5%">
+                    </div>
+                    <div class="d-flex align-items-stretch" style="width:25%; display: inline-block">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">For Parents/Guardians</h5>
+                                <p class="card-text-center">Using this Portal allows you to check your child's progress, including homework submission dates.</p>
+                            </div>
+                            <div class="" style="margin:auto; padding-bottom: 10%">
+                                <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=parent-login>&nbsp;Parent Login&nbsp;</a>
+                                &nbsp;
+                                <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=parent-register>&nbsp;Register Parent&nbsp;</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="d-flex align-items-stretch" style="width:25%; display: inline-block">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">For Children</h5>
-                            <p class="card-text-center">If you are a child accessing this site, please use the following links:</p>
-                        </div>
-                        <div class="" style="margin:auto; padding-bottom: 10%">
-                            <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=child-login>&nbsp;Child Login&nbsp;</a>
-                            &nbsp;
-                            <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=child-register>&nbsp;Child Register&nbsp;</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="d-flex align-items-stretch" style="width:25%; display: inline-block">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">For Teachers</h5>
-                            <p class="card-text-center">Teachers accessing this site can update Homework and Lesson Files from their account.</p>
-                        </div>
-                        <div class="" style="margin:auto; padding-bottom: 10%">
-                            <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=teacher-login>&nbsp;Teacher Login&nbsp;</a>
-                            &nbsp;
-                            <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=teacher-register>&nbsp;Teacher Register&nbsp;</a>
+                    <div class="d-flex align-items-stretch" style="width:25%; display: inline-block">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">For Children</h5>
+                                <p class="card-text-center">If you are a child accessing this site, please use the following links:</p>
+                            </div>
+                            <div class="" style="margin:auto; padding-bottom: 10%">
+                                <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=child-login>&nbsp;Child Login&nbsp;</a>
+                                &nbsp;
+                                <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=child-register>&nbsp;Child Register&nbsp;</a>
+                            </div>
                         </div>
                     </div>
+                    <div class="d-flex align-items-stretch" style="width:25%; display: inline-block">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">For Teachers</h5>
+                                <p class="card-text-center">Teachers accessing this site can update Homework and Lesson Files from their account.</p>
+                            </div>
+                            <div class="" style="margin:auto; padding-bottom: 10%">
+                                <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=teacher-login>&nbsp;Teacher Login&nbsp;</a>
+                                &nbsp;
+                                <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=teacher-register>&nbsp;Teacher Register&nbsp;</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 12.5%">
+                    </div>
                 </div>
-                <div style="width: 12.5%">
-                </div>
-            </div>
-            <br/>
+                <br/>
+            <% } %>
+
         </div>
 
         <footer class="footer">
@@ -162,10 +171,3 @@
         </footer>
     </body>
 </html>
-<%--
-                <a href=${pageContext.request.contextPath}/servlets/Redirects?location=calender>&nbsp;Calender&nbsp;</a>
-                <a href=${pageContext.request.contextPath}/servlets/Redirects?location=lessons>&nbsp;Lessons Join&nbsp;</a>
-                <a href=${pageContext.request.contextPath}/servlets/Redirects?location=progress-request>&nbsp;Request Progress (By parent?)&nbsp;</a>
-                <a href=${pageContext.request.contextPath}/servlets/Redirects?location=progress-submit>&nbsp;Submit Progress (By Teacher)&nbsp;</a>
-                <a href=${pageContext.request.contextPath}/servlets/Redirects?location=progress-view>&nbsp;View Progress (Put on profile page of child, accessible by THAT Child/Teacher/LINKED Parent)&nbsp;</a>
---%>

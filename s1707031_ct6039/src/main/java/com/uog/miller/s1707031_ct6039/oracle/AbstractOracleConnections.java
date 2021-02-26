@@ -18,7 +18,7 @@ public class AbstractOracleConnections
 	public static final String TEACHERS_COLLECTION = "ct6039_teachers";
 	public static final String PARENTS_COLLECTION = "ct6039_parents";
 	public static final String RESOURCES_COLLECTION = "ct6039_resources";
-	public static final String CALENDERS_COLLECTION = "ct6039_calender";
+	public static final String CALENDARS_COLLECTION = "ct6039_calendar";
 	public static final String HOMEWORKS_COLLECTION = "ct6039_homeworks";
 	public static final String PROGRESS_COLLECTION = "ct6039_progress";
 	public static final String PARENT_LINKS_COLLECTION = "ct6039_parent_links";

@@ -31,7 +31,7 @@
                             <% String email = (String) session.getAttribute("email");
                                 if(email != null) { %>
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=calender">Calender</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=calendar">Calendar</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=progress-view">Progress</a>
@@ -114,7 +114,7 @@
             </p>
 
             <%--Edit account page, new password/confirm old pword needed, plus Email settings.--%>
-            <%--Below this, links to calender/HW?--%>
+            <%--Below this, links to calendar/HW?--%>
         </div>
 
         <footer class="footer">

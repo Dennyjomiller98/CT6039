@@ -16,7 +16,7 @@ public class ChildBean
 	private String fYear;
 	private String fPword;
 	private boolean fProfileEmail;
-	private boolean fCalenderEmail;
+	private boolean fCalendarEmail;
 	private boolean fHomeworkEmail;
 
 	public ChildBean()
@@ -36,7 +36,7 @@ public class ChildBean
 			fYear = resultSet.getString("Year");
 			fPword = resultSet.getString("Pword");
 			fHomeworkEmail = resultSet.getBoolean("Homework_Email");
-			fCalenderEmail = resultSet.getBoolean("Calender_Email");
+			fCalendarEmail = resultSet.getBoolean("Calendar_Email");
 			fProfileEmail = resultSet.getBoolean("Profile_Email");
 		}
 		catch (SQLException throwables)
@@ -119,13 +119,13 @@ public class ChildBean
 	{
 		fHomeworkEmail = settings;
 	}
-	public boolean getEmailForCalender()
+	public boolean getEmailForCalendar()
 	{
-		return fCalenderEmail;
+		return fCalendarEmail;
 	}
-	public void setEmailForCalender(boolean settings)
+	public void setEmailForCalendar(boolean settings)
 	{
-		fCalenderEmail = settings;
+		fCalendarEmail = settings;
 	}
 	public boolean getEmailForProfile()
 	{

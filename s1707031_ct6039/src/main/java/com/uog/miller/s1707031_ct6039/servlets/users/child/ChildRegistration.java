@@ -79,7 +79,7 @@ public class ChildRegistration extends HttpServlet
 				bean.setPword(pword);
 				//Get 'Default' account settings for new user
 				bean.setEmailForHomework(true);
-				bean.setEmailForCalender(true);
+				bean.setEmailForCalendar(true);
 				bean.setEmailForProfile(true);
 				attemptChildRegistration(request, response, bean);
 			}

@@ -34,7 +34,7 @@ public class ParentConnections extends AbstractOracleConnections
 						+ "','" + beanToRegister.getLinkedChildIds()
 						+ "','" + beanToRegister.getPword().replace("'", "''")
 						+ "','" + beanToRegister.getEmailForHomework()
-						+ "','" + beanToRegister.getEmailForCalender()
+						+ "','" + beanToRegister.getEmailForCalendar()
 						+ "','" + beanToRegister.getEmailForProfile() + "'";
 				String query = "INSERT INTO " + PARENTS_COLLECTION +
 						"(Firstname, Surname, Email, DOB, Address, Linked_Child_Id, Pword, Homework_Email, Calender_Email, Profile_Email)" + " VALUES (" + values + ")";

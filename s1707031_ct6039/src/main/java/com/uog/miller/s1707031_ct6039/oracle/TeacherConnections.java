@@ -35,7 +35,7 @@ public class TeacherConnections extends AbstractOracleConnections
 						+ "','" + beanToRegister.getYear()
 						+ "','" + beanToRegister.getPword().replace("'", "''")
 						+ "','" + beanToRegister.getEmailForHomework()
-						+ "','" + beanToRegister.getEmailForCalender()
+						+ "','" + beanToRegister.getEmailForCalendar()
 						+ "','" + beanToRegister.getEmailForProfile() + "'";
 				String query = "INSERT INTO " + TEACHERS_COLLECTION +
 						"(Firstname, Title, Surname, Email, DOB, Address, Year, Pword, Homework_Email, Calender_Email, Profile_Email)" + " VALUES (" + values + ")";

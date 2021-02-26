@@ -39,7 +39,7 @@ public class ParentLogout extends HttpServlet
 		request.getSession(true).removeAttribute("linkedChildId");
 		request.getSession(true).removeAttribute("pword");
 		request.getSession(true).removeAttribute("homeworkEmail");
-		request.getSession(true).removeAttribute("calenderEmail");
+		request.getSession(true).removeAttribute("calendarEmail");
 		request.getSession(true).removeAttribute("profileEmail");
 		//Custom Child session login attribute
 		request.getSession(true).removeAttribute("isParent");

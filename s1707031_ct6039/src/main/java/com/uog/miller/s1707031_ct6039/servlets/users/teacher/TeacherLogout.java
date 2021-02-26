@@ -39,7 +39,7 @@ public class TeacherLogout extends HttpServlet
 		request.getSession(true).removeAttribute("year");
 		request.getSession(true).removeAttribute("pword");
 		request.getSession(true).removeAttribute("homeworkEmail");
-		request.getSession(true).removeAttribute("calenderEmail");
+		request.getSession(true).removeAttribute("calendarEmail");
 		request.getSession(true).removeAttribute("profileEmail");
 		request.getSession(true).removeAttribute("title");
 		//Custom Child session login attribute

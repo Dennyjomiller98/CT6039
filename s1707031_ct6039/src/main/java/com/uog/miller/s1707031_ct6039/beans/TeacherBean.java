@@ -17,7 +17,7 @@ public class TeacherBean
 	private String fAddress;
 	private String fPword;
 	private boolean fHomeworkEmail;
-	private boolean fCalenderEmail;
+	private boolean fCalendarEmail;
 	private boolean fProfileEmail;
 
 	public TeacherBean()
@@ -38,7 +38,7 @@ public class TeacherBean
 			fPword = resultSet.getString("Pword");
 			fTitle = resultSet.getString("Title");
 			fHomeworkEmail = resultSet.getBoolean("Homework_Email");
-			fCalenderEmail = resultSet.getBoolean("Calender_Email");
+			fCalendarEmail = resultSet.getBoolean("Calendar_Email");
 			fProfileEmail = resultSet.getBoolean("Profile_Email");
 		}
 		catch(SQLException throwables)
@@ -130,13 +130,13 @@ public class TeacherBean
 	{
 		fHomeworkEmail = settings;
 	}
-	public boolean getEmailForCalender()
+	public boolean getEmailForCalendar()
 	{
-		return fCalenderEmail;
+		return fCalendarEmail;
 	}
-	public void setEmailForCalender(boolean settings)
+	public void setEmailForCalendar(boolean settings)
 	{
-		fCalenderEmail = settings;
+		fCalendarEmail = settings;
 	}
 	public boolean getEmailForProfile()
 	{

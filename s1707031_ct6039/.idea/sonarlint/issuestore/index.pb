@@ -205,10 +205,6 @@ r
 Btarget/s1707031_ct6039-1.0-SNAPSHOT/jsp/users/child/childlogin.jsp,b\f\bfb1a19e80b390e2c77083eddcea0dd03bf5946b
 `
 0src/main/webapp/jsp/users/child/childprofile.jsp,5\9\5980e9ad92edd86ae855efdc31fb616b4273622b
-Y
-)src/main/webapp/jsp/users/logoutindex.jsp,5\e\5e39bdf281b062ff424f11d357869e0558f33911
-m
-=target/s1707031_ct6039-1.0-SNAPSHOT/jsp/users/logoutindex.jsp,c\2\c24a11d275f0de29b5fa7cdd23779d9695ba4108
 L
 src/main/webapp/css/main.css,e\5\e541d2083b92473d29b1b970745c43bc2d2439f6
 `
@@ -237,3 +233,5 @@ c.idea/dataSources/18876887-8e80-4bc3-af78-2a1e6dcbad31/storage_v2/_src_/schema/
 ^.idea/dataSources/18876887-8e80-4bc3-af78-2a1e6dcbad31/storage_v2/_src_/schema/SYS.rUIBAA.meta,4\b\4bd0ed5dcb62dc2fad575f063d698d5b639bd9cb
 ‘
 a.idea/dataSources/18876887-8e80-4bc3-af78-2a1e6dcbad31/storage_v2/_src_/schema/SYSTEM.L2avkg.meta,c\6\c60cdda86073bde7fd37b15da5a8399b1f0cce32
+p
+@src/main/java/com/uog/miller/s1707031_ct6039/beans/YearBean.java,3\7\37739fb5d312ffa2b7cc125d84e372702e63abd6

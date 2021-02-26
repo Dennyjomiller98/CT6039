@@ -91,7 +91,7 @@ public class ParentLogin extends HttpServlet
 		request.getSession(true).setAttribute("linkedChildId", loggedInParentBean.getLinkedChildIds());
 		request.getSession(true).setAttribute("pword", loggedInParentBean.getPword());
 		request.getSession(true).setAttribute("homeworkEmail", loggedInParentBean.getEmailForHomework());
-		request.getSession(true).setAttribute("calenderEmail", loggedInParentBean.getEmailForCalender());
+		request.getSession(true).setAttribute("calendarEmail", loggedInParentBean.getEmailForCalendar());
 		request.getSession(true).setAttribute("profileEmail", loggedInParentBean.getEmailForProfile());
 		//Custom Teacher session login attribute
 		request.getSession(true).setAttribute("isParent", "true");

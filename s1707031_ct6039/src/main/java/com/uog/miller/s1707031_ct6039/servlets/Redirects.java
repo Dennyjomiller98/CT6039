@@ -58,7 +58,6 @@ public class Redirects extends HttpServlet
 		//Otherwise (For example) you log in, browse pages, "Logged in Successfully" will retain. This way the alert is used for the relevant pages.
 		request.getSession(true).removeAttribute("formErrors");
 		request.getSession(true).removeAttribute("formSuccess");
-
 	}
 
 	private String switchFindLocation(String location, HttpServletRequest request)
@@ -102,8 +101,8 @@ public class Redirects extends HttpServlet
 				ret = "/jsp/users/teacher/teacherprofile.jsp";
 				break;
 
-			case "calender":
-				ret = "/jsp/actions/calender/viewcalender.jsp";
+			case "calendar":
+				ret = "/jsp/actions/calendar/viewcalendar.jsp";
 				break;
 
 			case "lessons":

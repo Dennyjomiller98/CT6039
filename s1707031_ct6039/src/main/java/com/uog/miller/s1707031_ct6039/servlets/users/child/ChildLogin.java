@@ -91,7 +91,7 @@ public class ChildLogin extends HttpServlet
 		request.getSession(true).setAttribute("year", loggedInChildBean.getYear());
 		request.getSession(true).setAttribute("pword", loggedInChildBean.getPword());
 		request.getSession(true).setAttribute("homeworkEmail", loggedInChildBean.getEmailForHomework());
-		request.getSession(true).setAttribute("calenderEmail", loggedInChildBean.getEmailForCalender());
+		request.getSession(true).setAttribute("calendarEmail", loggedInChildBean.getEmailForCalendar());
 		request.getSession(true).setAttribute("profileEmail", loggedInChildBean.getEmailForProfile());
 		//Custom Child session login attribute
 		request.getSession(true).setAttribute("isChild", "true");
