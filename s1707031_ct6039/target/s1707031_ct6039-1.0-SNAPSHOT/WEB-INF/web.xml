@@ -116,4 +116,45 @@
         <url-pattern>/servlets/users/teacher/TeacherProfile</url-pattern>
     </servlet-mapping>
 
+    <!--CALENDAR-->
+    <servlet>
+        <servlet-name>calendarActions</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.calendar.CalendarActions</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>calendarActions</servlet-name>
+        <url-pattern>/servlets/calendar/CalendarActions</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>deleteCalendarEvent</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.calendar.DeleteCalendarEvent</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteCalendarEvent</servlet-name>
+        <url-pattern>/servlets/calendar/DeleteCalendarEvent</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>updateCalendarEvent</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.calendar.UpdateCalendarEvent</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>updateCalendarEvent</servlet-name>
+        <url-pattern>/servlets/calendar/UpdateCalendarEvent</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>addCalendarEvent</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.calendar.AddCalendarEvent</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addCalendarEvent</servlet-name>
+        <url-pattern>/servlets/calendar/AddCalendarEvent</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>retrieveCalendarEvent</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.calendar.RetrieveCalendarEvent</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>retrieveCalendarEvent</servlet-name>
+        <url-pattern>/servlets/calendar/RetrieveCalendarEvent</url-pattern>
+    </servlet-mapping>
 </web-app>

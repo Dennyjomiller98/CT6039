@@ -15,8 +15,6 @@ q
 Asrc/main/java/com/uog/miller/s1707031_ct6039/beans/ClassBean.java,2\4\2403110de70139da31e47f066b1455a8a3bf2d90
 z
 Jsrc/main/java/com/uog/miller/s1707031_ct6039/oracle/LinkedConnections.java,1\d\1dc00bef9be35af41332c268b31cf12b2d2ccb0d
-x
-Hsrc/main/java/com/uog/miller/s1707031_ct6039/beans/CalenderItemBean.java,6\f\6f1707238c4dcc23cf6ed04a8b54435bcf9c0a93
 Å
 Qsrc/main/java/com/uog/miller/s1707031_ct6039/servlets/users/child/ChildLogin.java,8\1\81293ffa96480ed01b80007567e307fe820d0e0c
 É
@@ -106,8 +104,6 @@ Ktarget/s1707031_ct6039-1.0-SNAPSHOT/jsp/actions/homework/uploadhomework.jsp,b\
 }
 Mtarget/s1707031_ct6039-1.0-SNAPSHOT/jsp/actions/resources/uploadresources.jsp,3\8\3818b895bf9ae483ee0c657d040215a5d74a6604
 y
-Itarget/s1707031_ct6039-1.0-SNAPSHOT/jsp/actions/calender/viewcalender.jsp,f\5\f599b2939e6ee096feef8b24a6a0c0d0d870e904
-y
 Itarget/s1707031_ct6039-1.0-SNAPSHOT/jsp/actions/homework/viewhomework.jsp,5\f\5f9b7f757f81e4edd5651fcc7bce8414b00e569e
 y
 Itarget/s1707031_ct6039-1.0-SNAPSHOT/jsp/actions/progress/viewprogress.jsp,a\d\ad4bda01259951935e6a95bde7da883d818004ba
@@ -119,8 +115,6 @@ c
 3target/s1707031_ct6039-1.0-SNAPSHOT/WEB-INF/web.xml,2\2\22de40c705b69716ed3bf0b11bb879259d221397
 I
 src/main/webapp/index.jsp,8\e\8e6d3b70c9f5b02570779b0441540d45eceb0ded
-e
-5src/main/webapp/jsp/actions/calender/viewcalender.jsp,9\a\9a62c775070b0ae8d2f04ac071663df6a9ca6aaa
 É
 Ssrc/main/java/com/uog/miller/s1707031_ct6039/servlets/homework/HomeworkActions.java,f\b\fbab92d6025c6cdd5430bda7743e8ec05bc900a9
 e
@@ -139,8 +133,6 @@ h
 8target/s1707031_ct6039-1.0-SNAPSHOT/META-INF/MANIFEST.MF,e\8\e8fd365c2d6c048418b245b5ce77ab5d6ce013dc
 É
 Ssrc/main/java/com/uog/miller/s1707031_ct6039/servlets/progress/ProgressActions.java,6\a\6ae2f88508ca8aee234a86880668f8fa9e41f490
-É
-Ssrc/main/java/com/uog/miller/s1707031_ct6039/servlets/calender/CalenderActions.java,0\e\0ec801d5311cbc25096edf34c81c5a87fb37f66b
 b
 2target/s1707031_ct6039-1.0-SNAPSHOT/css/footer.css,f\9\f9ecc5ce54d9a0c2ffd1be04e4fca104fc018eb2
 a
@@ -169,8 +161,6 @@ s
 Csrc/main/java/com/uog/miller/s1707031_ct6039/beans/TeacherBean.java,b\2\b2d122340979f9e2fd5ee3e53c284bd7ba989e6c
 {
 Ksrc/main/java/com/uog/miller/s1707031_ct6039/oracle/TeacherConnections.java,9\3\93f68abbadad98439ae16bb1e3c74e7a780c453d
-|
-Lsrc/main/java/com/uog/miller/s1707031_ct6039/oracle/CalenderConnections.java,5\d\5dea2440f78eb152649743b9e383745a1e038dc8
 \
 ,src/main/webapp/jsp/actions/lessons/join.jsp,6\7\67d107f376f92527b5486bb563ab0cadb71e97a6
 |

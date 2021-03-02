@@ -47,9 +47,8 @@ public class Redirects extends HttpServlet
 			}
 			catch (IOException e)
 			{
-				e.printStackTrace();
+				LOG.error("Error redirecting, unable to redirect", e);
 			}
-
 		}
 	}
 
@@ -58,6 +57,11 @@ public class Redirects extends HttpServlet
 		//Otherwise (For example) you log in, browse pages, "Logged in Successfully" will retain. This way the alert is used for the relevant pages.
 		request.getSession(true).removeAttribute("formErrors");
 		request.getSession(true).removeAttribute("formSuccess");
+		request.getSession(true).removeAttribute("eventId");
+		request.getSession(true).removeAttribute("eventName");
+		request.getSession(true).removeAttribute("eventUser");
+		request.getSession(true).removeAttribute("eventDate");
+		request.getSession(true).removeAttribute("eventUpdateDate");
 	}
 
 	private String switchFindLocation(String location, HttpServletRequest request)
