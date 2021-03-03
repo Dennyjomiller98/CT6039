@@ -32,6 +32,8 @@ public class AddCalendarEvent extends HttpServlet
 				removeAlerts(request);
 				LOG.debug("Successfully added new event");
 				request.getSession(true).setAttribute("formSuccess", "Event added successfully.");
+				request.getSession(true).setAttribute("newlyAddedEvent", newEventId);
+
 				response.sendRedirect(request.getContextPath() + "/jsp/actions/calendar/viewcalendar.jsp");
 			}
 			catch (IOException e)
@@ -70,5 +72,6 @@ public class AddCalendarEvent extends HttpServlet
 		request.getSession(true).removeAttribute("eventUser");
 		request.getSession(true).removeAttribute("eventDate");
 		request.getSession(true).removeAttribute("eventUpdateDate");
+		request.getSession(true).removeAttribute("newlyAddedEvent");
 	}
 }

@@ -54,16 +54,7 @@ public class ChildLogin extends HttpServlet
 			}
 			else
 			{
-				//Invalid Credentials
-				LOG.error("Login failed. Email and Password do not match.");
-				//Redirect Back to Login Page
-				request.getSession(true).setAttribute("formErrors", "Invalid credentials. Please try again.");
-				try
-				{
-					response.sendRedirect(request.getContextPath() + "/jsp/users/child/childlogin.jsp");
-				} catch (IOException e) {
-					LOG.error("Failure to redirect.", e);
-				}
+				redirectFromFailure(request, response);
 			}
 		}
 		else
@@ -77,6 +68,20 @@ public class ChildLogin extends HttpServlet
 			} catch (IOException e) {
 				LOG.error("Failure to redirect.", e);
 			}
+		}
+	}
+
+	private void redirectFromFailure(HttpServletRequest request, HttpServletResponse response)
+	{
+		//Invalid Credentials
+		LOG.error("Login failed. Email and Password do not match.");
+		//Redirect Back to Login Page
+		request.getSession(true).setAttribute("formErrors", "Invalid credentials. Please try again.");
+		try
+		{
+			response.sendRedirect(request.getContextPath() + "/jsp/users/child/childlogin.jsp");
+		} catch (IOException e) {
+			LOG.error("Failure to redirect.", e);
 		}
 	}
 

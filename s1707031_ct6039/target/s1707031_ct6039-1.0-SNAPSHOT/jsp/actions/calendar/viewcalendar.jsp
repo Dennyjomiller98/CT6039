@@ -47,9 +47,6 @@
                 /* initialize the calendar
                 -----------------------------------------------------------------*/
                 let date = new Date();
-                let d = date.getDate();
-                let m = date.getMonth();
-                let y = date.getFullYear();
 
                 let calendar =  $('#calendar').fullCalendar({
                     header: {
@@ -84,20 +81,31 @@
                                 type: "POST",
                                 url: "${pageContext.request.contextPath}/servlets/calendar/AddCalendarEvent",
                                 data: myData,
-                                dataType: String
-                            })
-                            .done(function(data){
-                                calendar.fullCalendar('renderEvent',
-                                    {
-                                        title: eventName,
-                                        start: start,
-                                        end: end,
-                                        className: 'info',
-                                        url: '${pageContext.request.contextPath}/servlets/calendar/CalendarActions?eventId='+ data,
-                                    },
-                                    true // make the event "stick"
-                                );
+                                dataType: "text",
+                                async: false,
+                                success : function(data){
+                                    console.log("success", data);
+                                },
+                                error : function(result) {
+                                    console.log("Failed to add event: ", result);
+                                },
+                                always : function(result){
+                                    console.log(result);
+                                    if ("${!empty sessionScope['newlyAddedEvent']}") {
+                                        calendar.fullCalendar('renderEvent',
+                                            {
+                                                title: eventName,
+                                                start: start,
+                                                end: end,
+                                                className: 'info',
+                                                url: '${pageContext.request.contextPath}/servlets/calendar/CalendarActions?eventId='+"${sessionScope['newlyAddedEvent']}",
+                                            },
+                                            true // make the event "stick"
+                                        );
+                                    }
+                                }
                             });
+                            location.reload();
                         }
                         calendar.fullCalendar('unselect');
                     },
@@ -124,14 +132,7 @@
                             $(this).remove();
                         }
                     },
-
-                    /*Populate events from DB here*/
-                    events: [
-                        /*{
-                            title: 'All Day Event',
-                            start: new Date(y, m, d)
-                        }*/],
-
+                    events: [],
                 });
 
                 let allUserEvents = getAllEventsForUser();
