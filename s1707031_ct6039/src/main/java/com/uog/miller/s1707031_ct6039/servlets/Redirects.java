@@ -127,6 +127,10 @@ public class Redirects extends HttpServlet
 				ret = "/jsp/actions/homework/viewhomework.jsp";
 				break;
 
+			case "class-view":
+				ret = "/jsp/actions/class/viewclass.jsp";
+				break;
+
 			case "login":
 				ret = "/jsp/users/loginindex.jsp";
 				break;

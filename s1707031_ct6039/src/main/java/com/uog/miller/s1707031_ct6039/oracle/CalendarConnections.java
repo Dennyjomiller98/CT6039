@@ -1,10 +1,7 @@
 package com.uog.miller.s1707031_ct6039.oracle;
 
 import com.uog.miller.s1707031_ct6039.beans.CalendarItemBean;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -268,8 +265,83 @@ public class CalendarConnections extends AbstractOracleConnections
 		oracleClient.close();
 	}
 
-	public void deleteEvent()
+	public void updateEvent(CalendarItemBean originalBean, CalendarItemBean updatedValues)
 	{
-		//Needs impl
+		updateBean(originalBean, updatedValues);
+		try
+		{
+			AbstractOracleConnections conn = new AbstractOracleConnections();
+			Connection oracleClient = conn.getOracleClient();
+			if (oracleClient != null)
+			{
+				String query = "UPDATE " + CALENDARS_COLLECTION + " SET Event_Name ='" + originalBean.getEventName().replace("'", "''")
+						+"', Event_Update_Date='"+ originalBean.getEventDate().replace("'", "''")
+						+"', Event_Date='"+ originalBean.getDateForUpdate().replace("'", "''")
+						+"' WHERE Event_Id='"+ originalBean.getEventId() +"'";
+				executeUpdateQuery(oracleClient, query);
+			}
+			else
+			{
+				LOG.error("connection failure");
+			}
+		}
+		catch(Exception e)
+		{
+			LOG.error("Unable to update event information");
+		}
+	}
+
+	private void executeUpdateQuery(Connection oracleClient, String query) throws SQLException
+	{
+		try (Statement statement = oracleClient.createStatement())
+		{
+			statement.executeUpdate(query);
+		}
+		catch(Exception e)
+		{
+			LOG.error("Query failure, using query: " + query, e);
+		}
+		oracleClient.close();
+	}
+
+	private void updateBean(CalendarItemBean originalBean, CalendarItemBean updatedValues)
+	{
+		if (updatedValues.getEventName() != null)
+		{
+			originalBean.setEventName(updatedValues.getEventName());
+		}
+		if (updatedValues.getEventDate() != null)
+		{
+			originalBean.setEventDate(updatedValues.getEventDate());
+		}
+		if (updatedValues.getDateForUpdate() != null)
+		{
+			originalBean.setDateForUpdate(updatedValues.getDateForUpdate());
+		}
+	}
+
+	public void deleteEvent(String eventId)
+	{
+		LOG.debug("Attempting to delete event");
+		setOracleDriver();
+		try
+		{
+			AbstractOracleConnections conn = new AbstractOracleConnections();
+			Connection oracleClient = conn.getOracleClient();
+			if (oracleClient != null)
+			{
+				String query = "DELETE FROM " + CALENDARS_COLLECTION
+						+ " WHERE Event_Id='" + eventId + "'";
+				executeUpdateQuery(oracleClient, query);
+			}
+			else
+			{
+				LOG.error("connection failure");
+			}
+		}
+		catch(Exception e)
+		{
+			LOG.error("Unable to delete event in oracle DB");
+		}
 	}
 }

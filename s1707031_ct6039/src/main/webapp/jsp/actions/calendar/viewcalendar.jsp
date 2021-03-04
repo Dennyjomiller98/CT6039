@@ -35,20 +35,12 @@
 
                     // store the Event Object in the DOM element so we can get to it later
                     $(this).data('eventObject', eventObject);
-
-                    // make the event draggable using jQuery UI
-                    /*$(this).draggable({
-                        zIndex: 999,
-                        revert: true,      // will cause the event to go back to its
-                        revertDuration: 0  //  original position after the drag
-                    });*/
                 });
 
                 /* initialize the calendar
                 -----------------------------------------------------------------*/
-                let date = new Date();
-
-                let calendar =  $('#calendar').fullCalendar({
+                let calElement = $('#calendar');
+                let calendar =  calElement.fullCalendar({
                     header: {
                         left: 'title',
                         center: 'month',
@@ -98,7 +90,7 @@
                                                 start: start,
                                                 end: end,
                                                 className: 'info',
-                                                url: '${pageContext.request.contextPath}/servlets/calendar/CalendarActions?eventId='+"${sessionScope['newlyAddedEvent']}",
+                                                url: '${pageContext.request.contextPath}/servlets/calendar/CalendarActions?eventId='+"${sessionScope['newlyAddedEvent']}"
                                             },
                                             true // make the event "stick"
                                         );
@@ -124,7 +116,7 @@
 
                         // render the event on the calendar
                         // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-                        $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+                        calElement.fullCalendar('renderEvent', copiedEventObject, true);
 
                         // is the "remove after drop" checkbox checked?
                         if ($('#drop-remove').is(':checked')) {
@@ -207,7 +199,7 @@
                         className: allUserEvents[i].className,
                         url: allUserEvents[i].url
                     }
-                    $('#calendar').fullCalendar('renderEvent', eventToAdd);
+                    calElement.fullCalendar('renderEvent', eventToAdd, true);
                 }
             }
             });
@@ -344,14 +336,18 @@
                             <form class="login-form" action="${pageContext.request.contextPath}/servlets/calendar/UpdateCalendarEvent" method="POST">
                                 <div class="modal-body">
                                     <%--Content for modal popup containing calendar event information--%>
-                                    <label for="eventName" class="form-label"><%="Event Name"%></label>
-                                    <input class="form-control" type="text" name="eventName" id="eventName" value="<%=eventName%>" required/>
+                                    <label for="eventUpdateId"></label>
+                                    <input type="text" name="eventUpdateId" id="eventUpdateId" value="<%=eventId%>" hidden/>
+                                    <label for="newEventUpdateDate"></label>
+                                    <input type="text" name="newEventUpdateDate" id="newEventUpdateDate" value="<%=eventDate%>" hidden/>
+                                    <label for="eventUpdateName" class="form-label"><%="Event Name"%></label>
+                                    <input class="form-control" type="text" name="eventUpdateName" id="eventUpdateName" value="<%=eventName%>" required/>
                                     <br/>
-                                    <label for="eventDate" class="form-label"><%="Event Date"%></label>
-                                    <input type="date" name="eventDate" id="eventDate" class="form-control" value="<%=eventUpdateDate%>" required/>
+                                    <label for="eventUpdateDate" class="form-label"><%="Event Date"%></label>
+                                    <input type="date" name="eventUpdateDate" id="eventUpdateDate" class="form-control" value="<%=eventUpdateDate%>" required/>
                                     <br/>
-                                    <label for="eventUser" class="form-label"><%="Event Name"%></label>
-                                    <input class="form-control" type="text" name="eventUser" id="eventUser" disabled value="<%=eventUser%>" />
+                                    <label for="eventUpdateUser" class="form-label"><%="Event Name"%></label>
+                                    <input class="form-control" type="text" name="eventUpdateUser" id="eventUpdateUser" disabled value="<%=eventUser%>" />
                                     <br/>
                                 </div>
                                 <div class="modal-footer">
@@ -360,6 +356,17 @@
                                     <script>
                                         $(".close-btn").on('click', function (){
                                             $("#exampleModalCenter").modal('hide');
+                                        });
+
+                                        let eventDate = $("#eventUpdateDate");
+                                        function getDate() {
+                                            let dateInput = $("#newEventUpdateDate");
+                                            console.log(eventDate.val());
+                                            dateInput.val(new Date(eventDate.val()));
+                                            console.log(dateInput.val());
+                                        }
+                                        eventDate.on('change', function() {
+                                            getDate();
                                         });
                                     </script>
                                 </div>
