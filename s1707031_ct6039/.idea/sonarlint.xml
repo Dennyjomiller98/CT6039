@@ -7,6 +7,9 @@
         <option value="DIRECTORY:.idea" />
         <option value="DIRECTORY:src/main/webapp/assets" />
         <option value="FILE:src/main/webapp/assets/js/fullcalendar.js" />
+        <option value="FILE:target/s1707031_ct6039-1.0-SNAPSHOT/assets/js/fullcalendar.js" />
+        <option value="FILE:src/main/webapp/assets/js/jquery-1.10.2.js" />
+        <option value="FILE:target/s1707031_ct6039-1.0-SNAPSHOT/assets/js/jquery-1.10.2.js" />
       </list>
     </option>
   </component>

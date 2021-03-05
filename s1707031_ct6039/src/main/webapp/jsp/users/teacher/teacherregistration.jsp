@@ -115,6 +115,7 @@
                 <div class="alert alert-success" role="alert" id="formSuccess"><%=success%></div>
                 <%}%>
                 <br/>
+                <h3>Profile Settings</h3>
                 <label for="title" class="form-label"><%="Title"%></label>
                 <select  class="form-control" class="selectpicker" name="title" id="title" data-live-search="true">
                     <%--Single select, use Titles. (Mr/Mrs/Other (specified field)--%>

@@ -115,7 +115,31 @@
         <servlet-name>teacherprofile</servlet-name>
         <url-pattern>/servlets/users/teacher/TeacherProfile</url-pattern>
     </servlet-mapping>
-
+    <!--Delete Accounts-->
+    <servlet>
+        <servlet-name>childDelete</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.users.child.ChildDelete</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>childDelete</servlet-name>
+        <url-pattern>/servlets/users/child/ChildDelete</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>parentDelete</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.users.parent.ParentDelete</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>parentDelete</servlet-name>
+        <url-pattern>/servlets/users/parent/ParentDelete</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>teacherDelete</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.users.teacher.TeacherDelete</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>teacherDelete</servlet-name>
+        <url-pattern>/servlets/users/teacher/TeacherDelete</url-pattern>
+    </servlet-mapping>
     <!--CALENDAR-->
     <servlet>
         <servlet-name>calendarActions</servlet-name>

@@ -2,7 +2,9 @@ package com.uog.miller.s1707031_ct6039.servlets.users.child;
 
 import com.uog.miller.s1707031_ct6039.beans.ChildBean;
 import com.uog.miller.s1707031_ct6039.oracle.ChildConnections;
+import com.uog.miller.s1707031_ct6039.oracle.YearConnections;
 import java.io.IOException;
+import java.util.Map;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -45,6 +47,7 @@ public class ChildLogin extends HttpServlet
 				//Redirect to Profile Account Page
 				request.getSession(true).removeAttribute("formErrors");
 				request.getSession(true).setAttribute("formSuccess", "Logged in successfully.");
+				addSessionAttributesForYear(request);
 				try
 				{
 					response.sendRedirect(request.getContextPath() + "/jsp/users/child/childprofile.jsp");
@@ -100,5 +103,17 @@ public class ChildLogin extends HttpServlet
 		request.getSession(true).setAttribute("profileEmail", loggedInChildBean.getEmailForProfile());
 		//Custom Child session login attribute
 		request.getSession(true).setAttribute("isChild", "true");
+	}
+
+	//Allows Registration forms/etc to populate Year select dropdown
+	private void addSessionAttributesForYear(HttpServletRequest request)
+	{
+		Map<String, String> allYears;
+		YearConnections yearConnections = new YearConnections();
+		allYears = yearConnections.getAllClassYears();
+		if(allYears != null)
+		{
+			request.getSession(true).setAttribute("allYears", allYears);
+		}
 	}
 }

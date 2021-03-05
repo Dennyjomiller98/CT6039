@@ -1,10 +1,7 @@
 package com.uog.miller.s1707031_ct6039.oracle;
 
 import com.uog.miller.s1707031_ct6039.beans.ChildBean;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class ChildConnections extends AbstractOracleConnections
@@ -84,7 +81,7 @@ public class ChildConnections extends AbstractOracleConnections
 		return ret;
 	}
 
-	private ChildBean validateCredentials(String email, String pword)
+	public ChildBean validateCredentials(String email, String pword)
 	{
 		//Default to true in case of an error.
 		ChildBean ret = null;
@@ -122,11 +119,6 @@ public class ChildConnections extends AbstractOracleConnections
 		}
 
 		return ret;
-	}
-
-	public void deleteAccount()
-	{
-		//Needs Auth
 	}
 
 	public boolean checkUserExists(String email)
@@ -189,5 +181,74 @@ public class ChildConnections extends AbstractOracleConnections
 		oracleClient.close();
 
 		return allChildren;
+	}
+
+	public void updateAccount(ChildBean bean)
+	{
+		try
+		{
+			AbstractOracleConnections conn = new AbstractOracleConnections();
+			Connection oracleClient = conn.getOracleClient();
+			if (oracleClient != null)
+			{
+				String query = "UPDATE " + CHILDRENS_COLLECTION + " SET Firstname ='" + bean.getFirstname().replace("'", "''")
+						+"', Surname='"+ bean.getSurname().replace("'", "''")
+						+"', DOB='"+ bean.getDOB().replace("'", "''")
+						+"', Address='"+ bean.getAddress().replace("'", "''")
+						+"', Pword='"+ bean.getPword().replace("'", "''")
+						+"', Homework_Email='"+ bean.getEmailForHomework()
+						+"', Calender_Email='"+ bean.getEmailForCalendar()
+						+"', Profile_Email='"+ bean.getEmailForProfile()
+						+"' WHERE Email='"+ bean.getEmail() +"'";
+				executeUpdateQuery(oracleClient, query);
+			}
+			else
+			{
+				LOG.error("connection failure");
+			}
+		}
+		catch(Exception e)
+		{
+			LOG.error("Unable to update child information");
+		}
+	}
+
+	public void deleteAccount(String userEmail)
+	{
+		//Needs impl
+		LOG.debug("Attempting to delete user:" + userEmail);
+		setOracleDriver();
+		try
+		{
+			AbstractOracleConnections conn = new AbstractOracleConnections();
+			Connection oracleClient = conn.getOracleClient();
+			if (oracleClient != null)
+			{
+				String query = "DELETE FROM " + CHILDRENS_COLLECTION
+						+ " WHERE Email='" + userEmail + "'";
+				executeUpdateQuery(oracleClient, query);
+			}
+			else
+			{
+				LOG.error("connection failure");
+			}
+		}
+		catch(Exception e)
+		{
+			LOG.error("Unable to delete user in oracle DB");
+		}
+	}
+
+	private void executeUpdateQuery(Connection oracleClient, String query) throws SQLException
+	{
+		try (Statement statement = oracleClient.createStatement())
+		{
+			statement.executeUpdate(query);
+		}
+		catch(Exception e)
+		{
+			LOG.error("Query failure, using query: " + query, e);
+		}
+		oracleClient.close();
 	}
 }

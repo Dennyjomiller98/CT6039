@@ -115,6 +115,7 @@
                 <div class="alert alert-success" role="alert" id="formSuccess"><%=success%></div>
                 <%}%>
                 <br/>
+                <h3>Profile Settings</h3>
                 <label for="firstname" class="form-label"><%="Firstname"%></label>
                 <input class="form-control" type="text" name="firstname" id="firstname" required/>
                 <br/>

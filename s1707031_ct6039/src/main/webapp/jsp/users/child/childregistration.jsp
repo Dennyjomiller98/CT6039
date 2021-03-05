@@ -106,6 +106,8 @@
             </p>
 
             <form class="reg-form" action="${pageContext.request.contextPath}/servlets/users/child/ChildRegistration" method="POST">
+                <br/>
+                <h3>Profile Settings</h3>
                 <label for="address-value"></label>
                 <input type="text" name="address-value" id="address-value" hidden/>
 

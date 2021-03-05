@@ -35,7 +35,7 @@ public class ParentBean
 			fLinkedChildIds = resultSet.getString("linkedChildIds");
 			fPword = resultSet.getString("Pword");
 			fHomeworkEmail = resultSet.getBoolean("Homework_Email");
-			fCalendarEmail = resultSet.getBoolean("Calendar_Email");
+			fCalendarEmail = resultSet.getBoolean("Calender_Email");
 			fProfileEmail = resultSet.getBoolean("Profile_Email");
 		}
 		catch (SQLException throwables)
