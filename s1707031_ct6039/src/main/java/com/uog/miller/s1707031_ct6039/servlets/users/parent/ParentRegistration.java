@@ -1,6 +1,7 @@
 package com.uog.miller.s1707031_ct6039.servlets.users.parent;
 
 import com.uog.miller.s1707031_ct6039.beans.ParentBean;
+import com.uog.miller.s1707031_ct6039.oracle.LinkedConnections;
 import com.uog.miller.s1707031_ct6039.oracle.ParentConnections;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +27,7 @@ public class ParentRegistration extends HttpServlet
 		String email = request.getParameter("email");
 		String dob = request.getParameter("dob");
 		String address = request.getParameter("address-value");
-		String linkedChildIds = request.getParameter("childSelect");
+		String[] linkedChildIds = request.getParameterValues("childSelect[]");
 		String pword = request.getParameter("pword");
 		String pwordConfirm = request.getParameter("pwordConfirm");
 
@@ -71,20 +72,29 @@ public class ParentRegistration extends HttpServlet
 				bean.setEmail(email.toLowerCase());
 				bean.setDOB(dob);
 				bean.setAddress(address);
-				bean.setLinkedChildIds(linkedChildIds);
 				bean.setPword(pword);
 				//Get 'Default' account settings for new user
 				bean.setEmailForHomework(true);
 				bean.setEmailForCalendar(true);
 				bean.setEmailForProfile(true);
-				attemptParentRegistration(request, response, bean);
+				attemptParentRegistration(request, response, bean, String.join(", ", linkedChildIds));
 			}
 		}
 	}
 
-	private void attemptParentRegistration(HttpServletRequest request, HttpServletResponse response, ParentBean bean)
+	private void attemptParentRegistration(HttpServletRequest request, HttpServletResponse response, ParentBean bean, String linkedChildIds)
 	{
 		LOG.debug("Account sane to be created, attempting to register to DB");
+		//Create parent-child link
+		LinkedConnections connections = new LinkedConnections();
+		connections.linkChildren(bean.getEmail(), linkedChildIds);
+		//Get links, add to Parent account
+		String allLinkedIds = connections.getAllLinks(bean.getEmail());
+		if(allLinkedIds != null)
+		{
+			bean.setLinkedChildIds(allLinkedIds);
+		}
+
 		//Use ParentBean to create an account and add to DB
 		ParentConnections parentConnections = new ParentConnections();
 		boolean registerSuccess = parentConnections.registerParent(bean);

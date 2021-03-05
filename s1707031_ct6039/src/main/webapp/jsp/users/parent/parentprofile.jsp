@@ -1,3 +1,6 @@
+<%@ page import="com.uog.miller.s1707031_ct6039.beans.LinkBean" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
 <%--
   Created by IntelliJ IDEA.
   User: Denny-Jo
@@ -112,6 +115,90 @@
             <p class="main-body-text">
                 <%="From here, you can edit your account and settings."%>
             </p>
+
+            <% String firstname = (String) session.getAttribute("firstname");%>
+            <% String surname = (String) session.getAttribute("surname");%>
+            <% String dob = (String) session.getAttribute("dob");%>
+            <% String address = (String) session.getAttribute("address");%>
+            <% List<LinkBean> linkBeans = (List<LinkBean>) session.getAttribute("allLinkBeans");
+                StringBuilder linkBeansArray = new StringBuilder();
+                for (int i = 0; i < linkBeans.size(); i++)
+                {
+                    if (i == 0)
+                    {
+                    	linkBeansArray = new StringBuilder(linkBeans.get(i).getChildEmail().trim());
+                    }
+                    else
+                    {
+                        linkBeansArray.append(",").append(linkBeans.get(i).getChildEmail().trim());
+                    }
+                }%>
+            <% Boolean homeworkEmail = (Boolean) session.getAttribute("homeworkEmail");%>
+            <% Boolean calendarEmail = (Boolean) session.getAttribute("calendarEmail");%>
+            <% Boolean profileEmail = (Boolean) session.getAttribute("profileEmail");%>
+            <form class="reg-form" action="${pageContext.request.contextPath}/servlets/users/parent/ParentProfile" method="POST">
+                <h3>Profile Settings</h3>
+                <label for="child-value" hidden></label>
+                <input type="text" name="child-value" id="child-value" value="<%=linkBeansArray.toString()%>" hidden/>
+                <br/>
+                <label for="firstname" class="form-label"><%="Firstname"%></label>
+                <input type="text" name="firstname" id="firstname" class="form-control" value="<%=firstname%>" required/>
+                <br/>
+                <label for="surname" class="form-label"><%="Surname"%></label>
+                <input type="text" name="surname" id="surname" class="form-control" value="<%=surname%>" required/>
+                <br/>
+                <label for="email" class="form-label"><%="Email (This cannot be changed)"%></label>
+                <input type="email" name="email" id="email" class="form-control" value="<%=email%>" disabled required/>
+                <br/>
+                <label for="dob" class="form-label"><%="Date of Birth"%></label>
+                <input type="date" name="dob" id="dob" class="form-control" value="<%=dob%>" required/>
+                <br/>
+                <label for="address" class="form-label"><%="Address (Start Typing to auto-fill)"%></label>
+                <input type="search" id="address" class="form-control" placeholder="<%=address%>" />
+                <br/>
+                <label for="address-value"></label>
+                <input type="text" name="address-value" id="address-value" value="<%=address%>" hidden/>
+                <br/>
+                <label for="childSelect[]" class="form-label"><%="Children"%></label>
+                <select class="form-control select-css selectpicker childSelect" name="childSelect[]" id="childSelect[]" multiple data-live-search="true">
+                    <%--Get all children, allow multi select--%>
+                    <option value=""></option>
+                    <% Map<String,String> allChildren = (Map<String,String>) session.getAttribute("allChildren");
+                        if(allChildren != null) {
+                            for (Map.Entry<String, String> entry : allChildren.entrySet())
+                            {%>
+                    <option value="<%=entry.getKey()%>"><%=entry.getValue()%></option>
+                    <%}
+                    }%>
+                </select>
+                <br/>
+                <label for="pword" class="form-label"><%="Old Password"%></label>
+                <input type="password" name="pword" id="pword" minlength="8" class="form-control" required/>
+                <br/>
+                <label for="newPword" class="form-label"><%="New Password"%></label>
+                <input type="password" name="newPword" id="newPword" minlength="8" class="form-control"/>
+                <br/>
+                <label for="pwordConfirm" class="form-label"><%="Confirm New Password"%></label>
+                <input type="password" name="pwordConfirm" id="pwordConfirm" minlength="8" class="form-control"/>
+                <div class="alert alert-danger" role="alert" id="pwordErrors" style="display: none">Passwords do not match!</div>
+                <br/>
+                <h3>Email Settings</h3>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" name="homeworkEmail" id="homeworkEmail" <%if(homeworkEmail){ %> checked <% } %> >
+                    <label class="custom-control-label" for="homeworkEmail">Email me for Homework updates</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" name="calendarEmail" id="calendarEmail" <%if(calendarEmail){ %> checked <% } %> >
+                    <label class="custom-control-label" for="calendarEmail">Email me for Calendar updates</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" name="profileEmail" id="profileEmail" <%if(profileEmail){ %> checked <% } %> >
+                    <label class="custom-control-label" for="profileEmail">Email me for Account updates</label>
+                </div>
+                <br/>
+                <a type="button" style="flex:1" class="btn btn-secondary" href="${pageContext.request.contextPath}/servlets/users/parent/ParentDelete?email=<%=email%>" >Delete Account</a>
+                <input class="btn btn-primary" type="submit" value="Update Changes">
+            </form>
         </div>
 
         <footer class="footer">
@@ -123,5 +210,53 @@
                 <a href=${pageContext.request.contextPath}/servlets/Redirects?location=teacher-login>&nbsp;Teacher Login&nbsp;</a>
             </div>
         </footer>
+        <script>
+            //Address Search
+            (function() {
+                let placesAutocomplete = places({
+                    container: document.querySelector('#address')
+                });
+
+                let $address = document.querySelector('#address-value')
+                placesAutocomplete.on('change', function(e) {
+                    $address.textContent = e.suggestion.value;
+                    $('#address-value').val(e.suggestion.value);
+                });
+
+                placesAutocomplete.on('clear', function() {
+                    $address.textContent = 'none';
+                });
+            })();
+
+            //Password validation
+            let pword = $("#newPword");
+            let pwordConfirm = $("#pwordConfirm");
+            function verifyPword() {
+                let pwordErrors = $("#pwordErrors");
+                if (pword.val() !== pwordConfirm.val()) {
+                    pwordErrors.show();
+                } else {
+                    pwordErrors.hide();
+                }
+            }
+
+            pword.keyup(function() {
+                verifyPword();
+            });
+            pwordConfirm.keyup(function() {
+                verifyPword();
+            });
+
+            //Child Selection
+            $(document).ready(
+                function () {
+                    let linkBeans = $("#child-value").val();
+                    let linkBeansArr =linkBeans.split(",");
+                    let selPicker = $('.selectpicker');
+                    let selPicker2 = $(".childSelect");
+                    selPicker2.val(linkBeansArr);
+                    selPicker.selectpicker('refresh');
+            });
+        </script>
     </body>
 </html>

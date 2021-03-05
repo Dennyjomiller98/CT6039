@@ -32,7 +32,7 @@ public class ParentBean
 			fEmail = resultSet.getString("Email");
 			fDOB = resultSet.getString("DOB");
 			fAddress = resultSet.getString("Address");
-			fLinkedChildIds = resultSet.getString("linkedChildIds");
+			fLinkedChildIds = resultSet.getString("Linked_Child_Id");
 			fPword = resultSet.getString("Pword");
 			fHomeworkEmail = resultSet.getBoolean("Homework_Email");
 			fCalendarEmail = resultSet.getBoolean("Calender_Email");

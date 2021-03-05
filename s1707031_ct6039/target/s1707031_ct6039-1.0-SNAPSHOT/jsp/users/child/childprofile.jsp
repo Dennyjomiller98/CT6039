@@ -111,6 +111,7 @@
 
             <p class="main-body-text">
                 <%="From here, you can edit your account and settings."%>
+                <br/>
                 <%="You must enter your old Password to save changes."%>
             </p>
 
@@ -145,7 +146,7 @@
                 <label for="address" class="form-label"><%="Address (Start Typing to auto-fill)"%></label>
                 <input type="search" id="address" class="form-control" placeholder="<%=address%>" />
                 <br/>
-                <label for="year" class="form-label"><%="Year"%></label>
+                <label for="year" class="form-label"><%="Year (This cannot be changed)"%></label>
                 <select class="select-css form-control" name="year" id="year" disabled required>
                     <%--Iterate each year, Use these for options --%>
                     <option value="">None</option>
@@ -168,7 +169,7 @@
                 <input type="password" name="pwordConfirm" id="pwordConfirm" minlength="8" class="form-control"/>
                 <br/>
                 <div class="alert alert-danger" role="alert" id="pwordErrors" style="display: none">Passwords do not match!</div>
-
+                <br/>
                 <h3>Email Settings</h3>
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" name="homeworkEmail" id="homeworkEmail" <%if(homeworkEmail){ %> checked <% } %> >

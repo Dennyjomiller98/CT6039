@@ -46,5 +46,8 @@ public class ParentLogout extends HttpServlet
 
 		request.getSession(true).removeAttribute("formErrors");
 
+		request.getSession(true).removeAttribute("allYears");
+		request.getSession(true).removeAttribute("allChildren");
+		request.getSession(true).removeAttribute("allLinkBeans");
 	}
 }

@@ -1,10 +1,7 @@
 package com.uog.miller.s1707031_ct6039.oracle;
 
 import com.uog.miller.s1707031_ct6039.beans.TeacherBean;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class TeacherConnections extends AbstractOracleConnections
@@ -85,7 +82,7 @@ public class TeacherConnections extends AbstractOracleConnections
 		return ret;
 	}
 
-	private TeacherBean validateCredentials(String email, String pword)
+	public TeacherBean validateCredentials(String email, String pword)
 	{
 		//Default to true in case of an error.
 		TeacherBean ret = null;
@@ -186,8 +183,73 @@ public class TeacherConnections extends AbstractOracleConnections
 		return allTeachers;
 	}
 
-	public void deleteAccount()
+	public void deleteAccount(String email)
 	{
-		//Needs Auth
+		LOG.debug("Attempting to delete user:" + email);
+		setOracleDriver();
+		try
+		{
+			AbstractOracleConnections conn = new AbstractOracleConnections();
+			Connection oracleClient = conn.getOracleClient();
+			if (oracleClient != null)
+			{
+				String query = "DELETE FROM " + TEACHERS_COLLECTION
+						+ " WHERE Email='" + email + "'";
+				executeUpdateQuery(oracleClient, query);
+			}
+			else
+			{
+				LOG.error("connection failure");
+			}
+		}
+		catch(Exception e)
+		{
+			LOG.error("Unable to delete user in oracle DB");
+		}
+	}
+
+	public void updateAccount(TeacherBean teacherBean)
+	{
+		try
+		{
+			AbstractOracleConnections conn = new AbstractOracleConnections();
+			Connection oracleClient = conn.getOracleClient();
+			if (oracleClient != null)
+			{
+				String query = "UPDATE " + TEACHERS_COLLECTION + " SET Firstname ='" + teacherBean.getFirstname().replace("'", "''")
+						+"', Surname='"+ teacherBean.getSurname().replace("'", "''")
+						+"', Title='"+ teacherBean.getTitle().replace("'", "''")
+						+"', DOB='"+ teacherBean.getDOB().replace("'", "''")
+						+"', Address='"+ teacherBean.getAddress().replace("'", "''")
+						+"', Year='"+ teacherBean.getYear()
+						+"', Pword='"+ teacherBean.getPword().replace("'", "''")
+						+"', Homework_Email='"+ teacherBean.getEmailForHomework()
+						+"', Calender_Email='"+ teacherBean.getEmailForCalendar()
+						+"', Profile_Email='"+ teacherBean.getEmailForProfile()
+						+"' WHERE Email='"+ teacherBean.getEmail() +"'";
+				executeUpdateQuery(oracleClient, query);
+			}
+			else
+			{
+				LOG.error("connection failure");
+			}
+		}
+		catch(Exception e)
+		{
+			LOG.error("Unable to update teacher information", e);
+		}
+	}
+
+	private void executeUpdateQuery(Connection oracleClient, String query) throws SQLException
+	{
+		try (Statement statement = oracleClient.createStatement())
+		{
+			statement.executeUpdate(query);
+		}
+		catch(Exception e)
+		{
+			LOG.error("Query failure, using query: " + query, e);
+		}
+		oracleClient.close();
 	}
 }

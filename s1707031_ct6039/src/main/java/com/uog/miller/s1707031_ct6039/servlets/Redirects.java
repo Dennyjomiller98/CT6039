@@ -1,5 +1,6 @@
 package com.uog.miller.s1707031_ct6039.servlets;
 
+import com.uog.miller.s1707031_ct6039.oracle.LinkedConnections;
 import com.uog.miller.s1707031_ct6039.oracle.YearConnections;
 import java.io.IOException;
 import java.util.Map;
@@ -87,9 +88,11 @@ public class Redirects extends HttpServlet
 				ret = "/jsp/users/parent/parentlogin.jsp";
 				break;
 			case "parent-register":
+				addSessionAttributesForLinks(request);
 				ret = "/jsp/users/parent/parentregistration.jsp";
 				break;
 			case "parent-profile":
+				addSessionAttributesForLinks(request);
 				ret = "/jsp/users/parent/parentprofile.jsp";
 				break;
 
@@ -155,6 +158,18 @@ public class Redirects extends HttpServlet
 		if(allYears != null)
 		{
 			request.getSession(true).setAttribute("allYears", allYears);
+		}
+	}
+
+	//Allows Registration forms/etc to populate Year select dropdown
+	private void addSessionAttributesForLinks(HttpServletRequest request)
+	{
+		Map<String, String> allYears;
+		LinkedConnections connections = new LinkedConnections();
+		allYears = connections.getAllChildren();
+		if(allYears != null)
+		{
+			request.getSession(true).setAttribute("allChildren", allYears);
 		}
 	}
 }

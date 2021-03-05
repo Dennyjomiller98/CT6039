@@ -1,10 +1,7 @@
 package com.uog.miller.s1707031_ct6039.oracle;
 
 import com.uog.miller.s1707031_ct6039.beans.ParentBean;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class ParentConnections extends AbstractOracleConnections
@@ -84,7 +81,7 @@ public class ParentConnections extends AbstractOracleConnections
 		return ret;
 	}
 
-	private ParentBean validateCredentials(String email, String pword)
+	public ParentBean validateCredentials(String email, String pword)
 	{
 		//Default to true in case of an error.
 		ParentBean ret = null;
@@ -185,8 +182,72 @@ public class ParentConnections extends AbstractOracleConnections
 		return allParents;
 	}
 
-	public void deleteAccount()
+	public void deleteAccount(String email)
 	{
-		//Needs Auth
+		LOG.debug("Attempting to delete user:" + email);
+		setOracleDriver();
+		try
+		{
+			AbstractOracleConnections conn = new AbstractOracleConnections();
+			Connection oracleClient = conn.getOracleClient();
+			if (oracleClient != null)
+			{
+				String query = "DELETE FROM " + PARENTS_COLLECTION
+						+ " WHERE Email='" + email + "'";
+				executeUpdateQuery(oracleClient, query);
+			}
+			else
+			{
+				LOG.error("connection failure");
+			}
+		}
+		catch(Exception e)
+		{
+			LOG.error("Unable to delete user in oracle DB", e);
+		}
+	}
+
+	private void executeUpdateQuery(Connection oracleClient, String query) throws SQLException
+	{
+		try (Statement statement = oracleClient.createStatement())
+		{
+			statement.executeUpdate(query);
+		}
+		catch(Exception e)
+		{
+			LOG.error("Query failure, using query: " + query, e);
+		}
+		oracleClient.close();
+	}
+
+	public void updateAccount(ParentBean bean)
+	{
+		try
+		{
+			AbstractOracleConnections conn = new AbstractOracleConnections();
+			Connection oracleClient = conn.getOracleClient();
+			if (oracleClient != null)
+			{
+				String query = "UPDATE " + PARENTS_COLLECTION + " SET Firstname ='" + bean.getFirstname().replace("'", "''")
+						+"', Surname='"+ bean.getSurname().replace("'", "''")
+						+"', DOB='"+ bean.getDOB().replace("'", "''")
+						+"', Address='"+ bean.getAddress().replace("'", "''")
+						+"', Linked_Child_Id='"+ bean.getLinkedChildIds()
+						+"', Pword='"+ bean.getPword().replace("'", "''")
+						+"', Homework_Email='"+ bean.getEmailForHomework()
+						+"', Calender_Email='"+ bean.getEmailForCalendar()
+						+"', Profile_Email='"+ bean.getEmailForProfile()
+						+"' WHERE Email='"+ bean.getEmail() +"'";
+				executeUpdateQuery(oracleClient, query);
+			}
+			else
+			{
+				LOG.error("connection failure");
+			}
+		}
+		catch(Exception e)
+		{
+			LOG.error("Unable to update parent information", e);
+		}
 	}
 }

@@ -50,7 +50,7 @@ public class YearConnections extends AbstractOracleConnections
 
 	private Map<String,String> executeQuery(Connection oracleClient, String query) throws SQLException
 	{
-		//Executes SQL Query, any Children found will populate the ArrayList.
+		//Executes SQL Query, any years found will populate the HashMap.
 		Map<String,String> allYears = new HashMap<>();
 		try (PreparedStatement preparedStatement = oracleClient.prepareStatement(query))
 		{
@@ -59,7 +59,7 @@ public class YearConnections extends AbstractOracleConnections
 			{
 				String id = resultSet.getString("Id");
 				String name = resultSet.getString("Name");
-				//Add bean to list of students
+				//Add id and name to year map
 				allYears.put(id, name);
 			}
 		}

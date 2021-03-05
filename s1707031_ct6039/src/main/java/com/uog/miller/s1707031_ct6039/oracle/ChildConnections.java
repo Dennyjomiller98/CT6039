@@ -215,7 +215,6 @@ public class ChildConnections extends AbstractOracleConnections
 
 	public void deleteAccount(String userEmail)
 	{
-		//Needs impl
 		LOG.debug("Attempting to delete user:" + userEmail);
 		setOracleDriver();
 		try

@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.util.Map" %><%--
   Created by IntelliJ IDEA.
   User: Denny-Jo
   Date: 19/02/2021
@@ -133,12 +133,17 @@
                 <label for="address-value"></label>
                 <input type="text" name="address-value" id="address-value" hidden/>
                 <br/>
-                <label for="childSelect" class="form-label"><%="Children"%></label>
-                <select class="form-control select-css selectpicker" name="childSelect" id="childSelect" multiple data-live-search="true">
+                <label for="childSelect[]" class="form-label"><%="Children"%></label>
+                <select class="form-control select-css selectpicker" name="childSelect[]" id="childSelect[]" multiple data-live-search="true">
                     <%--Get all children, allow multi select--%>
                     <option value=""></option>
-                    <option value="susan">Susan</option>
-                    <option value="john">JOHN</option>
+                    <% Map<String,String> allChildren = (Map<String,String>) session.getAttribute("allChildren");
+                        if(allChildren != null) {
+                            for (Map.Entry<String, String> entry : allChildren.entrySet())
+                            {%>
+                    <option value="<%=entry.getKey()%>"><%=entry.getValue()%></option>
+                    <%}
+                    }%>
                 </select>
                 <br/>
                 <label for="pword" class="form-label"><%="Password"%></label>

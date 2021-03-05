@@ -45,5 +45,8 @@ public class ChildLogout extends HttpServlet
 		request.getSession(true).removeAttribute("isChild");
 
 		request.getSession(true).removeAttribute("formErrors");
+
+		request.getSession(true).removeAttribute("allYears");
+		request.getSession(true).removeAttribute("allChildren");
 	}
 }

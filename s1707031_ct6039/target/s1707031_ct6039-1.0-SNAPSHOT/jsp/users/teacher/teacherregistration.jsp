@@ -126,10 +126,8 @@
                 </select>
                 <br/>
                 <%--If Other selected, use textbox value. When select is changed, set value in this textbox and use this value when submitting--%>
-                <label for="title-value" class="form-label"><%="Title (Other)"%></label>
-                <%--HIDE THIS WHEN "Other" NOT SELECTED!--%>
-                <input class="form-control" type="text" name="title-value" id="title-value" <%--If "Other", required--%>/>
-                <br/>
+                <label for="title-value" class="form-label titleval" hidden><%="Title (Other)"%></label>
+                <input class="form-control titleval" type="text" name="title-value" id="title-value" hidden/>
                 <br/>
                 <label for="firstname" class="form-label"><%="Firstname"%></label>
                 <input class="form-control" type="text" name="firstname" id="firstname" required/>
@@ -214,6 +212,23 @@
                     pwordErrors.hide();
                 }
             }
+
+            //Title "Other" input
+            let titleSelect = $("#title");
+            titleSelect.on('change', function(){
+                let val = titleSelect.val();
+                let titleVal = $(".titleval");
+                console.log(val);
+                if (val !== "Mr" && val !== "Mrs" && val !== "") {
+                    titleVal.show();
+                    titleVal.removeAttr("hidden");
+                    titleVal.removeAttr("required");
+                } else {
+                    titleVal.hide();
+                    titleVal.attr("hidden");
+                    titleVal.attr("required");
+                }
+            });
 
             pword.keyup(function() {
                 verifyPword();

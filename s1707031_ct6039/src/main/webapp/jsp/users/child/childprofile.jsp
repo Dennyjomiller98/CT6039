@@ -111,6 +111,7 @@
 
             <p class="main-body-text">
                 <%="From here, you can edit your account and settings."%>
+                <br/>
                 <%="You must enter your old Password to save changes."%>
             </p>
 
@@ -168,7 +169,7 @@
                 <input type="password" name="pwordConfirm" id="pwordConfirm" minlength="8" class="form-control"/>
                 <br/>
                 <div class="alert alert-danger" role="alert" id="pwordErrors" style="display: none">Passwords do not match!</div>
-
+                <br/>
                 <h3>Email Settings</h3>
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" name="homeworkEmail" id="homeworkEmail" <%if(homeworkEmail){ %> checked <% } %> >
