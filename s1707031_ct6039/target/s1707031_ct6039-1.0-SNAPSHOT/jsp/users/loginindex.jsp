@@ -29,6 +29,9 @@
                             </li>
                             <%--If logged in, show nav links, else just have home & account signup/login visible--%>
                             <% String email = (String) session.getAttribute("email");
+                                String isChild = (String) session.getAttribute("isChild");
+                                String isTeacher = (String) session.getAttribute("isTeacher");
+                                String isParent = (String) session.getAttribute("isParent");
                                 if(email != null) { %>
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=calendar">Calendar</a>
@@ -36,9 +39,23 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=progress-view">Progress</a>
                             </li>
+                            <%if(isChild != null) {%>
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=homework-view">Homework</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=class-view">My Class</a>
+                            </li>
+                            <% } else if(isTeacher != null) {%>
+                            <li class="nav-item">
+                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=class-view">My Classes</a>
+                            </li>
+                            <% } else if(isParent != null) {%>
+                            <li class="nav-item">
+                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=view-child">My Children</a>
+                            </li>
+                            <%}%>
+
                             <%} else { %>
                             <li class="nav-item">
                                 <a class="nav-link">You must be signed in to access site features</a>
@@ -47,49 +64,46 @@
                         </ul>
                         <%--Login/Register Side of navbar. if logged in, show logout/account links--%>
                         <span class="navbar-text">
-                            <% if(email != null) { %>
-                                <% String isChild = (String) session.getAttribute("isChild");
-                                    String isTeacher = (String) session.getAttribute("isTeacher");
-                                    String isParent = (String) session.getAttribute("isParent");
-                                    if(isChild != null) { %>
-                                        <a class="nav-link navbar-login-info"><%="Logged in as: "%><%=email%></a>
-                                        <button class="btn btn-sm btn-outline-secondary" type="button">
-                                            <a href=${pageContext.request.contextPath}/servlets/Redirects?location=child-profile>&nbsp;My account&nbsp;</a>
-                                        </button>
-                                        &nbsp;
-                                        <button class="btn btn-sm btn-outline-secondary" type="button">
-                                            <a href=${pageContext.request.contextPath}/servlets/users/child/ChildLogout>&nbsp;Logout&nbsp;</a>
-                                        </button>
-                                    <% } else if(isParent != null) { %>
-                                        <a class="nav-link navbar-login-info"><%="Logged in as: "%><%=email%></a>
-                                        <button class="btn btn-sm btn-outline-secondary" type="button">
-                                            <a href=${pageContext.request.contextPath}/servlets/Redirects?location=parent-profile>&nbsp;My account&nbsp;</a>
-                                        </button>
-                                        &nbsp;
-                                        <button class="btn btn-sm btn-outline-secondary" type="button">
-                                            <a href=${pageContext.request.contextPath}/servlets/users/parent/ParentLogout>&nbsp;Logout&nbsp;</a>
-                                        </button>
-                                    <% } else if(isTeacher != null) { %>
-                                        <a class="nav-link navbar-login-info"><%="Logged in as: "%><%=email%></a>
-                                        <button class="btn btn-sm btn-outline-secondary" type="button">
-                                            <a href=${pageContext.request.contextPath}/servlets/Redirects?location=teacher-profile>&nbsp;My account&nbsp;</a>
-                                        </button>
-                                        &nbsp;
-                                        <button class="btn btn-sm btn-outline-secondary" type="button">
-                                            <a href=${pageContext.request.contextPath}/servlets/users/teacher/TeacherLogout>&nbsp;Logout&nbsp;</a>
-                                        </button>
-                                    <% } %>
-                            <%} else { %>
-                                <a class="nav-link navbar-login-info"><%="You are not logged in"%></a>
-                                <button class="btn btn-sm btn-outline-secondary" type="button">
-                                <a href=${pageContext.request.contextPath}/servlets/Redirects?location=login>&nbsp;Login&nbsp;</a>
-                                </button>
-                                &nbsp;
-                                <button class="btn btn-sm btn-outline-secondary" type="button">
-                                    <a href=${pageContext.request.contextPath}/servlets/Redirects?location=register>&nbsp;Register&nbsp;</a>
-                                </button>
-                            <% } %>
-                        </span>
+                        <% if(email != null) { %>
+                            <%if(isChild != null) { %>
+                                    <a class="nav-link navbar-login-info"><%="Logged in as: "%><%=email%></a>
+                                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                                        <a href=${pageContext.request.contextPath}/servlets/Redirects?location=child-profile>&nbsp;My account&nbsp;</a>
+                                    </button>
+                                    &nbsp;
+                                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                                        <a href=${pageContext.request.contextPath}/servlets/users/child/ChildLogout>&nbsp;Logout&nbsp;</a>
+                                    </button>
+                                <% } else if(isParent != null) { %>
+                                    <a class="nav-link navbar-login-info"><%="Logged in as: "%><%=email%></a>
+                                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                                        <a href=${pageContext.request.contextPath}/servlets/Redirects?location=parent-profile>&nbsp;My account&nbsp;</a>
+                                    </button>
+                                    &nbsp;
+                                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                                        <a href=${pageContext.request.contextPath}/servlets/users/parent/ParentLogout>&nbsp;Logout&nbsp;</a>
+                                    </button>
+                                <% } else if(isTeacher != null) { %>
+                                    <a class="nav-link navbar-login-info"><%="Logged in as: "%><%=email%></a>
+                                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                                        <a href=${pageContext.request.contextPath}/servlets/Redirects?location=teacher-profile>&nbsp;My account&nbsp;</a>
+                                    </button>
+                                    &nbsp;
+                                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                                        <a href=${pageContext.request.contextPath}/servlets/users/teacher/TeacherLogout>&nbsp;Logout&nbsp;</a>
+                                    </button>
+                                <% } %>
+                        <%} else { %>
+                            <a class="nav-link navbar-login-info"><%="You are not logged in"%></a>
+                            <button class="btn btn-sm btn-outline-secondary" type="button">
+                            <a href=${pageContext.request.contextPath}/servlets/Redirects?location=login>&nbsp;Login&nbsp;</a>
+                            </button>
+                            &nbsp;
+                            <button class="btn btn-sm btn-outline-secondary" type="button">
+                                <a href=${pageContext.request.contextPath}/servlets/Redirects?location=register>&nbsp;Register&nbsp;</a>
+                            </button>
+                        <% } %>
+                    </span>
                     </div>
                 </div>
             </nav>

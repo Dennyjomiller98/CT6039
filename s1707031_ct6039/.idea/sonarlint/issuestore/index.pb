@@ -211,8 +211,6 @@ c.idea/dataSources/18876887-8e80-4bc3-af78-2a1e6dcbad31/storage_v2/_src_/schema/
 ^.idea/dataSources/18876887-8e80-4bc3-af78-2a1e6dcbad31/storage_v2/_src_/schema/SYS.rUIBAA.meta,4\b\4bd0ed5dcb62dc2fad575f063d698d5b639bd9cb
 ‘
 a.idea/dataSources/18876887-8e80-4bc3-af78-2a1e6dcbad31/storage_v2/_src_/schema/SYSTEM.L2avkg.meta,c\6\c60cdda86073bde7fd37b15da5a8399b1f0cce32
-p
-@src/main/java/com/uog/miller/s1707031_ct6039/beans/YearBean.java,3\7\37739fb5d312ffa2b7cc125d84e372702e63abd6
 Y
 )src/main/webapp/assets/js/fullcalendar.js,6\c\6c9fe29ea8b3d95d4e120416529679332842fbbb
 „
@@ -259,3 +257,15 @@ a
 +src/main/webapp/assets/css/fullcalendar.css,3\9\39af780ee33d82c4884c53c103a3f885977ed8c6
 a
 1src/main/webapp/assets/css/fullcalendar.print.css,b\0\b03ff082873a19355262eba378f4325c169667f5
+s
+Ctarget/s1707031_ct6039-1.0-SNAPSHOT/jsp/actions/class/viewclass.jsp,7\d\7de7fc163ad8b299d95a11b09280cd83dd312428
+‚
+Rsrc/main/java/com/uog/miller/s1707031_ct6039/servlets/users/child/ChildDelete.java,a\7\a7383231f94917afe584dd61755b6fd9b26f078e
+u
+Esrc/main/java/com/uog/miller/s1707031_ct6039/beans/ClassLinkBean.java,d\d\dda69c7e78316a85da5a2b1a85f06722d55bf3dd
+p
+@src/main/java/com/uog/miller/s1707031_ct6039/beans/LinkBean.java,f\3\f33bc0a2ecba20502da9e0926e06f6b91f304beb
+„
+Tsrc/main/java/com/uog/miller/s1707031_ct6039/servlets/users/parent/ParentDelete.java,9\6\96ebed69a5f7edb89f88a5bfca364d543878d46b
+†
+Vsrc/main/java/com/uog/miller/s1707031_ct6039/servlets/users/teacher/TeacherDelete.java,7\f\7f25317539e9810fc65705bd7e1ce4b7b03c17ac
