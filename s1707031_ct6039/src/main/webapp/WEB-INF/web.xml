@@ -140,6 +140,7 @@
         <servlet-name>teacherDelete</servlet-name>
         <url-pattern>/servlets/users/teacher/TeacherDelete</url-pattern>
     </servlet-mapping>
+
     <!--CALENDAR-->
     <servlet>
         <servlet-name>calendarActions</servlet-name>
@@ -180,5 +181,39 @@
     <servlet-mapping>
         <servlet-name>retrieveCalendarEvent</servlet-name>
         <url-pattern>/servlets/calendar/RetrieveCalendarEvent</url-pattern>
+    </servlet-mapping>
+
+    <!--CLASS-->
+    <servlet>
+        <servlet-name>deleteClass</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.childclass.DeleteClass</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteClass</servlet-name>
+        <url-pattern>/servlets/childclass/DeleteClass</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>updateClass</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.childclass.UpdateClass</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>updateClass</servlet-name>
+        <url-pattern>/servlets/childclass/UpdateClass</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>addClass</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.childclass.AddClass</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addClass</servlet-name>
+        <url-pattern>/servlets/childclass/AddClass</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>retrieveClass</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.childclass.RetrieveClass</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>retrieveClass</servlet-name>
+        <url-pattern>/servlets/childclass/RetrieveClass</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -1,8 +1,11 @@
 package com.uog.miller.s1707031_ct6039.servlets;
 
+import com.uog.miller.s1707031_ct6039.beans.ClassBean;
+import com.uog.miller.s1707031_ct6039.oracle.ClassConnections;
 import com.uog.miller.s1707031_ct6039.oracle.LinkedConnections;
 import com.uog.miller.s1707031_ct6039.oracle.YearConnections;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -112,10 +115,6 @@ public class Redirects extends HttpServlet
 				ret = "/jsp/actions/calendar/viewcalendar.jsp";
 				break;
 
-			case "lessons":
-				ret = "/jsp/actions/lessons/join.jsp";
-				break;
-
 			case "progress-request":
 				ret = "/jsp/actions/progress/requestprogress.jsp";
 				break;
@@ -131,12 +130,15 @@ public class Redirects extends HttpServlet
 				break;
 
 			case "class-view":
+				addSessionAttributesForClass(request);
 				ret = "/jsp/actions/class/viewclass.jsp";
 				break;
 			case "class-edit":
 				ret = "/jsp/actions/class/editclass.jsp";
 				break;
 			case "class-add":
+				addSessionAttributesForYear(request);
+				addSessionAttributesForLinks(request);
 				ret = "/jsp/actions/class/addclass.jsp";
 				break;
 
@@ -159,6 +161,17 @@ public class Redirects extends HttpServlet
 		return ret;
 	}
 
+	private void addSessionAttributesForClass(HttpServletRequest request)
+	{
+		String email = (String) request.getSession(true).getAttribute("email");
+		if(email != null)
+		{
+			ClassConnections connections = new ClassConnections();
+			List<ClassBean> classFromTeacherEmail = connections.getClassFromTeacherEmail(email);
+			request.getSession(true).setAttribute("allClasses", classFromTeacherEmail);
+		}
+	}
+
 	//Allows Registration forms/etc to populate Year select dropdown
 	private void addSessionAttributesForYear(HttpServletRequest request)
 	{
@@ -174,12 +187,12 @@ public class Redirects extends HttpServlet
 	//Allows Registration forms/etc to populate Year select dropdown
 	private void addSessionAttributesForLinks(HttpServletRequest request)
 	{
-		Map<String, String> allYears;
+		Map<String, String> allChildren;
 		LinkedConnections connections = new LinkedConnections();
-		allYears = connections.getAllChildren();
-		if(allYears != null)
+		allChildren = connections.getAllChildren();
+		if(allChildren != null)
 		{
-			request.getSession(true).setAttribute("allChildren", allYears);
+			request.getSession(true).setAttribute("allChildren", allChildren);
 		}
 	}
 }

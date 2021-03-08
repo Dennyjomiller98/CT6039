@@ -22,9 +22,9 @@ public class ClassLinkBean
 			fEventId = resultSet.getString("Event_Id");
 			fEmail = resultSet.getString("Child_Email");
 		}
-		catch (SQLException throwables)
+		catch (SQLException e)
 		{
-			LOG.error("Unable to create Bean from ResultSet", throwables);
+			LOG.error("Unable to create Bean from ResultSet", e);
 		}
 	}
 

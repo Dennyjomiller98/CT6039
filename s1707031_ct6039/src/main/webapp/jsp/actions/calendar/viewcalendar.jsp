@@ -217,7 +217,7 @@
                     <div class="collapse navbar-collapse" id="navbarText">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/servlets/Redirects?location=home">Home</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=home">Home</a>
                             </li>
                             <%--If logged in, show nav links, else just have home & account signup/login visible--%>
                             <% String email = (String) session.getAttribute("email");
@@ -226,7 +226,7 @@
                                 String isParent = (String) session.getAttribute("isParent");
                                 if(email != null) { %>
                             <li class="nav-item">
-                                <a class="nav-link active" href="${pageContext.request.contextPath}/servlets/Redirects?location=calendar">Calendar</a>
+                                <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/servlets/Redirects?location=calendar">Calendar</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=progress-view">Progress</a>
@@ -234,9 +234,6 @@
                             <%if(isChild != null) {%>
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=homework-view">Homework</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=class-view">My Class</a>
                             </li>
                             <% } else if(isTeacher != null) {%>
                             <li class="nav-item">

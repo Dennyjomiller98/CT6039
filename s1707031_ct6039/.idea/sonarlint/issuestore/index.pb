@@ -173,8 +173,6 @@ x
 Hsrc/main/java/com/uog/miller/s1707031_ct6039/oracle/YearConnections.java,a\c\ac2895a93f9a6631e3b5eb210b13c15fc50ffe39
 
 Osrc/main/java/com/uog/miller/s1707031_ct6039/servlets/misc/PasswordActions.java,f\a\fa92e4db81f37062ff41296600dfa804a246e217
-{
-Ksrc/main/java/com/uog/miller/s1707031_ct6039/servlets/misc/YearActions.java,2\2\22bd420c582486ffdd260456903c698e65284267
 y
 Isrc/main/java/com/uog/miller/s1707031_ct6039/oracle/ChildConnections.java,f\6\f68c38e7bbcae4a559f24d14bd16a736ccf1c65d
 ^
@@ -269,3 +267,11 @@ p
 Tsrc/main/java/com/uog/miller/s1707031_ct6039/servlets/users/parent/ParentDelete.java,9\6\96ebed69a5f7edb89f88a5bfca364d543878d46b
 †
 Vsrc/main/java/com/uog/miller/s1707031_ct6039/servlets/users/teacher/TeacherDelete.java,7\f\7f25317539e9810fc65705bd7e1ce4b7b03c17ac
+_
+/src/main/webapp/jsp/actions/class/viewclass.jsp,0\7\079d809ab3ee4107d38e3f3c38cbfcbe87daf527
+^
+.src/main/webapp/jsp/actions/class/addclass.jsp,7\f\7f3a2ed9cb9dee953e59bdd8ed6be808a1a88c00
+_
+/src/main/webapp/jsp/actions/class/editclass.jsp,d\6\d604a74003fc926632cb92ae65266f6e9286e795
+c
+3src/main/webapp/jsp/users/parent/viewmychildren.jsp,2\5\25a32074c370d2d78dfec6f73691e7f535263e9e

@@ -2,7 +2,9 @@ package com.uog.miller.s1707031_ct6039.servlets.users.teacher;
 
 import com.uog.miller.s1707031_ct6039.beans.TeacherBean;
 import com.uog.miller.s1707031_ct6039.oracle.TeacherConnections;
+import com.uog.miller.s1707031_ct6039.oracle.YearConnections;
 import java.io.IOException;
+import java.util.Map;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -40,6 +42,7 @@ public class TeacherLogin extends HttpServlet
 			{
 				//Matching user, log in and set session
 				populateSession(loggedInTeacherBean, request);
+				addSessionAttributesForYear(request);
 				//Invalid Credentials
 				LOG.debug("Login Success for user: " + email);
 				//Redirect to Profile Account Page
@@ -54,16 +57,7 @@ public class TeacherLogin extends HttpServlet
 			}
 			else
 			{
-				//Invalid Credentials
-				LOG.error("Login failed. Email and Password do not match.");
-				//Redirect Back to Login Page
-				request.getSession(true).setAttribute("formErrors", "Invalid credentials. Please try again.");
-				try
-				{
-					response.sendRedirect(request.getContextPath() + "/jsp/users/teacher/teacherlogin.jsp");
-				} catch (IOException e) {
-					LOG.error("Failure to redirect.", e);
-				}
+				redirectAfterError(request, response);
 			}
 		}
 		else
@@ -77,6 +71,20 @@ public class TeacherLogin extends HttpServlet
 			} catch (IOException e) {
 				LOG.error("Failure to redirect.", e);
 			}
+		}
+	}
+
+	private void redirectAfterError(HttpServletRequest request, HttpServletResponse response)
+	{
+		//Invalid Credentials
+		LOG.error("Login failed. Email and Password do not match.");
+		//Redirect Back to Login Page
+		request.getSession(true).setAttribute("formErrors", "Invalid credentials. Please try again.");
+		try
+		{
+			response.sendRedirect(request.getContextPath() + "/jsp/users/teacher/teacherlogin.jsp");
+		} catch (IOException e) {
+			LOG.error("Failure to redirect.", e);
 		}
 	}
 
@@ -96,5 +104,17 @@ public class TeacherLogin extends HttpServlet
 		request.getSession(true).setAttribute("title", loggedInTeacherBean.getTitle());
 		//Custom Teacher session login attribute
 		request.getSession(true).setAttribute("isTeacher", "true");
+	}
+
+	//Allows Registration forms/etc to populate Year select dropdown
+	private void addSessionAttributesForYear(HttpServletRequest request)
+	{
+		Map<String, String> allYears;
+		YearConnections yearConnections = new YearConnections();
+		allYears = yearConnections.getAllClassYears();
+		if(allYears != null)
+		{
+			request.getSession(true).setAttribute("allYears", allYears);
+		}
 	}
 }
