@@ -31,8 +31,6 @@ a
 1target/s1707031_ct6039-1.0-SNAPSHOT/jsp/error.jsp,5\f\5f77a2e8c0e250fdc8eb3629034a6c0c7b15faa6
 ]
 -target/s1707031_ct6039-1.0-SNAPSHOT/index.jsp,3\4\342e84f1d31ec5b6a1fc2ea411dfffcc94fc2356
-p
-@target/s1707031_ct6039-1.0-SNAPSHOT/jsp/actions/lessons/join.jsp,b\d\bd066d36bf31d48e7248f24a44c76ff63934b28e
 r
 B.idea/libraries/Maven__com_algolia_algoliasearch_apache_3_10_0.xml,2\a\2afde245c8dea1202b869ab1b61c0435eaab0821
 w
@@ -149,8 +147,6 @@ s
 Csrc/main/java/com/uog/miller/s1707031_ct6039/beans/TeacherBean.java,b\2\b2d122340979f9e2fd5ee3e53c284bd7ba989e6c
 {
 Ksrc/main/java/com/uog/miller/s1707031_ct6039/oracle/TeacherConnections.java,9\3\93f68abbadad98439ae16bb1e3c74e7a780c453d
-\
-,src/main/webapp/jsp/actions/lessons/join.jsp,6\7\67d107f376f92527b5486bb563ab0cadb71e97a6
 |
 Lsrc/main/java/com/uog/miller/s1707031_ct6039/oracle/HomeworkConnections.java,0\1\0162b1e916db01a55fea9b2dcc48d79a5bd7e236
 q

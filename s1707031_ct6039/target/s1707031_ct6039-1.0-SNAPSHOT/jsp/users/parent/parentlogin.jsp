@@ -37,18 +37,21 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=calendar">Calendar</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=progress-view">Progress</a>
-                            </li>
                             <%if(isChild != null) {%>
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=homework-view">Homework</a>
                             </li>
                             <% } else if(isTeacher != null) {%>
                             <li class="nav-item">
+                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=progress-view">Progress</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=class-view">My Classes</a>
                             </li>
                             <% } else if(isParent != null) {%>
+                            <li class="nav-item">
+                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=progress-view">Progress</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=view-child">My Children</a>
                             </li>
@@ -106,6 +109,15 @@
                 </div>
             </nav>
 
+            <% String success = (String) session.getAttribute("formSuccess");
+                if(success != null) { %>
+            <div class="alert alert-success" role="alert" id="formSuccess"><%=success%></div>
+            <%}%>
+            <% String errors = (String) session.getAttribute("formErrors");
+                if(errors != null) { %>
+            <div class="alert alert-danger" role="alert" id="formErrors"><%=errors%></div>
+            <%}%>
+
             <%--Title--%>
             <div class="main-body-content">
                 <h1><%="Parent Account Login Portal"%></h1>
@@ -117,14 +129,6 @@
             </p>
 
             <form class="login-form" action="${pageContext.request.contextPath}/servlets/users/parent/ParentLogin" method="GET">
-                <% String success = (String) session.getAttribute("formSuccess");
-                    if(success != null) { %>
-                <div class="alert alert-success" role="alert" id="formSuccess"><%=success%></div>
-                <%}%>
-                <% String errors = (String) session.getAttribute("formErrors");
-                    if(errors != null) { %>
-                <div class="alert alert-danger" role="alert" id="formErrors"><%=errors%></div>
-                <%}%>
                 <label for="email" class="form-label"><%="Email"%></label>
                 <input class="form-control" type="email" name="email" id="email" required/>
                 <br/>

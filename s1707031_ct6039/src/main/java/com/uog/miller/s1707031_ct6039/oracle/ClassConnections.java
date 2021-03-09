@@ -131,6 +131,42 @@ public class ClassConnections extends AbstractOracleConnections
 		}
 	}
 
+	public List<ClassLinkBean> getClassLinksFromChildEmail(String childEmail)
+	{
+		ArrayList<ClassLinkBean> ret = new ArrayList<>();
+		setOracleDriver();
+		try
+		{
+			AbstractOracleConnections conn = new AbstractOracleConnections();
+			Connection oracleClient = conn.getOracleClient();
+			if(oracleClient != null)
+			{
+				//Select all Query
+				String query = "SELECT * FROM " + CLASS_LINKS_COLLECTION + " WHERE Child_Email='" + childEmail +"'";
+
+				//Execute query
+				ArrayList<ClassLinkBean> allLinks = executeRetrieveClassLinkQuery(oracleClient, query);
+				if(!allLinks.isEmpty())
+				{
+					ret = allLinks;
+				}
+				else
+				{
+					LOG.debug("No Links Exists, cannot retrieve event.");
+				}
+			}
+			else
+			{
+				LOG.error("connection failure");
+			}
+		}
+		catch(Exception e)
+		{
+			LOG.error("Unable to find existing class links", e);
+		}
+		return ret;
+	}
+
 	public List<ClassBean> getClassFromTeacherEmail(String teacherEmail)
 	{
 		ArrayList<ClassBean> ret = new ArrayList<>();

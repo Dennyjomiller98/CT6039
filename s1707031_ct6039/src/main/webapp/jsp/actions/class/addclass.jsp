@@ -36,18 +36,21 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=calendar">Calendar</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=progress-view">Progress</a>
-                            </li>
                             <%if(isChild != null) {%>
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=homework-view">Homework</a>
                             </li>
                             <% } else if(isTeacher != null) {%>
                             <li class="nav-item">
+                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=progress-view">Progress</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/servlets/Redirects?location=class-view">My Classes</a>
                             </li>
                             <% } else if(isParent != null) {%>
+                            <li class="nav-item">
+                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=progress-view">Progress</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=view-child">My Children</a>
                             </li>

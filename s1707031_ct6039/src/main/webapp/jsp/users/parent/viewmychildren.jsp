@@ -1,4 +1,5 @@
-<%--
+<%@ page import="com.uog.miller.s1707031_ct6039.beans.ChildBean" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Denny-Jo
   Date: 06/03/2021
@@ -37,18 +38,21 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=calendar">Calendar</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=progress-view">Progress</a>
-                            </li>
                             <%if(isChild != null) {%>
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=homework-view">Homework</a>
                             </li>
                             <% } else if(isTeacher != null) {%>
                             <li class="nav-item">
+                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=progress-view">Progress</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=class-view">My Classes</a>
                             </li>
                             <% } else if(isParent != null) {%>
+                            <li class="nav-item">
+                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=progress-view">Progress</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=view-child">My Children</a>
                             </li>
@@ -106,6 +110,15 @@
                 </div>
             </nav>
 
+            <% String errors = (String) session.getAttribute("formErrors");
+                if(errors != null) { %>
+            <div class="alert alert-danger" role="alert" id="formErrors"><%=errors%></div>
+            <%}%>
+            <% String success = (String) session.getAttribute("formSuccess");
+                if(success != null) { %>
+            <div class="alert alert-success" role="alert" id="formSuccess"><%=success%></div>
+            <%}%>
+
             <%--Title--%>
             <div class="main-body-content">
                 <h1><%="My Children"%></h1>
@@ -113,9 +126,36 @@
             </div>
 
             <p class="main-body-text">
-                <%="As a Parent, any linked children will appear below, along with child information regarding homework submissions and class progress."%>
+                <%="As a Parent, any linked children in your Profile will appear below."%>
             </p>
+            <br/>
 
+            <div class="main-body-content">
+                <% List<ChildBean> myChildrenBeans = (List<ChildBean>) session.getAttribute("myChildrenBeans");
+                    if (myChildrenBeans.size() > 0)
+                    { for (ChildBean child : myChildrenBeans) { %>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><%="User: " + child.getEmail()%></h5>
+                        <p class="card-text-center">
+                            <%="Firstname: " + child.getFirstname()%> <br/>
+                            <%="Surname: " + child.getSurname()%> <br/>
+                            <%="Date-Of-Birth: " + child.getDOB()%> <br/>
+                            <%="Address: " + child.getAddress()%> <br/>
+                            <%="Year: " + child.getYear()%> <br/>
+                        </p>
+                    </div>
+                    <div class="" style="padding-bottom: 5%">
+                        <a class="btn btn-primary"
+                           href=${pageContext.request.contextPath}/servlets/progress/ProgressActions?childEmail=<%=child.getEmail()%>>&nbsp;View Progress&nbsp;</a>
+                    </div>
+                </div>
+                <br/>
+                <% } } else { %>
+                <%="You have no linked children, please update your Profile."%>
+                <br/>
+                <% } %>
+            </div>
             <%--Create cards for each linked child?--%>
         </div>
         <footer class="footer">

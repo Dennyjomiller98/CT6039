@@ -3,6 +3,7 @@ package com.uog.miller.s1707031_ct6039.oracle;
 import com.uog.miller.s1707031_ct6039.beans.ChildBean;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ChildConnections extends AbstractOracleConnections
 {
@@ -81,6 +82,17 @@ public class ChildConnections extends AbstractOracleConnections
 		return ret;
 	}
 
+	public List<ChildBean> getChildBean(String email)
+	{
+		List<ChildBean> ret = new ArrayList<>();
+		boolean userExists = checkUserExists(email);
+		if(userExists)
+		{
+			ret = validateCredentials(email);
+		}
+		return ret;
+	}
+
 	public ChildBean validateCredentials(String email, String pword)
 	{
 		//Default to true in case of an error.
@@ -116,6 +128,46 @@ public class ChildConnections extends AbstractOracleConnections
 		catch(Exception e)
 		{
 			LOG.error("Unable to retrieve user from Oracle", e);
+		}
+
+		return ret;
+	}
+
+	public List<ChildBean> validateCredentials(String email)
+	{
+		//Default to true in case of an error.
+		List<ChildBean> ret = new ArrayList<>();
+		email = email.toLowerCase();
+
+		//Connect to DB, check if email is present
+		setOracleDriver();
+		try
+		{
+			AbstractOracleConnections conn = new AbstractOracleConnections();
+			Connection oracleClient = conn.getOracleClient();
+			if(oracleClient != null)
+			{
+				//Select Query
+				String query = "SELECT * FROM " + CHILDRENS_COLLECTION + " WHERE Email='" + email.replace("'", "''") + "'";
+				//Execute query
+				ArrayList<ChildBean> allChildren = executeQuery(oracleClient, query);
+				if(allChildren.size() == 1)
+				{
+					ret = allChildren;
+				}
+				else
+				{
+					LOG.error("Multiple matching users found, this shouldn't happen.");
+				}
+			}
+			else
+			{
+				LOG.error("connection failure");
+			}
+		}
+		catch(Exception e)
+		{
+			LOG.error("Unable to retrieve users from Oracle", e);
 		}
 
 		return ret;

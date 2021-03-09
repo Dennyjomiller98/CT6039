@@ -1,7 +1,12 @@
 package com.uog.miller.s1707031_ct6039.servlets.users.child;
 
+import com.uog.miller.s1707031_ct6039.beans.ClassLinkBean;
+import com.uog.miller.s1707031_ct6039.beans.LinkBean;
 import com.uog.miller.s1707031_ct6039.oracle.ChildConnections;
+import com.uog.miller.s1707031_ct6039.oracle.ClassConnections;
+import com.uog.miller.s1707031_ct6039.oracle.LinkedConnections;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,8 +27,26 @@ public class ChildDelete extends HttpServlet
 		String email = (String) request.getSession(true).getAttribute("email");
 		if(email != null)
 		{
+			//Remove child from Child Table
 			ChildConnections connections = new ChildConnections();
 			connections.deleteAccount(email);
+
+			//Remove Child links to parent
+			LinkedConnections linkedConnections = new LinkedConnections();
+			List<LinkBean> allLinksForChild = linkedConnections.findAllLinksForChild(email);
+			for (LinkBean linkBean : allLinksForChild)
+			{
+				linkedConnections.removeLink(linkBean.getId());
+			}
+
+			//Remove links of Child Class
+			ClassConnections classConnections = new ClassConnections();
+			List<ClassLinkBean> allLinkBeans = classConnections.getClassLinksFromChildEmail(email);
+			for (ClassLinkBean childClassLink : allLinkBeans)
+			{
+				classConnections.deleteClassLinks(childClassLink.getEventId());
+			}
+
 			removeSessionAttributes(request);
 			request.getSession(true).setAttribute("formSuccess", "User Deleted.");
 			try

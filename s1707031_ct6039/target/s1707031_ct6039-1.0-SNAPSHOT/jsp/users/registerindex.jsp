@@ -36,18 +36,21 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=calendar">Calendar</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=progress-view">Progress</a>
-                            </li>
                             <%if(isChild != null) {%>
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=homework-view">Homework</a>
                             </li>
                             <% } else if(isTeacher != null) {%>
                             <li class="nav-item">
+                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=progress-view">Progress</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=class-view">My Classes</a>
                             </li>
                             <% } else if(isParent != null) {%>
+                            <li class="nav-item">
+                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=progress-view">Progress</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=view-child">My Children</a>
                             </li>
@@ -120,11 +123,53 @@
                 <br/>
             </div>
 
-            <p class="main-body-text">
-                <%="Please select how you want to Register an account."%>
-            </p>
+            <div class="main-body-content">
+                <p class="main-body-text">
+                    <%="Please select how you want to Register an account."%>
+                </p>
+                <br/>
+
+                <%--Child Register--%>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><%="Child Registration"%></h5>
+                        <p class="card-text-center">
+                            <%="Click below to create a Child account"%> <br/>
+                        </p>
+                    </div>
+                    <div class="" style="padding-bottom: 5%">
+                        <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=child-register>&nbsp;Children&nbsp;</a>
+                    </div>
+                </div>
+                <br/>
+                <%--Parent Register--%>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><%="Parent Registration"%></h5>
+                        <p class="card-text-center">
+                            <%="Click below to create a Parent or Guardian account"%> <br/>
+                        </p>
+                    </div>
+                    <div class="" style="padding-bottom: 5%">
+                        <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=parent-register>&nbsp;Parents/Guardians&nbsp;</a>
+                    </div>
+                </div>
+                <br/>
+                <%--Teacher Register--%>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><%="Teacher Registration"%></h5>
+                        <p class="card-text-center">
+                            <%="Click below to create a Teacher account"%> <br/>
+                        </p>
+                    </div>
+                    <div class="" style="padding-bottom: 5%">
+                        <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=teacher-register>&nbsp;Teachers&nbsp;</a>
+                    </div>
+                </div>
+                <br/>
+            </div>
         </div>
-        <%--3 cards, each has registration buttons for each section, DONT DYNAMIC REG FORMS here--%>
 
         <footer class="footer">
             <div class="">

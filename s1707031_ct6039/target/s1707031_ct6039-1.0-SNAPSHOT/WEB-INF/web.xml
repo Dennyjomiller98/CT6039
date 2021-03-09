@@ -216,4 +216,14 @@
         <servlet-name>retrieveClass</servlet-name>
         <url-pattern>/servlets/childclass/RetrieveClass</url-pattern>
     </servlet-mapping>
+
+    <!--Child Progress-->
+    <servlet>
+        <servlet-name>progressActions</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.progress.ProgressActions</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>progressActions</servlet-name>
+        <url-pattern>/servlets/progress/ProgressActions</url-pattern>
+    </servlet-mapping>
 </web-app>

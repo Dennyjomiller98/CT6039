@@ -1,5 +1,6 @@
 package com.uog.miller.s1707031_ct6039.servlets;
 
+import com.uog.miller.s1707031_ct6039.beans.ChildBean;
 import com.uog.miller.s1707031_ct6039.beans.ClassBean;
 import com.uog.miller.s1707031_ct6039.oracle.ClassConnections;
 import com.uog.miller.s1707031_ct6039.oracle.LinkedConnections;
@@ -143,6 +144,7 @@ public class Redirects extends HttpServlet
 				break;
 
 			case "view-child":
+				addSessionAttributesForParentViewingChildren(request);
 				ret = "/jsp/users/parent/viewmychildren.jsp";
 				break;
 
@@ -159,6 +161,20 @@ public class Redirects extends HttpServlet
 				break;
 		}
 		return ret;
+	}
+
+	private void addSessionAttributesForParentViewingChildren(HttpServletRequest request)
+	{
+		String parentEmail = (String) request.getSession(true).getAttribute("email");
+		if(parentEmail != null)
+		{
+			LinkedConnections connections = new LinkedConnections();
+			List<ChildBean> allChildrenFromLinks = connections.getAllChildrenFromLinks(parentEmail);
+			if(!allChildrenFromLinks.isEmpty())
+			{
+				request.getSession(true).setAttribute("myChildrenBeans", allChildrenFromLinks);
+			}
+		}
 	}
 
 	private void addSessionAttributesForClass(HttpServletRequest request)

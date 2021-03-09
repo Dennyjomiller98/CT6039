@@ -93,6 +93,19 @@ public class LinkedConnections extends AbstractOracleConnections
 		return allChildren;
 	}
 
+	public List<ChildBean> getAllChildrenFromLinks(String parentEmail)
+	{
+		List<ChildBean> allBeans = new ArrayList<>();
+		List<LinkBean> allChildLinksForParent = findAllChildLinksForParent(parentEmail);
+		for (LinkBean childLink : allChildLinksForParent)
+		{
+			ChildConnections connections = new ChildConnections();
+			List<ChildBean> childBean = connections.getChildBean(childLink.getChildEmail().trim());
+			allBeans.addAll(childBean);
+		}
+		return allBeans;
+	}
+
 	//Get all links for parent
 	public String getAllLinks(String parentEmail)
 	{
@@ -183,6 +196,41 @@ public class LinkedConnections extends AbstractOracleConnections
 			foundChildren.put(child.getEmail(), fullName);
 		}
 		return foundChildren;
+	}
+
+	public List<LinkBean> findAllLinksForChild(String email)
+	{
+		List<LinkBean> ret = new ArrayList<>();
+		setOracleDriver();
+		try
+		{
+			AbstractOracleConnections conn = new AbstractOracleConnections();
+			Connection oracleClient = conn.getOracleClient();
+			if(oracleClient != null)
+			{
+				//Select Query
+				String query = "SELECT * FROM " + PARENT_LINKS_COLLECTION + " WHERE Child_Email='"+ email+"'";
+				//Execute query
+				List<LinkBean> linkBeans = executeLinkBeanQuery(oracleClient, query);
+				if(linkBeans.isEmpty())
+				{
+					LOG.error("Could not find Links.");
+				}
+				else
+				{
+					ret = linkBeans;
+				}
+			}
+			else
+			{
+				LOG.error("connection failure");
+			}
+		}
+		catch(Exception e)
+		{
+			LOG.error("Unable to retrieve LinkBeans", e);
+		}
+		return ret;
 	}
 
 	public List<LinkBean> findAllChildLinksForParent(String parentEmail)
