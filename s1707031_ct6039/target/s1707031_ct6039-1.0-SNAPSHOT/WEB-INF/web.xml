@@ -250,7 +250,22 @@
         <servlet-name>deleteHomework</servlet-name>
         <url-pattern>/servlets/homework/DeleteHomework</url-pattern>
     </servlet-mapping>
-
+    <servlet>
+        <servlet-name>downloadHomework</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.homework.DownloadHomework</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>downloadHomework</servlet-name>
+        <url-pattern>/servlets/homework/DownloadHomework</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>viewSubmissions</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.homework.ViewSubmissions</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>viewSubmissions</servlet-name>
+        <url-pattern>/servlets/homework/ViewSubmissions</url-pattern>
+    </servlet-mapping>
     <!--Child Progress-->
     <servlet>
         <servlet-name>progressActions</servlet-name>

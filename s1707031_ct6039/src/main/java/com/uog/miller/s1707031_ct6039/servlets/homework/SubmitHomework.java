@@ -1,9 +1,13 @@
 package com.uog.miller.s1707031_ct6039.servlets.homework;
 
+import com.uog.miller.s1707031_ct6039.beans.CalendarItemBean;
+import com.uog.miller.s1707031_ct6039.beans.HomeworkBean;
 import com.uog.miller.s1707031_ct6039.beans.SubmissionBean;
+import com.uog.miller.s1707031_ct6039.oracle.CalendarConnections;
 import com.uog.miller.s1707031_ct6039.oracle.HomeworkConnections;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,6 +41,18 @@ public class SubmitHomework extends HttpServlet
 			bean.setEventId(homeworkId);
 			bean.setSubmissionDate(dateSubmitted);
 			String result = connections.submitHomeworkTask(bean, inputStream, filename);
+
+			//Remove calendar event for child after submitting
+			HomeworkBean homeworkBean = connections.getHomeworkTaskFromId(homeworkId);
+			CalendarConnections calendarConnections = new CalendarConnections();
+			List<CalendarItemBean> allCalendarItemsForUser = calendarConnections.getAllCalendarItemsForUser(email);
+			for (CalendarItemBean calendarItemBean : allCalendarItemsForUser)
+			{
+				if(calendarItemBean.getEventName().equals("HW: "+homeworkBean.getName()))
+				{
+					calendarConnections.deleteEvent(calendarItemBean.getEventId());
+				}
+			}
 
 			//Remove alerts and redirect after submitting to DB
 			removeAlerts(request);

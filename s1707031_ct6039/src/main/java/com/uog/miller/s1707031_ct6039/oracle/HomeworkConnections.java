@@ -179,12 +179,6 @@ public class HomeworkConnections extends AbstractOracleConnections
 		return ret;
 	}
 
-
-
-
-
-
-
 	//Updates homework submissions to contain SubmissionID for homework_files, returns response of submitting HW file.
 	public String submitHomeworkTask(SubmissionBean bean, InputStream inputStream, String filename)
 	{
@@ -304,11 +298,6 @@ public class HomeworkConnections extends AbstractOracleConnections
 		return fileId;
 	}
 
-
-
-
-
-
 	//Retrieves List<HomeworkBean>
 	public List<HomeworkBean> getAllHomeworkForChild(String childEmail)
 	{
@@ -329,7 +318,7 @@ public class HomeworkConnections extends AbstractOracleConnections
 				String query;
 				if(whereClause != null)
 				{
-					query = "SELECT * FROM " + HOMEWORKS_COLLECTION + whereClause.toString();
+					query = "SELECT * FROM " + HOMEWORKS_COLLECTION + " " + whereClause.toString();
 				}
 				else
 				{
@@ -467,12 +456,93 @@ public class HomeworkConnections extends AbstractOracleConnections
 		return allEvents;
 	}
 
+	//Returns bean of Homework Task, using Homework Submission ID. Allows name retrieval for Calendar event deletion after HW submission
+	public HomeworkBean getHomeworkTaskFromId(String id)
+	{
+		HomeworkBean beanToReturn = new HomeworkBean();
+		setOracleDriver();
+		try
+		{
+			AbstractOracleConnections conn = new AbstractOracleConnections();
+			Connection oracleClient = conn.getOracleClient();
+			if(oracleClient != null)
+			{
+				//Select all Query
+				String query = "SELECT * FROM " + HOMEWORKS_COLLECTION + " WHERE Event_Id='" + id +"'";
+
+				//Execute query
+				ArrayList<HomeworkBean> allBeans = executeHomeworkQuery(oracleClient, query);
+				if(!allBeans.isEmpty())
+				{
+					beanToReturn = allBeans.get(0);
+				}
+				else
+				{
+					LOG.debug("No Links Exists, cannot retrieve event.");
+				}
+			}
+			else
+			{
+				LOG.error("connection failure");
+			}
+		}
+		catch(Exception e)
+		{
+			LOG.error("Unable to find existing class links", e);
+		}
+
+		return beanToReturn;
+	}
+
+	//Retrieves List<HomeworkBean>
+	public List<HomeworkBean> getAllHomeworkForTeacher(String teacherEmail)
+	{
+		//Get HomeworkSubmissions to find HW task ID
+
+		//Now get Homework Tasks set
+		List<HomeworkBean> ret = new ArrayList<>();
+		setOracleDriver();
+		try
+		{
+			AbstractOracleConnections conn = new AbstractOracleConnections();
+			Connection oracleClient = conn.getOracleClient();
+			if(oracleClient != null)
+			{
+				//Select all Query
+				String query = "SELECT * FROM " + HOMEWORKS_COLLECTION + " WHERE Tutor_Assigned='"+teacherEmail+"'";
+
+				//Execute query
+				List<HomeworkBean> allHomeworks = executeHomeworkQuery(oracleClient, query);
+				if(!allHomeworks.isEmpty())
+				{
+					ret.addAll(allHomeworks);
+				}
+				else
+				{
+					LOG.debug("Cannot retrieve HW.");
+				}
+			}
+			else
+			{
+				LOG.error("connection failure");
+			}
+		}
+		catch(Exception e)
+		{
+			LOG.error("Unable to retrieve Homework Events", e);
+		}
+		return ret;
+	}
 
 
 
 
 
-
+	public List<SubmissionBean> getAllSubmissionsForHomeworkTask(String homeworkId)
+	{
+		List<SubmissionBean> allSubmissions = new ArrayList<>();
+		return allSubmissions;
+	}
 
 
 

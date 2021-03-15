@@ -50,5 +50,8 @@ public class ParentLogout extends HttpServlet
 		request.getSession(true).removeAttribute("allChildren");
 		request.getSession(true).removeAttribute("allLinkBeans");
 		request.getSession(true).removeAttribute("myChildrenBeans");
+
+		request.getSession(true).removeAttribute("allHomeworks");
+		request.getSession(true).removeAttribute("allSubmissions");
 	}
 }

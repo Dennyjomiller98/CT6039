@@ -50,5 +50,9 @@ public class TeacherLogout extends HttpServlet
 		request.getSession(true).removeAttribute("allYears");
 		request.getSession(true).removeAttribute("allChildren");
 		request.getSession(true).removeAttribute("allClasses");
+
+		request.getSession(true).removeAttribute("allHomeworks");
+		request.getSession(true).removeAttribute("allHomeworksTeacher");
+		request.getSession(true).removeAttribute("allSubmissions");
 	}
 }

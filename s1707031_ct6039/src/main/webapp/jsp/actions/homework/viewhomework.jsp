@@ -1,4 +1,6 @@
-<%--
+<%@ page import="com.uog.miller.s1707031_ct6039.beans.HomeworkBean" %>
+<%@ page import="com.uog.miller.s1707031_ct6039.beans.SubmissionBean" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Denny-Jo
   Date: 19/02/2021
@@ -42,10 +44,10 @@
                             </li>
                             <% } else if(isTeacher != null) {%>
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=progress-view">Progress</a>
+                                <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/servlets/Redirects?location=class-view">My Classes</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/servlets/Redirects?location=class-view">My Classes</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=homework-view">Homework</a>
                             </li>
                             <% } else if(isParent != null) {%>
                             <li class="nav-item">
@@ -119,17 +121,149 @@
 
             <%--Title--%>
             <div class="main-body-content">
-                <h1><%="Homework"%></h1>
+                <h1><%="View Homework"%></h1>
                 <br/>
             </div>
 
+            <%if(isChild != null)
+            { %>
+            <%--Children Homework Cards--%>
             <p class="main-body-text">
                 <%="From here, you can view Homework, both required and submitted."%>
             </p>
+            <br/>
 
-            <p>
+            <div class="main-body-content">
+                <%List<HomeworkBean> allHomework = (List<HomeworkBean>) session.getAttribute("allHomeworks");
+                    List<SubmissionBean> allSubmissions = (List<SubmissionBean>) session.getAttribute("allSubmissions");
+                    if (allHomework.size() > 0 && allSubmissions.size() > 0)
+                    {%>
+                <%--List all Unsubmitted/Due Homework--%>
+                <h3>Unsubmitted Homework</h3>
+                <% for (HomeworkBean homeworkTask : allHomework) {
+                    SubmissionBean matchingSubmission = null;
+                    for (SubmissionBean submission : allSubmissions) {
+                        if(homeworkTask.getEventId().equals(submission.getEventId()))
+                        {
+                            matchingSubmission = submission;
+                        }
+                    }
+                    if(matchingSubmission != null && matchingSubmission.getSubmissionId() == null){%>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><%="Homework #" + homeworkTask.getEventId() + ": " + homeworkTask.getName()%></h5>
+                        <p class="card-text-center">
+                            Set Date: <%=homeworkTask.getSetDate()%> <br/>
+                            Description: <%=homeworkTask.getDescription()%> <br/>
+                            Submission Status: Not submitted. <br/>
+                            Due Date: <%=homeworkTask.getDueDate()%> <br/>
+                        </p>
+                    </div>
+                    <div class="" style="padding-bottom: 5%">
+                        <a class="btn btn-primary"
+                           href=${pageContext.request.contextPath}/servlets/homework/SubmitHomework?homeworkId=<%=homeworkTask.getEventId()%>>&nbsp;Submit Homework&nbsp;
+                        </a>
+                    </div>
+                </div>
+                <br/>
+                <%}
+                } %>
 
+                <br/>
+                <%--List all Submitted/Completed Homework--%>
+                <h3>Submitted Homework</h3>
+                <% if(!allHomework.isEmpty()){
+                	for (HomeworkBean homeworkTask : allHomework) {
+                    SubmissionBean matchingSubmission = null;
+                    for (SubmissionBean submission : allSubmissions) {
+                        if(homeworkTask.getEventId().equals(submission.getEventId()))
+                        {
+                            matchingSubmission = submission;
+                        }
+                    }
+                    if(matchingSubmission != null && matchingSubmission.getSubmissionId() != null){%>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><%="Homework #" + homeworkTask.getEventId() + ": " + homeworkTask.getName()%></h5>
+                        <p class="card-text-center">
+                            Set Date: <%=homeworkTask.getSetDate()%> <br/>
+                            Description: <%=homeworkTask.getDescription()%> <br/>
+                            Submission Status: Submitted: #<%=matchingSubmission.getSubmissionId()%> <br/>
+                            Due Date: <%=homeworkTask.getDueDate()%> <br/>
+                            Submission Date: <%=matchingSubmission.getSubmissionDate()%> <br/>
+                            <%if(matchingSubmission.getGrade() != null){ %>
+                            Grade: <%=matchingSubmission.getGrade()%> <br/>
+                            <% } else{ %>
+                            Grade: Not Provided Yet <br/>
+                            <% } %>
+                        </p>
+                    </div>
+                    <div class="" style="padding-bottom: 5%">
+                        <a class="btn btn-primary"
+                           href=${pageContext.request.contextPath}/servlets/homework/DownloadHomework?homeworkId=<%=homeworkTask.getEventId()%>>&nbsp;Download Submission&nbsp;
+                        </a>
+                    </div>
+                </div>
+                <br/>
+                <%}
+                }
+                }else { %>
+                    <%="You have no Submissions."%>
+                <% } %>
+                <% } else { %>
+                <%="There are no Homeworks for you."%>
+                <br/>
+                <% } %>
+            </div>
+
+            <% }
+            else if(isTeacher != null)
+            { %>
+            <%--Teacher Homework Cards--%>
+            <p class="main-body-text">
+                <%="From here, you can view assigned Homework and Childrens submissions."%>
             </p>
+            <br/>
+
+            <div class="main-body-content">
+                <%List<HomeworkBean> allHomework = (List<HomeworkBean>) session.getAttribute("allHomeworksTeacher");
+                    if (allHomework.size() > 0)
+                    {%>
+                <h3><%="Assigned Homeworks"%></h3>
+                <% if(!allHomework.isEmpty()){
+                	for (HomeworkBean homeworkTask : allHomework){%>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><%="Homework #" + homeworkTask.getEventId() + ": " + homeworkTask.getName()%></h5>
+                            <p class="card-text-center">
+                                Set Date: <%=homeworkTask.getSetDate()%> <br/>
+                                Due Date: <%=homeworkTask.getDueDate()%> <br/>
+                                <%if(homeworkTask.getClassId().equals("0")){%>
+                                Class Assigned: Reception <br/>
+                                <%}else{%>
+                                Class Assigned: <%="Year " + homeworkTask.getClassId()%> <br/>
+                                <%}%>
+                                Description: <%=homeworkTask.getDescription()%> <br/>
+                            </p>
+                        </div>
+                        <div class="" style="padding-bottom: 5%">
+                            <a class="btn btn-primary"
+                               href=${pageContext.request.contextPath}/servlets/homework/ViewSubmissions?homeworkId=<%=homeworkTask.getEventId()%>>&nbsp;View Submissions&nbsp;
+                            </a>
+                        </div>
+                    </div>
+                    <br/>
+                <%}
+                }else{ %>
+                    <%="There are no Assigned Homeworks for you."%>
+                <% }%>
+                <br/>
+                <% } else { %>
+                <%="No Homework Assignments could be found."%>
+                <br/>
+                <% } %>
+            </div>
+            <% } %>
         </div>
 
         <footer class="footer">

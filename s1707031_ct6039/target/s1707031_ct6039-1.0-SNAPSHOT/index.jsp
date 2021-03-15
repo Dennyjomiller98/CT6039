@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="css/main.css">
 
         <div class="content">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light mynav">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="${pageContext.request.contextPath}/servlets/Redirects?location=home"><%="School Site"%></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,10 +36,10 @@
                             </li>
                             <% } else if(isTeacher != null) {%>
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=progress-view">Progress</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=class-view">My Classes</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=class-view">My Classes</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=homework-view">Homework</a>
                             </li>
                             <% } else if(isParent != null) {%>
                             <li class="nav-item">
@@ -104,36 +104,39 @@
 
             <% String errors = (String) session.getAttribute("formErrors");
                 if(errors != null) { %>
-            <div class="alert alert-danger" role="alert" id="formErrors"><%=errors%></div>
+            <div class="alert alert-danger myalert" role="alert" id="formErrors"><%=errors%></div>
             <%}%>
             <% String success = (String) session.getAttribute("formSuccess");
                 if(success != null) { %>
-            <div class="alert alert-success" role="alert" id="formSuccess"><%=success%></div>
+            <div class="alert alert-success mysuccess" role="alert" id="formSuccess"><%=success%></div>
             <%}%>
 
             <%--Title--%>
-            <div class="main-body-content">
-                <h1><%="Welcome! Index Homepage"%></h1>
+            <div class="main-body-content myheader neat">
+                <h1 class="myheader neat"><%="Welcome! Index Homepage"%></h1>
                 <br/>
             </div>
 
             <% if(email != null) { %>
-                <div class="main-body-content">
-                    <p>
-                        <%="You are already logged in! Please use the menu at the top of the page to go to a page you want."%>
-                    </p>
-                </div>
+                <p class="main-body-text myPara neat">
+                    <%="You are already logged in! Please use the menu at the top of the page to go to a page you want."%>
+                </p>
+                <br/>
             <%} else { %>
-                <div class="row card-index" style="width: 100%">
+                <p class="main-body-text myPara neat">
+                    <%="To use this site, log in or register an account."%>
+                </p>
+                <br/>
+                <div class="row card-index myheader neat" style="width: 100%">
                     <div style="width: 12.5%">
                     </div>
                     <div class="d-flex align-items-stretch" style="width:25%; display: inline-block">
                         <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">For Parents/Guardians</h5>
-                                <p class="card-text-center">Using this Portal allows you to check your child's progress, including homework submission dates.</p>
+                            <div class="card-body formParaText">
+                                <h5 class="card-title formPara">For Parents/Guardians</h5>
+                                <p class="card-text-center formParaText">Using this Portal allows you to check your child's progress, including homework submission dates.</p>
                             </div>
-                            <div class="" style="margin:auto; padding-bottom: 10%">
+                            <div class="myformbtn" style="margin:auto; padding-bottom: 10%">
                                 <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=parent-login>&nbsp;Parent Login&nbsp;</a>
                                 &nbsp;
                                 <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=parent-register>&nbsp;Register Parent&nbsp;</a>
@@ -142,11 +145,11 @@
                     </div>
                     <div class="d-flex align-items-stretch" style="width:25%; display: inline-block">
                         <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">For Children</h5>
-                                <p class="card-text-center">If you are a child accessing this site, please use the following links:</p>
+                            <div class="card-body formParaText">
+                                <h5 class="card-title formPara">For Children</h5>
+                                <p class="card-text-center formParaText">If you are a child accessing this site, please use the following links:</p>
                             </div>
-                            <div class="" style="margin:auto; padding-bottom: 10%">
+                            <div class="myformbtn" style="margin:auto; padding-bottom: 10%">
                                 <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=child-login>&nbsp;Child Login&nbsp;</a>
                                 &nbsp;
                                 <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=child-register>&nbsp;Child Register&nbsp;</a>
@@ -155,11 +158,11 @@
                     </div>
                     <div class="d-flex align-items-stretch" style="width:25%; display: inline-block">
                         <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">For Teachers</h5>
-                                <p class="card-text-center">Teachers accessing this site can update Homework and Lesson Files from their account.</p>
+                            <div class="card-body formParaText">
+                                <h5 class="card-title formPara">For Teachers</h5>
+                                <p class="card-text-center formParaText">Teachers accessing this site can update Homework and Lesson Files from their account.</p>
                             </div>
-                            <div class="" style="margin:auto; padding-bottom: 10%">
+                            <div class="myformbtn" style="margin:auto; padding-bottom: 10%">
                                 <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=teacher-login>&nbsp;Teacher Login&nbsp;</a>
                                 &nbsp;
                                 <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=teacher-register>&nbsp;Teacher Register&nbsp;</a>
@@ -171,10 +174,10 @@
                 </div>
                 <br/>
             <% } %>
-
         </div>
+        <div id="background"></div>
 
-        <footer class="footer">
+        <footer class="footer formPara">
             <div class="">
                 <span class="text-muted">CT6039 Project by S1707031 &copy;2021</span>
                 <a href=${pageContext.request.contextPath}/servlets/Redirects?location=home>&nbsp;Return Home&nbsp;</a>

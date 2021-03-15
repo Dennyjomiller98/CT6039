@@ -2,7 +2,10 @@ package com.uog.miller.s1707031_ct6039.servlets;
 
 import com.uog.miller.s1707031_ct6039.beans.ChildBean;
 import com.uog.miller.s1707031_ct6039.beans.ClassBean;
+import com.uog.miller.s1707031_ct6039.beans.HomeworkBean;
+import com.uog.miller.s1707031_ct6039.beans.SubmissionBean;
 import com.uog.miller.s1707031_ct6039.oracle.ClassConnections;
+import com.uog.miller.s1707031_ct6039.oracle.HomeworkConnections;
 import com.uog.miller.s1707031_ct6039.oracle.LinkedConnections;
 import com.uog.miller.s1707031_ct6039.oracle.YearConnections;
 import java.io.IOException;
@@ -127,6 +130,7 @@ public class Redirects extends HttpServlet
 				break;
 
 			case "homework-view":
+				addSessionAttributesForHomeworksAndSubmissions(request);
 				ret = "/jsp/actions/homework/viewhomework.jsp";
 				break;
 			case "homework-assign":
@@ -134,6 +138,7 @@ public class Redirects extends HttpServlet
 				ret = "/jsp/actions/homework/addhomework.jsp";
 				break;
 			case "homework-upload":
+				addSessionAttributesForHomeworksAndSubmissions(request);
 				ret = "/jsp/actions/homework/uploadhomework.jsp";
 				break;
 
@@ -226,5 +231,46 @@ public class Redirects extends HttpServlet
 		{
 			request.getSession(true).setAttribute("allChildren", allChildren);
 		}
+	}
+
+	private void addSessionAttributesForHomeworksAndSubmissions(HttpServletRequest request)
+	{
+		String isChild = (String) request.getSession(true).getAttribute("isChild");
+		String isTeacher = (String) request.getSession(true).getAttribute("isTeacher");
+
+		if(isChild != null)
+		{
+			String childEmail = (String) request.getSession(true).getAttribute("email");
+			if(childEmail != null)
+			{
+				HomeworkConnections connections = new HomeworkConnections();
+				List<HomeworkBean> allHomeworkForChild = connections.getAllHomeworkForChild(childEmail);
+				List<SubmissionBean> allHomeworkSubmissionsForChild = connections.getAllHomeworkSubmissionsForChild(childEmail);
+				if(!allHomeworkForChild.isEmpty())
+				{
+					request.getSession(true).setAttribute("allHomeworks", allHomeworkForChild);
+				}
+				if(!allHomeworkSubmissionsForChild.isEmpty())
+				{
+					request.getSession(true).setAttribute("allSubmissions", allHomeworkSubmissionsForChild);
+				}
+			}
+		}
+		else if (isTeacher != null)
+		{
+			String teacherEmail = (String) request.getSession(true).getAttribute("email");
+			if(teacherEmail != null)
+			{
+				HomeworkConnections connections = new HomeworkConnections();
+				List<HomeworkBean> allHomeworks = connections.getAllHomeworkForTeacher(teacherEmail);
+				if(!allHomeworks.isEmpty())
+				{
+					request.getSession(true).setAttribute("allHomeworksTeacher", allHomeworks);
+				}
+			}
+
+		}
+
+
 	}
 }

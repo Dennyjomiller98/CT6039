@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="../../../css/main.css">
 
         <div class="content">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light mynav">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="${pageContext.request.contextPath}/servlets/Redirects?location=home"><%="School Site"%></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,10 +42,10 @@
                             </li>
                             <% } else if(isTeacher != null) {%>
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=progress-view">Progress</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=class-view">My Classes</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=class-view">My Classes</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=homework-view">Homework</a>
                             </li>
                             <% } else if(isParent != null) {%>
                             <li class="nav-item">
@@ -110,24 +110,25 @@
 
             <% String errors = (String) session.getAttribute("formErrors");
                 if(errors != null) { %>
-            <div class="alert alert-danger" role="alert" id="formErrors"><%=errors%></div>
+            <div class="alert alert-danger myalert" role="alert" id="formErrors"><%=errors%></div>
             <%}%>
             <% String success = (String) session.getAttribute("formSuccess");
                 if(success != null) { %>
-            <div class="alert alert-success" role="alert" id="formSuccess"><%=success%></div>
+            <div class="alert alert-success mysuccess" role="alert" id="formSuccess"><%=success%></div>
             <%}%>
 
             <%--Title--%>
-            <div class="main-body-content">
-                <h1><%="Child Account Profile"%></h1>
+            <div class="main-body-content myheader neat">
+                <h1 class="myheader neat"><%="Child Account Profile"%></h1>
                 <br/>
             </div>
 
-            <p class="main-body-text">
+            <p class="main-body-text myPara neat">
                 <%="From here, you can edit your account and settings."%>
                 <br/>
                 <%="You must enter your old Password to save changes."%>
             </p>
+            <br/>
 
             <%--Edit account page, new password/confirm old pword needed, plus Email settings.--%>
             <% String firstname = (String) session.getAttribute("firstname");%>
@@ -139,72 +140,82 @@
             <% Boolean calendarEmail = (Boolean) session.getAttribute("calendarEmail");%>
             <% Boolean profileEmail = (Boolean) session.getAttribute("profileEmail");%>
 
-            <form class="reg-form" action="${pageContext.request.contextPath}/servlets/users/child/ChildProfile" method="POST">
-                <br/>
-                <h3>Profile Settings</h3>
-                <label for="address-value"></label>
-                <input type="text" name="address-value" id="address-value" value="<%=address%>" hidden/>
+            <div class="card myform">
+                <form class="reg-form" action="${pageContext.request.contextPath}/servlets/users/child/ChildProfile" method="POST">
+                    <br/>
+                    <div class="card-body">
+                        <h3 class="formPara formHeader">Profile Settings</h3>
+                        <br/>
+                        <label for="address-value"></label>
+                        <input type="text" name="address-value" id="address-value" value="<%=address%>" hidden/>
 
-                <label for="firstname" class="form-label"><%="Firstname"%></label>
-                <input type="text" name="firstname" id="firstname" class="form-control" value="<%=firstname%>" required/>
+                        <label for="firstname" class="form-label formPara"><%="Firstname"%></label>
+                        <input type="text" name="firstname" id="firstname" class="form-control formParaText" value="<%=firstname%>" required/>
+                        <br/>
+                        <label for="surname" class="form-label formPara"><%="Surname"%></label>
+                        <input type="text" name="surname" id="surname" class="form-control formParaText" value="<%=surname%>" required/>
+                        <br/>
+                        <label for="email" class="form-label formPara"><%="Email (This cannot be changed)"%></label>
+                        <input type="email" name="email" id="email" class="form-control formParaText" value="<%=email%>" disabled required/>
+                        <br/>
+                        <label for="dob" class="form-label formPara"><%="Date of Birth"%></label>
+                        <input type="date" name="dob" id="dob" class="form-control formParaText" value="<%=dob%>" required/>
+                        <br/>
+                        <label for="address" class="form-label formPara"><%="Address (Start Typing to auto-fill)"%></label>
+                        <input type="search" id="address" class="form-control formParaText" placeholder="<%=address%>" />
+                        <br/>
+                        <br/>
+                        <label for="year" class="form-label formPara"><%="Year (This cannot be changed)"%></label>
+                        <select class="select-css form-control" name="year" id="year" disabled required>
+                            <%--Iterate each year, Use these for options --%>
+                            <option class="formParaText" value="">None</option>
+                            <% Map<String,String> allYears = (Map<String,String>) session.getAttribute("allYears");
+                                if(allYears != null) {
+                                    for (Map.Entry<String, String> entry : allYears.entrySet())
+                                    {%>
+                            <option class="formParaText" value="<%=entry.getKey()%>" <% if(entry.getKey().equals(year)) { %> selected <% } %> > <%=entry.getValue()%></option>
+                            <%}
+                            }%>
+                        </select>
+                        <br/>
+                        <label for="pword" class="form-label formPara"><%="Old Password"%></label>
+                        <input type="password" name="pword" id="pword" minlength="8" class="form-control formParaText" required/>
+                        <br/>
+                        <label for="newPword" class="form-label formPara"><%="New Password"%></label>
+                        <input type="password" name="newPword" id="newPword" minlength="8" class="form-control formParaText"/>
+                        <br/>
+                        <label for="pwordConfirm" class="form-label formPara"><%="Confirm New Password"%></label>
+                        <input type="password" name="pwordConfirm" id="pwordConfirm" minlength="8" class="form-control formParaText"/>
+                        <br/>
+                        <div class="alert alert-danger myalert formParaText" role="alert" id="pwordErrors" style="display: none">Passwords do not match!</div>
+                        <br/>
+                        <h3 class="formPara formHeader">Email Settings</h3>
+                        <br/>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" name="homeworkEmail" id="homeworkEmail" <%if(homeworkEmail){ %> checked <% } %> >
+                            <label class="custom-control-label formParaText" for="homeworkEmail">Email me for Homework updates</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" name="calendarEmail" id="calendarEmail" <%if(calendarEmail){ %> checked <% } %> >
+                            <label class="custom-control-label formParaText" for="calendarEmail">Email me for Calendar updates</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" name="profileEmail" id="profileEmail" <%if(profileEmail){ %> checked <% } %> >
+                            <label class="custom-control-label formParaText" for="profileEmail">Email me for Account updates</label>
+                        </div>
+                        <br/>
+                    </div>
+                    <div class="myformbtn">
+                        <a type="button" style="flex:1" class="btn btn-secondary formBtn" href="${pageContext.request.contextPath}/servlets/users/child/ChildDelete?email=<%=email%>" >Delete Account</a>
+                        <input class="btn btn-primary formBtn" type="submit" id="submit-btn" value="Update Changes">
+                    </div>
+                </form>
                 <br/>
-                <label for="surname" class="form-label"><%="Surname"%></label>
-                <input type="text" name="surname" id="surname" class="form-control" value="<%=surname%>" required/>
-                <br/>
-                <label for="email" class="form-label"><%="Email (This cannot be changed)"%></label>
-                <input type="email" name="email" id="email" class="form-control" value="<%=email%>" disabled required/>
-                <br/>
-                <label for="dob" class="form-label"><%="Date of Birth"%></label>
-                <input type="date" name="dob" id="dob" class="form-control" value="<%=dob%>" required/>
-                <br/>
-                <label for="address" class="form-label"><%="Address (Start Typing to auto-fill)"%></label>
-                <input type="search" id="address" class="form-control" placeholder="<%=address%>" />
-                <br/>
-                <label for="year" class="form-label"><%="Year (This cannot be changed)"%></label>
-                <select class="select-css form-control" name="year" id="year" disabled required>
-                    <%--Iterate each year, Use these for options --%>
-                    <option value="">None</option>
-                    <% Map<String,String> allYears = (Map<String,String>) session.getAttribute("allYears");
-                        if(allYears != null) {
-                            for (Map.Entry<String, String> entry : allYears.entrySet())
-                            {%>
-                    <option value="<%=entry.getKey()%>" <% if(entry.getKey().equals(year)) { %> selected <% } %> > <%=entry.getValue()%></option>
-                    <%}
-                    }%>
-                </select>
-                <br/>
-                <label for="pword" class="form-label"><%="Old Password"%></label>
-                <input type="password" name="pword" id="pword" minlength="8" class="form-control" required/>
-                <br/>
-                <label for="newPword" class="form-label"><%="New Password"%></label>
-                <input type="password" name="newPword" id="newPword" minlength="8" class="form-control"/>
-                <br/>
-                <label for="pwordConfirm" class="form-label"><%="Confirm New Password"%></label>
-                <input type="password" name="pwordConfirm" id="pwordConfirm" minlength="8" class="form-control"/>
-                <br/>
-                <div class="alert alert-danger" role="alert" id="pwordErrors" style="display: none">Passwords do not match!</div>
-                <br/>
-                <h3>Email Settings</h3>
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" name="homeworkEmail" id="homeworkEmail" <%if(homeworkEmail){ %> checked <% } %> >
-                    <label class="custom-control-label" for="homeworkEmail">Email me for Homework updates</label>
-                </div>
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" name="calendarEmail" id="calendarEmail" <%if(calendarEmail){ %> checked <% } %> >
-                    <label class="custom-control-label" for="calendarEmail">Email me for Calendar updates</label>
-                </div>
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" name="profileEmail" id="profileEmail" <%if(profileEmail){ %> checked <% } %> >
-                    <label class="custom-control-label" for="profileEmail">Email me for Account updates</label>
-                </div>
-                <br/>
-                <a type="button" style="flex:1" class="btn btn-secondary" href="${pageContext.request.contextPath}/servlets/users/child/ChildDelete?email=<%=email%>" >Delete Account</a>
-                <input class="btn btn-primary" type="submit" id="submit-btn" value="Update Changes">
-            </form>
-            <%--Below this, links to calendar/HW?--%>
+            </div>
         </div>
+        <div id="background"></div>
 
-        <footer class="footer">
+        <footer class="footer formPara">
             <div class="">
                 <span class="text-muted">CT6039 Project by S1707031 &copy;2021</span>
                 <a href=${pageContext.request.contextPath}/servlets/Redirects?location=home>&nbsp;Return Home&nbsp;</a>
