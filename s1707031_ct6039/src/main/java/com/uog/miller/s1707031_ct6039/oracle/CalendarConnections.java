@@ -76,6 +76,9 @@ public class CalendarConnections extends AbstractOracleConnections
 	{
 		switch (val)
 		{
+			case "0":
+				val = "00";
+				break;
 			case "1":
 				val = "01";
 				break;

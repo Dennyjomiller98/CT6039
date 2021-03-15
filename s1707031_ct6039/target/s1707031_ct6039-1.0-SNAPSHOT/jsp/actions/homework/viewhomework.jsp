@@ -124,7 +124,11 @@
             </div>
 
             <p class="main-body-text">
-                <%="From here, you can view Homework. Children can view Homework tasks and submit Homework, whilst Teachers can assign Homework to a class/"%>
+                <%="From here, you can view Homework, both required and submitted."%>
+            </p>
+
+            <p>
+
             </p>
         </div>
 
@@ -137,5 +141,25 @@
                 <a href=${pageContext.request.contextPath}/servlets/Redirects?location=teacher-login>&nbsp;Teacher Login&nbsp;</a>
             </div>
         </footer>
+        <script>
+            //Child Selection
+            $(document).ready(
+                function () {
+                    //Todays date (set date) for Homework Assign
+                    let curday = function(){
+                        let today = new Date();
+                        let dd = today.getDate();
+                        let mm = today.getMonth()+1;
+                        let yyyy = today.getFullYear();
+
+                        if(dd<10) dd='0'+dd;
+                        if(mm<10) mm='0'+mm;
+                        return (yyyy+"-"+mm+"-"+dd);
+                    };
+                    $('#setDate').val(curday());
+                    //Full Todays Date (for creating Calendar events for children in class)
+                    $('#fullDate').val(new Date());
+                });
+        </script>
     </body>
 </html>

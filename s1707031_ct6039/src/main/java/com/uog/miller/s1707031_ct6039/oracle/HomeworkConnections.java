@@ -8,7 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class HomeworkConnections extends AbstractOracleConnections
 {
@@ -284,7 +286,7 @@ public class HomeworkConnections extends AbstractOracleConnections
 	{
 		String fileId = null;
 		AbstractOracleConnections conn = new AbstractOracleConnections();
-		String sql = "SELECT * FROM "+ HOMEWORK_FILES_COLLECTION + " WHERE Event_Id = ( SELECT MAX(Event_Id) FROM " +HOMEWORK_FILES_COLLECTION+ " )";
+		String sql = "SELECT * FROM "+ HOMEWORK_FILES_COLLECTION + " WHERE Submission_Id = ( SELECT MAX(Submission_Id) FROM " +HOMEWORK_FILES_COLLECTION+ " )";
 		//SELECT * FROM HOMEWORK_FILES_COLLECTION WHERE Event_Id = ( SELECT MAX(Event_Id) FROM HOMEWORK_FILES_COLLECTION )
 		try (Connection oracleClient = conn.getOracleClient(); PreparedStatement statement = oracleClient.prepareStatement(sql))
 		{
@@ -307,6 +309,169 @@ public class HomeworkConnections extends AbstractOracleConnections
 
 
 
+	//Retrieves List<HomeworkBean>
+	public List<HomeworkBean> getAllHomeworkForChild(String childEmail)
+	{
+		//Get HomeworkSubmissions to find HW task ID
+		List<SubmissionBean> allHomeworkSubmissionsForChild = getAllHomeworkSubmissionsForChild(childEmail);
+		StringBuilder whereClause = createWhereClause(allHomeworkSubmissionsForChild);
+
+		//Now get Homework Tasks set
+		List<HomeworkBean> ret = new ArrayList<>();
+		setOracleDriver();
+		try
+		{
+			AbstractOracleConnections conn = new AbstractOracleConnections();
+			Connection oracleClient = conn.getOracleClient();
+			if(oracleClient != null)
+			{
+				//Select all Query
+				String query;
+				if(whereClause != null)
+				{
+					query = "SELECT * FROM " + HOMEWORKS_COLLECTION + whereClause.toString();
+				}
+				else
+				{
+					query = "SELECT * FROM " + HOMEWORKS_COLLECTION;
+				}
+
+				//Execute query
+				List<HomeworkBean> allHomeworks = executeHomeworkQuery(oracleClient, query);
+				if(!allHomeworks.isEmpty())
+				{
+					ret.addAll(allHomeworks);
+				}
+				else
+				{
+					LOG.debug("Cannot retrieve HW.");
+				}
+			}
+			else
+			{
+				LOG.error("connection failure");
+			}
+		}
+		catch(Exception e)
+		{
+			LOG.error("Unable to retrieve Homework Events", e);
+		}
+		return ret;
+	}
+
+	//Retrieves List<SubmissionBean> allowing user info on if each HW task is submitted or not
+	public List<SubmissionBean> getAllHomeworkSubmissionsForChild(String childEmail)
+	{
+		List<SubmissionBean> ret = new ArrayList<>();
+		setOracleDriver();
+		try
+		{
+			AbstractOracleConnections conn = new AbstractOracleConnections();
+			Connection oracleClient = conn.getOracleClient();
+			if(oracleClient != null)
+			{
+				//Select all Query
+				String query = "SELECT * FROM " + HOMEWORK_SUBMISSIONS_COLLECTION + " WHERE Child_Email='"+childEmail+"'";
+
+				//Execute query
+				List<SubmissionBean> allSubmissions = executeHomeworkSubmissionQuery(oracleClient, query);
+				if(!allSubmissions.isEmpty())
+				{
+					ret.addAll(allSubmissions);
+				}
+				else
+				{
+					LOG.debug("Cannot retrieve HW.");
+				}
+			}
+			else
+			{
+				LOG.error("connection failure");
+			}
+		}
+		catch(Exception e)
+		{
+			LOG.error("Unable to retrieve Homework Events", e);
+		}
+		return ret;
+	}
+
+	private StringBuilder createWhereClause(List<SubmissionBean> allHomeworkSubmissionsForChild)
+	{
+		StringBuilder whereClause = null;
+		if(!allHomeworkSubmissionsForChild.isEmpty())
+		{
+			for (int i = 0; i < allHomeworkSubmissionsForChild.size(); i++)
+			{
+				if(whereClause == null)
+				{
+					whereClause = new StringBuilder("WHERE Event_Id='");
+				}
+				else
+				{
+					if(i == allHomeworkSubmissionsForChild.size() - 1)
+					{
+						whereClause.append(allHomeworkSubmissionsForChild.get(i).getEventId()).append("'");
+					}
+					else
+					{
+						whereClause.append(allHomeworkSubmissionsForChild.get(i).getEventId()).append("' OR Event_Id='");
+					}
+				}
+			}
+		}
+		return whereClause;
+	}
+
+	private ArrayList<HomeworkBean> executeHomeworkQuery(Connection oracleClient, String query) throws SQLException
+	{
+		//Executes SQL Query, any Events found will populate the ArrayList.
+		ArrayList<HomeworkBean> allEvents = new ArrayList<>();
+		try (PreparedStatement preparedStatement = oracleClient.prepareStatement(query))
+		{
+			ResultSet resultSet = preparedStatement.executeQuery(query);
+			while (resultSet.next())
+			{
+				HomeworkBean bean = new HomeworkBean(resultSet);
+				allEvents.add(bean);
+			}
+		}
+		catch(Exception e)
+		{
+			LOG.error("Query failure, using query: " + query, e);
+		}
+		oracleClient.close();
+
+		return allEvents;
+	}
+
+	private ArrayList<SubmissionBean> executeHomeworkSubmissionQuery(Connection oracleClient, String query) throws SQLException
+	{
+		//Executes SQL Query, any Events found will populate the ArrayList.
+		ArrayList<SubmissionBean> allEvents = new ArrayList<>();
+		try (PreparedStatement preparedStatement = oracleClient.prepareStatement(query))
+		{
+			ResultSet resultSet = preparedStatement.executeQuery(query);
+			while (resultSet.next())
+			{
+				SubmissionBean bean = new SubmissionBean(resultSet);
+				allEvents.add(bean);
+			}
+		}
+		catch(Exception e)
+		{
+			LOG.error("Query failure, using query: " + query, e);
+		}
+		oracleClient.close();
+
+		return allEvents;
+	}
+
+
+
+
+
+
 
 
 
@@ -319,25 +484,7 @@ public class HomeworkConnections extends AbstractOracleConnections
 		//Search homework_files DB for submission ID, return data here
 
 		//This is the childs submission (file/jsp/etc)
-		List<HomeworkBean> ret = new ArrayList<>();
-		return ret;
-	}
-
-	public List<HomeworkBean> getAllHomeworkForChild(String childEmail)
-	{
-		List<HomeworkBean> ret = new ArrayList<>();
-		return ret;
-	}
-
-	public List<HomeworkBean> getAllOutstandingHomeworkForChild(String childEmail)
-	{
-		List<HomeworkBean> ret = new ArrayList<>();
-		return ret;
-	}
-
-	public List<HomeworkBean> getAllSubmittedHomeworkForChild(String childEmail)
-	{
-		List<HomeworkBean> ret = new ArrayList<>();
+		Map<String, String> ret = new HashMap<>();
 		return ret;
 	}
 }

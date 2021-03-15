@@ -331,6 +331,56 @@
                 String eventUser = (String) session.getAttribute("eventUser");
                 String eventDate = (String) session.getAttribute("eventDate");
                 String eventUpdateDate = (String) session.getAttribute("eventUpdateDate");
+                String month = null;
+                String newMonth = null;
+                String newDate = eventUpdateDate;
+                if(eventUpdateDate != null)
+                {
+                	String[] split = eventUpdateDate.split("-");
+                	month = split[1];
+                	if(month.equals("00")){
+                		newMonth = "01";
+                	}
+                	else if(month.equals("01")){
+                		newMonth = "02";
+                	}
+                	else if(month.equals("02")){
+                		newMonth = "03";
+                	}
+                	else if(month.equals("03")){
+                		newMonth = "04";
+                	}
+                	else if(month.equals("04")){
+                		newMonth = "05";
+                	}
+                	else if(month.equals("05")){
+                		newMonth = "06";
+                	}
+                	else if(month.equals("06")){
+                		newMonth = "07";
+                	}
+                	else if(month.equals("07")){
+                		newMonth = "08";
+                	}
+                	else if(month.equals("08")){
+                		newMonth = "09";
+                	}
+                	else if(month.equals("09")){
+                		newMonth = "10";
+                	}
+                	else if(month.equals("10")){
+                		newMonth = "11";
+                	}
+                	else if(month.equals("11")){
+                		newMonth = "12";
+                	}
+                	else{
+                		newMonth = month;
+                	}
+
+                	newDate = split[0] + "-" + newMonth + "-" + split[2];
+                }
+
             if(eventId != null && eventName != null && eventUser != null && eventDate != null && eventUpdateDate != null) { %>
                 <%--Script to load modal (or won't popup)--%>
                 <script>
@@ -358,9 +408,9 @@
                                     <input class="form-control" type="text" name="eventUpdateName" id="eventUpdateName" value="<%=eventName%>" required/>
                                     <br/>
                                     <label for="eventUpdateDate" class="form-label"><%="Event Date"%></label>
-                                    <input type="date" name="eventUpdateDate" id="eventUpdateDate" class="form-control" value="<%=eventUpdateDate%>" required/>
+                                    <input type="date" name="eventUpdateDate" id="eventUpdateDate" class="form-control" value="<%=newDate%>" required/>
                                     <br/>
-                                    <label for="eventUpdateUser" class="form-label"><%="Event Tutor"%></label>
+                                    <label for="eventUpdateUser" class="form-label"><%="Event For User"%></label>
                                     <input class="form-control" type="text" name="eventUpdateUser" id="eventUpdateUser" disabled value="<%=eventUser%>" />
                                     <br/>
                                 </div>

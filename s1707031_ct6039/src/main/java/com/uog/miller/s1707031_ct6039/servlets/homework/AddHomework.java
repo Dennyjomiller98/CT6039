@@ -95,7 +95,8 @@ public class AddHomework extends HttpServlet
 
 			//Create Calendar entries for every child in class HW assigned to
 			CalendarConnections calendarConnections = new CalendarConnections();
-			calendarConnections.addCalendarItemForUser(classLinkBean.getEmail(), "HW: "+ beanToAdd.getName(), fullDate, beanToAdd.getDueDate());
+			String addCalEventDate = alterDateForCalendar(beanToAdd.getDueDate());
+			calendarConnections.addCalendarItemForUser(classLinkBean.getEmail(), "HW: "+ beanToAdd.getName(), fullDate, addCalEventDate);
 		}
 
 		//Redirect
@@ -109,6 +110,57 @@ public class AddHomework extends HttpServlet
 		{
 			LOG.error("Unable to redirect back to Homework view page after class hw creation.",e);
 		}
+	}
+
+	private String alterDateForCalendar(String dueDate)
+	{
+		String ret;
+		String[] split = dueDate.split("-");
+		String month = split[1];
+		String newMonth;
+		switch (month)
+		{
+			case "01":
+				newMonth = "00";
+				break;
+			case "02":
+				newMonth = "01";
+				break;
+			case "03":
+				newMonth = "02";
+				break;
+			case "04":
+				newMonth = "03";
+				break;
+			case "05":
+				newMonth = "04";
+				break;
+			case "06":
+				newMonth = "05";
+				break;
+			case "07":
+				newMonth = "06";
+				break;
+			case "08":
+				newMonth = "07";
+				break;
+			case "09":
+				newMonth = "08";
+				break;
+			case "10":
+				newMonth = "09";
+				break;
+			case "11":
+				newMonth = "10";
+				break;
+			case "12":
+				newMonth = "11";
+				break;
+			default:
+				newMonth = month;
+		}
+		ret = split[0] + "-" + newMonth + "-" + split[2];
+		return ret;
 	}
 
 	//Returns true if due date is after set date
