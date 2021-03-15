@@ -217,6 +217,40 @@
         <url-pattern>/servlets/childclass/RetrieveClass</url-pattern>
     </servlet-mapping>
 
+    <!--HOMEWORK-->
+    <servlet>
+        <servlet-name>addHomework</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.homework.AddHomework</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addHomework</servlet-name>
+        <url-pattern>/servlets/homework/AddHomework</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>submitHomework</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.homework.SubmitHomework</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>submitHomework</servlet-name>
+        <url-pattern>/servlets/homework/SubmitHomework</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>retrieveHomework</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.homework.RetrieveHomework</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>retrieveHomework</servlet-name>
+        <url-pattern>/servlets/homework/RetrieveHomework</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>deleteHomework</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.homework.DeleteHomework</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteHomework</servlet-name>
+        <url-pattern>/servlets/homework/DeleteHomework</url-pattern>
+    </servlet-mapping>
+
     <!--Child Progress-->
     <servlet>
         <servlet-name>progressActions</servlet-name>

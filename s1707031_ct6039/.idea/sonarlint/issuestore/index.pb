@@ -5,8 +5,6 @@ z
 Jsrc/main/java/com/uog/miller/s1707031_ct6039/oracle/ParentConnections.java,c\e\ced01af6c155db1cdc37a334ce3c3fb2637785bf
 |
 Lsrc/main/java/com/uog/miller/s1707031_ct6039/oracle/ProgressConnections.java,b\f\bfc6728900f2fe568430f36ce30485b7d3b9bb1b
-}
-Msrc/main/java/com/uog/miller/s1707031_ct6039/servlets/lessons/LessonJoin.java,4\1\41c659583562198402a5c9a08ecf1b86c446cbd0
 |
 Lsrc/main/java/com/uog/miller/s1707031_ct6039/oracle/ResourceConnections.java,e\9\e925e487a6831dffada1b82bf003c1408866e3da
 M
@@ -113,8 +111,6 @@ c
 3target/s1707031_ct6039-1.0-SNAPSHOT/WEB-INF/web.xml,2\2\22de40c705b69716ed3bf0b11bb879259d221397
 I
 src/main/webapp/index.jsp,8\e\8e6d3b70c9f5b02570779b0441540d45eceb0ded
-ƒ
-Ssrc/main/java/com/uog/miller/s1707031_ct6039/servlets/homework/HomeworkActions.java,f\b\fbab92d6025c6cdd5430bda7743e8ec05bc900a9
 e
 5src/main/webapp/jsp/actions/progress/viewprogress.jsp,1\7\172085e9c608484de4dc878346af937bc59d5e63
 „
@@ -131,8 +127,6 @@ h
 8target/s1707031_ct6039-1.0-SNAPSHOT/META-INF/MANIFEST.MF,e\8\e8fd365c2d6c048418b245b5ce77ab5d6ce013dc
 ƒ
 Ssrc/main/java/com/uog/miller/s1707031_ct6039/servlets/progress/ProgressActions.java,6\a\6ae2f88508ca8aee234a86880668f8fa9e41f490
-~
-Nsrc/main/java/com/uog/miller/s1707031_ct6039/servlets/lessons/LessonLeave.java,a\9\a92feed7124353f2584a19ce40922a31cf9da96c
 i
 9src/main/webapp/jsp/actions/resources/uploadresources.jsp,0\0\00be0f901cc988b2c58337b72431dbcefdb93d44
 g
@@ -167,8 +161,6 @@ o
 Vsrc/main/java/com/uog/miller/s1707031_ct6039/servlets/users/teacher/TeacherLogout.java,1\5\15e9e15dde64c42642dff5f713d3a38aee4c944e
 x
 Hsrc/main/java/com/uog/miller/s1707031_ct6039/oracle/YearConnections.java,a\c\ac2895a93f9a6631e3b5eb210b13c15fc50ffe39
-
-Osrc/main/java/com/uog/miller/s1707031_ct6039/servlets/misc/PasswordActions.java,f\a\fa92e4db81f37062ff41296600dfa804a246e217
 y
 Isrc/main/java/com/uog/miller/s1707031_ct6039/oracle/ChildConnections.java,f\6\f68c38e7bbcae4a559f24d14bd16a736ccf1c65d
 ^
@@ -271,3 +263,15 @@ _
 /src/main/webapp/jsp/actions/class/editclass.jsp,d\6\d604a74003fc926632cb92ae65266f6e9286e795
 c
 3src/main/webapp/jsp/users/parent/viewmychildren.jsp,2\5\25a32074c370d2d78dfec6f73691e7f535263e9e
+t
+Dsrc/main/java/com/uog/miller/s1707031_ct6039/beans/ProgressBean.java,9\5\954cf3183ef3cf50bfb1c089c0a69b003da05773
+‚
+Rsrc/main/java/com/uog/miller/s1707031_ct6039/servlets/homework/SubmitHomework.java,1\e\1e16318c67f51e9c04895ae51ee73858cc4249e6
+t
+Dsrc/main/java/com/uog/miller/s1707031_ct6039/beans/HomeworkBean.java,4\3\4371cbfea953ccd987b1d7384353dae4578f6d26
+
+Osrc/main/java/com/uog/miller/s1707031_ct6039/servlets/homework/AddHomework.java,e\7\e774a863d258a0e5efb772f2c848cd2327a72427
+v
+Fsrc/main/java/com/uog/miller/s1707031_ct6039/beans/SubmissionBean.java,d\4\d458c6e6de8d87847c98087444be37b48e2c560a
+d
+4src/main/webapp/jsp/actions/homework/addhomework.jsp,a\c\ac66db768a3c59de2445a718e171ff1fc9b1c68e

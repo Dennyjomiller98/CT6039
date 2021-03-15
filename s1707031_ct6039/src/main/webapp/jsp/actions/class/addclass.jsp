@@ -137,7 +137,7 @@
                 <label for="email" class="form-label"><%="Tutor"%></label>
                 <input type="email" name="email" id="email" class="form-control" value="<%=email%>" disabled required/>
                 <br/>
-                <label for="tutor" class="form-label"><%="Tutor for Year"%></label>
+                <label for="tutor" class="form-label"><%="Year"%></label>
                 <select class="form-control" class="select-css" name="tutor" id="tutor" required>
                     <%--Iterate each year, Use these for options --%>
                     <option value="">None</option>

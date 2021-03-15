@@ -360,7 +360,7 @@
                                     <label for="eventUpdateDate" class="form-label"><%="Event Date"%></label>
                                     <input type="date" name="eventUpdateDate" id="eventUpdateDate" class="form-control" value="<%=eventUpdateDate%>" required/>
                                     <br/>
-                                    <label for="eventUpdateUser" class="form-label"><%="Event Name"%></label>
+                                    <label for="eventUpdateUser" class="form-label"><%="Event Tutor"%></label>
                                     <input class="form-control" type="text" name="eventUpdateUser" id="eventUpdateUser" disabled value="<%=eventUser%>" />
                                     <br/>
                                 </div>
@@ -375,9 +375,7 @@
                                         let eventDate = $("#eventUpdateDate");
                                         function getDate() {
                                             let dateInput = $("#newEventUpdateDate");
-                                            console.log(eventDate.val());
                                             dateInput.val(new Date(eventDate.val()));
-                                            console.log(dateInput.val());
                                         }
                                         eventDate.on('change', function() {
                                             getDate();

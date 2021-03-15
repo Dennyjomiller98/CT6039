@@ -6,7 +6,6 @@ import com.uog.miller.s1707031_ct6039.oracle.ClassConnections;
 import com.uog.miller.s1707031_ct6039.oracle.LinkedConnections;
 import com.uog.miller.s1707031_ct6039.oracle.YearConnections;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.annotation.WebServlet;
@@ -70,7 +69,7 @@ public class RetrieveClass extends HttpServlet
 		{
 			LOG.error("Unable to retrieve class");
 			removeAlerts(request);
-			request.getSession(true).setAttribute("formSuccess", "Unable to retrieve Class");
+			request.getSession(true).setAttribute("formErrors", "Unable to retrieve Class");
 			try
 			{
 				response.sendRedirect(request.getContextPath() + "/jsp/actions/class/viewclass.jsp");

@@ -1,0 +1,79 @@
+DROP TABLE ct6039_children CASCADE CONSTRAINTS;
+CREATE TABLE ct6039_children(
+                         Firstname varchar(25) NOT NULL,
+                         Surname varchar(25) NOT NULL,
+                         Email varchar2(50) NOT NULL primary key,
+                         DOB varchar(25) NOT NULL,
+                         Address varchar(255) NOT NULL,
+                         Year varchar(10) NOT NULL,
+                         Pword varchar(25) NOT NULL,
+                         Homework_Email varchar(10) NOT NULL,
+                         Calender_Email varchar(10) NOT NULL,
+                         Profile_Email varchar(10) NOT NULL
+);
+
+DROP TABLE ct6039_parents CASCADE CONSTRAINTS;
+CREATE TABLE ct6039_parents(
+                                Firstname varchar(25) NOT NULL,
+                                Surname varchar(25) NOT NULL,
+                                Email varchar2(50) NOT NULL primary key,
+                                DOB varchar(25) NOT NULL,
+                                Address varchar(255) NOT NULL,
+                                Linked_Child_Id varchar(255) NOT NULL,
+                                Pword varchar(25) NOT NULL,
+                                Homework_Email varchar(10) NOT NULL,
+                                Calender_Email varchar(10) NOT NULL,
+                                Profile_Email varchar(10) NOT NULL
+);
+
+DROP TABLE ct6039_teachers CASCADE CONSTRAINTS;
+CREATE TABLE ct6039_teachers(
+                               Firstname varchar(25) NOT NULL,
+                               Title varchar(25) NOT NULL,
+                               Surname varchar(25) NOT NULL,
+                               Email varchar2(50) NOT NULL primary key,
+                               DOB varchar(25) NOT NULL,
+                               Address varchar(255) NOT NULL,
+                               Year varchar(10) NOT NULL,
+                               Pword varchar(25) NOT NULL,
+                               Homework_Email varchar(10) NOT NULL,
+                               Calender_Email varchar(10) NOT NULL,
+                               Profile_Email varchar(10) NOT NULL
+);
+
+DROP TABLE ct6039_year CASCADE CONSTRAINTS;
+CREATE TABLE ct6039_year(
+                                Name varchar(25) NOT NULL,
+                                Id NUMBER GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY
+);
+SELECT * FROM ct6039_year WHERE Id=1;
+
+DROP TABLE ct6039_class CASCADE CONSTRAINTS;
+CREATE TABLE ct6039_class(
+                            Event_Id NUMBER GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
+                            Name varchar(25) NOT NULL,
+                            Teacher varchar2(50) NOT NULL,
+                            Year NUMBER NOT NULL
+);
+
+DROP TABLE ct6039_class_links CASCADE CONSTRAINTS;
+CREATE TABLE ct6039_class_links(
+                             Event_Id NUMBER NOT NULL,
+                             Child_Email varchar2(50) NOT NULL
+);
+
+DROP TABLE ct6039_parent_links CASCADE CONSTRAINTS;
+CREATE TABLE ct6039_parent_links(
+                                    Event_Id NUMBER GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
+                                    Child_Email varchar2(50) NOT NULL,
+                                    Parent_Email varchar2(50) NOT NULL
+);
+
+DROP TABLE ct6039_calendar CASCADE CONSTRAINTS;
+CREATE TABLE ct6039_calendar(
+                                    Event_Id NUMBER GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
+                                    Event_Name varchar2(50) NOT NULL,
+                                    User_Email varchar2(50) NOT NULL,
+                                    Event_Date varchar(255) NOT NULL,
+                                    Event_Update_Date varchar(25) NOT NULL
+);

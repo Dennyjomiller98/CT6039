@@ -17,14 +17,16 @@ public class AbstractOracleConnections
 	public static final String CHILDRENS_COLLECTION = "ct6039_children";
 	public static final String TEACHERS_COLLECTION = "ct6039_teachers";
 	public static final String PARENTS_COLLECTION = "ct6039_parents";
-	public static final String RESOURCES_COLLECTION = "ct6039_resources";
 	public static final String CALENDARS_COLLECTION = "ct6039_calendar";
-	public static final String HOMEWORKS_COLLECTION = "ct6039_homeworks";
-	public static final String PROGRESS_COLLECTION = "ct6039_progress";
 	public static final String PARENT_LINKS_COLLECTION = "ct6039_parent_links";
 	public static final String CLASS_LINKS_COLLECTION = "ct6039_class_links";
 	public static final String CLASS_COLLECTION = "ct6039_class";
 	public static final String YEAR_COLLECTION = "ct6039_year";
+	public static final String HOMEWORKS_COLLECTION = "ct6039_homeworks";
+	public static final String HOMEWORK_SUBMISSIONS_COLLECTION = "ct6039_homework_submissions";
+	public static final String HOMEWORK_FILES_COLLECTION = "ct6039_homework_files";
+	public static final String PROGRESS_COLLECTION = "ct6039_progress";
+	public static final String RESOURCES_COLLECTION = "ct6039_resources";
 
 	private Connection oracleClient;
 

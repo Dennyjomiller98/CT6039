@@ -27,9 +27,9 @@ public class ClassBean
 			fTeacher = resultSet.getString("Teacher");
 			fYear = resultSet.getString("Year");
 		}
-		catch (SQLException throwables)
+		catch (SQLException e)
 		{
-			LOG.error("Unable to create Bean from ResultSet", throwables);
+			LOG.error("Unable to create Bean from ResultSet", e);
 		}
 	}
 

@@ -36,18 +36,21 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=calendar">Calendar</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=progress-view">Progress</a>
-                            </li>
                             <%if(isChild != null) {%>
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=homework-view">Homework</a>
                             </li>
                             <% } else if(isTeacher != null) {%>
                             <li class="nav-item">
+                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=progress-view">Progress</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/servlets/Redirects?location=class-view">My Classes</a>
                             </li>
                             <% } else if(isParent != null) {%>
+                            <li class="nav-item">
+                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=progress-view">Progress</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=view-child">My Children</a>
                             </li>
@@ -134,7 +137,7 @@
                 <label for="email" class="form-label"><%="Tutor"%></label>
                 <input type="email" name="email" id="email" class="form-control" value="<%=email%>" disabled required/>
                 <br/>
-                <label for="tutor" class="form-label"><%="Tutor for Year"%></label>
+                <label for="tutor" class="form-label"><%="Year"%></label>
                 <select class="form-control" class="select-css" name="tutor" id="tutor" required>
                     <%--Iterate each year, Use these for options --%>
                     <option value="">None</option>

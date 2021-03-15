@@ -129,6 +129,13 @@ public class Redirects extends HttpServlet
 			case "homework-view":
 				ret = "/jsp/actions/homework/viewhomework.jsp";
 				break;
+			case "homework-assign":
+				getSelectedClass(request);
+				ret = "/jsp/actions/homework/addhomework.jsp";
+				break;
+			case "homework-upload":
+				ret = "/jsp/actions/homework/uploadhomework.jsp";
+				break;
 
 			case "class-view":
 				addSessionAttributesForClass(request);
@@ -161,6 +168,15 @@ public class Redirects extends HttpServlet
 				break;
 		}
 		return ret;
+	}
+
+	private void getSelectedClass(HttpServletRequest request)
+	{
+		String selectedClass = request.getParameter("class");
+		if(selectedClass != null)
+		{
+			request.getSession(true).setAttribute("selectedClass", selectedClass);
+		}
 	}
 
 	private void addSessionAttributesForParentViewingChildren(HttpServletRequest request)

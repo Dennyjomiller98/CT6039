@@ -123,7 +123,6 @@ public class ClassConnections extends AbstractOracleConnections
 			{
 				LOG.error("connection failure");
 			}
-
 		}
 		catch(Exception e)
 		{

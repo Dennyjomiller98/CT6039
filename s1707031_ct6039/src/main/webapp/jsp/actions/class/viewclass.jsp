@@ -139,7 +139,11 @@
                             </div>
                             <div class="" style="padding-bottom: 5%">
                                 <a class="btn btn-primary"
-                                   href=${pageContext.request.contextPath}/servlets/childclass/RetrieveClass?classId=<%=allClass.getEventId()%>>&nbsp;More info&nbsp;</a>
+                                   href=${pageContext.request.contextPath}/servlets/childclass/RetrieveClass?classId=<%=allClass.getEventId()%>>&nbsp;More info&nbsp;
+                                </a>
+                                <a class="btn btn-primary"
+                                   href="${pageContext.request.contextPath}/servlets/Redirects?location=homework-assign&class=<%=allClass.getEventId()%>">Assign Homework
+                                </a>
                             </div>
                         </div>
                         <br/>
