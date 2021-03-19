@@ -97,14 +97,10 @@ Htarget/s1707031_ct6039-1.0-SNAPSHOT/jsp/users/teacher/teacherprofile.jsp,4\b\4
 Mtarget/s1707031_ct6039-1.0-SNAPSHOT/jsp/users/teacher/teacherregistration.jsp,e\5\e5b723c3bbb1a6152818c5c1e9ffd7256c8bfc9d
 {
 Ktarget/s1707031_ct6039-1.0-SNAPSHOT/jsp/actions/homework/uploadhomework.jsp,b\6\b64193d5de195d6fd34cb1e7a4eb1b00be176955
-}
-Mtarget/s1707031_ct6039-1.0-SNAPSHOT/jsp/actions/resources/uploadresources.jsp,3\8\3818b895bf9ae483ee0c657d040215a5d74a6604
 y
 Itarget/s1707031_ct6039-1.0-SNAPSHOT/jsp/actions/homework/viewhomework.jsp,5\f\5f9b7f757f81e4edd5651fcc7bce8414b00e569e
 y
 Itarget/s1707031_ct6039-1.0-SNAPSHOT/jsp/actions/progress/viewprogress.jsp,a\d\ad4bda01259951935e6a95bde7da883d818004ba
-{
-Ktarget/s1707031_ct6039-1.0-SNAPSHOT/jsp/actions/resources/viewresources.jsp,3\6\368a17923ca733e1b588211bc2c0abd65c56e4cf
 O
 src/main/webapp/WEB-INF/web.xml,2\e\2e22b6edd746fa3dc40ad7276c87c8d87d72a392
 c
@@ -127,10 +123,6 @@ h
 8target/s1707031_ct6039-1.0-SNAPSHOT/META-INF/MANIFEST.MF,e\8\e8fd365c2d6c048418b245b5ce77ab5d6ce013dc
 ƒ
 Ssrc/main/java/com/uog/miller/s1707031_ct6039/servlets/progress/ProgressActions.java,6\a\6ae2f88508ca8aee234a86880668f8fa9e41f490
-i
-9src/main/webapp/jsp/actions/resources/uploadresources.jsp,0\0\00be0f901cc988b2c58337b72431dbcefdb93d44
-g
-7src/main/webapp/jsp/actions/resources/viewresources.jsp,c\5\c59cd4667d3b460ab06a5e4f0856f8794ffc3f2f
 g
 7src/main/webapp/jsp/actions/homework/uploadhomework.jsp,7\8\787eb76547ef9c3058b5d2d009ea0008b60ddcb9
 r

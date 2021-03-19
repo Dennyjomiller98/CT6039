@@ -125,8 +125,6 @@
 
             <p class="main-body-text myPara neat">
                 <%="From here, you can edit your account and settings."%>
-                <br/>
-                <%="You must enter your old Password to save changes."%>
             </p>
             <br/>
 
@@ -140,7 +138,7 @@
             <% Boolean calendarEmail = (Boolean) session.getAttribute("calendarEmail");%>
             <% Boolean profileEmail = (Boolean) session.getAttribute("profileEmail");%>
 
-            <div class="card myform">
+            <div class="card myform shadow p-3 mb-5 bg-white rounded">
                 <form class="reg-form" action="${pageContext.request.contextPath}/servlets/users/child/ChildProfile" method="POST">
                     <br/>
                     <div class="card-body">
@@ -166,7 +164,7 @@
                         <br/>
                         <br/>
                         <label for="year" class="form-label formPara"><%="Year (This cannot be changed)"%></label>
-                        <select class="select-css form-control" name="year" id="year" disabled required>
+                        <select class="select-css form-control formParaText" name="year" id="year" disabled required>
                             <%--Iterate each year, Use these for options --%>
                             <option class="formParaText" value="">None</option>
                             <% Map<String,String> allYears = (Map<String,String>) session.getAttribute("allYears");

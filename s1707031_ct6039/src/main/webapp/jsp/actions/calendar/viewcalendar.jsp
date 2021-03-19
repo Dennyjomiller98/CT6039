@@ -208,7 +208,7 @@
 
     <body class="d-flex flex-column">
         <div class="content">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light mynav">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="${pageContext.request.contextPath}/servlets/Redirects?location=home"><%="School Site"%></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -302,22 +302,22 @@
 
             <% String errors = (String) session.getAttribute("formErrors");
                 if(errors != null) { %>
-            <div class="alert alert-danger" role="alert" id="formErrors"><%=errors%></div>
+            <div class="alert alert-danger myalert" role="alert" id="formErrors"><%=errors%></div>
             <%}%>
             <% String success = (String) session.getAttribute("formSuccess");
                 if(success != null) { %>
-            <div class="alert alert-success" role="alert" id="formSuccess"><%=success%></div>
+            <div class="alert alert-success mysuccess" role="alert" id="formSuccess"><%=success%></div>
             <%}%>
 
             <%--Title--%>
-            <div class="main-body-content">
-                <h1><%="My Calendar"%></h1>
+            <div class="main-body-content myheader neat">
+                <h1 class="myheader neat"><%="My Calendar"%></h1>
                 <br/>
 
-                <p>
+                <p class="myPara neat">
                     <%="To add an event, please click on the desired day."%>
                     <br/>
-                    <%="To edit or delete an event, click on the event to view details, then edit or delete as desired."%>
+                    <%="To edit or delete an event, click the event on the Calendar."%>
                     <br/>
                     <label for="currentUser"></label>
                     <input type="text" name="currentUser" id="currentUser" value="<%=email%>" hidden/>
@@ -385,38 +385,39 @@
                 <%--Script to load modal (or won't popup)--%>
                 <script>
                     $(window).on('load', function(){
-                       $("#exampleModalCenter").modal('show');
+                        $('#exampleModalCenter').removeClass("hide").modal('show');
+                        $("#exampleModalCenter").appendTo("body");
                     });
                 </script>
-                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal fade calendarPopup" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
+                        <div class="modal-content shadow p-3 mb-5 bg-white rounded">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Event #<%=eventId%></h5>
+                                <h5 class="modal-title formPara" id="exampleModalLongTitle">Event #<%=eventId%></h5>
                                 <button type="button" class="close close-btn" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <form class="login-form" action="${pageContext.request.contextPath}/servlets/calendar/UpdateCalendarEvent" method="POST">
+                            <form class="calendar-form" action="${pageContext.request.contextPath}/servlets/calendar/UpdateCalendarEvent" method="POST">
                                 <div class="modal-body">
                                     <%--Content for modal popup containing calendar event information--%>
                                     <label for="eventUpdateId"></label>
                                     <input type="text" name="eventUpdateId" id="eventUpdateId" value="<%=eventId%>" hidden/>
                                     <label for="newEventUpdateDate"></label>
                                     <input type="text" name="newEventUpdateDate" id="newEventUpdateDate" value="<%=eventDate%>" hidden/>
-                                    <label for="eventUpdateName" class="form-label"><%="Event Name"%></label>
-                                    <input class="form-control" type="text" name="eventUpdateName" id="eventUpdateName" value="<%=eventName%>" required/>
+                                    <label for="eventUpdateName" class="form-label formPara"><%="Event Name"%></label>
+                                    <input class="form-control formParaText" type="text" name="eventUpdateName" id="eventUpdateName" value="<%=eventName%>" required/>
                                     <br/>
-                                    <label for="eventUpdateDate" class="form-label"><%="Event Date"%></label>
-                                    <input type="date" name="eventUpdateDate" id="eventUpdateDate" class="form-control" value="<%=newDate%>" required/>
+                                    <label for="eventUpdateDate" class="form-label formPara"><%="Event Date"%></label>
+                                    <input type="date" name="eventUpdateDate" id="eventUpdateDate" class="form-control formParaText" value="<%=newDate%>" required/>
                                     <br/>
-                                    <label for="eventUpdateUser" class="form-label"><%="Event For User"%></label>
-                                    <input class="form-control" type="text" name="eventUpdateUser" id="eventUpdateUser" disabled value="<%=eventUser%>" />
+                                    <label for="eventUpdateUser" class="form-label formPara"><%="Event For User"%></label>
+                                    <input class="form-control formParaText" type="text" name="eventUpdateUser" id="eventUpdateUser" disabled value="<%=eventUser%>" />
                                     <br/>
                                 </div>
                                 <div class="modal-footer">
-                                    <a type="button" style="flex:1" class="btn btn-secondary" href="${pageContext.request.contextPath}/servlets/calendar/DeleteCalendarEvent?eventId=<%=eventId%>" >Delete Event</a>
-                                    <button style="flex:1" class="btn btn-primary" type="submit">Save Changes</button>
+                                    <a type="button" class="btn btn-secondary formParaText formBtn" href="${pageContext.request.contextPath}/servlets/calendar/DeleteCalendarEvent?eventId=<%=eventId%>" >Delete Event</a>
+                                    <button class="btn btn-primary formParaText formBtn" type="submit">Save Changes</button>
                                     <script>
                                         $(".close-btn").on('click', function (){
                                             $("#exampleModalCenter").modal('hide');
@@ -440,12 +441,14 @@
 
             <%--Calendar--%>
             <div id='wrap'>
-                <div id='calendar'></div>
+                <div id='calendar' class="shadow p-3 mb-5 bg-white rounded"></div>
 
                 <div style='clear:both'></div>
             </div>
+        </div>
+        <div id="background"></div>
 
-        <footer class="footer">
+        <footer class="footer formPara">
             <div class="">
                 <span class="text-muted">CT6039 Project by S1707031 &copy;2021</span>
                 <a href=${pageContext.request.contextPath}/servlets/Redirects?location=home>&nbsp;Return Home&nbsp;</a>

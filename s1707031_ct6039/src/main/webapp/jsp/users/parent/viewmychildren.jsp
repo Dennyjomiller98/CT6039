@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="../../../css/main.css">
 
         <div class="content">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light mynav">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="${pageContext.request.contextPath}/servlets/Redirects?location=home"><%="School Site"%></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -112,20 +112,20 @@
 
             <% String errors = (String) session.getAttribute("formErrors");
                 if(errors != null) { %>
-            <div class="alert alert-danger" role="alert" id="formErrors"><%=errors%></div>
+            <div class="alert alert-danger myalert" role="alert" id="formErrors"><%=errors%></div>
             <%}%>
             <% String success = (String) session.getAttribute("formSuccess");
                 if(success != null) { %>
-            <div class="alert alert-success" role="alert" id="formSuccess"><%=success%></div>
+            <div class="alert alert-success mysuccess" role="alert" id="formSuccess"><%=success%></div>
             <%}%>
 
             <%--Title--%>
-            <div class="main-body-content">
-                <h1><%="My Children"%></h1>
+            <div class="main-body-content myheader neat">
+                <h1 class="myheader neat"><%="My Children"%></h1>
                 <br/>
             </div>
 
-            <p class="main-body-text">
+            <p class="main-body-text myPara neat">
                 <%="As a Parent, any linked children in your Profile will appear below."%>
             </p>
             <br/>
@@ -134,10 +134,10 @@
                 <% List<ChildBean> myChildrenBeans = (List<ChildBean>) session.getAttribute("myChildrenBeans");
                     if (myChildrenBeans.size() > 0)
                     { for (ChildBean child : myChildrenBeans) { %>
-                <div class="card">
+                <div class="card shadow p-3 mb-5 bg-white rounded">
                     <div class="card-body">
-                        <h5 class="card-title"><%="User: " + child.getEmail()%></h5>
-                        <p class="card-text-center">
+                        <h5 class="card-title formParaText"><%="User: " + child.getEmail()%></h5>
+                        <p class="card-text-center formParaText">
                             <%="Firstname: " + child.getFirstname()%> <br/>
                             <%="Surname: " + child.getSurname()%> <br/>
                             <%="Date-Of-Birth: " + child.getDOB()%> <br/>
@@ -145,20 +145,24 @@
                             <%="Year: " + child.getYear()%> <br/>
                         </p>
                     </div>
-                    <div class="" style="padding-bottom: 5%">
-                        <a class="btn btn-primary"
+                    <div class="myformbtn" style="padding-bottom: 5%">
+                        <a class="btn btn-primary formBtn"
                            href=${pageContext.request.contextPath}/servlets/progress/ProgressActions?childEmail=<%=child.getEmail()%>>&nbsp;View Progress&nbsp;</a>
                     </div>
                 </div>
                 <br/>
                 <% } } else { %>
-                <%="You have no linked children, please update your Profile."%>
+                <p class="formParaText">
+                    <%="You have no linked children, please update your Profile."%>
+                </p>
                 <br/>
                 <% } %>
             </div>
             <%--Create cards for each linked child?--%>
         </div>
-        <footer class="footer">
+        <div id="background"></div>
+
+        <footer class="footer formPara">
             <div class="">
                 <span class="text-muted">CT6039 Project by S1707031 &copy;2021</span>
                 <a href=${pageContext.request.contextPath}/servlets/Redirects?location=home>&nbsp;Return Home&nbsp;</a>

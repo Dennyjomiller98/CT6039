@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="../../../css/main.css">
 
         <div class="content">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light mynav">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light mynav ">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="${pageContext.request.contextPath}/servlets/Redirects?location=home"><%="School Site"%></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -112,18 +112,18 @@
 
             <% String errors = (String) session.getAttribute("formErrors");
                 if(errors != null) { %>
-            <div class="alert alert-danger" role="alert" id="formErrors"><%=errors%></div>
+            <div class="alert alert-danger myalert" role="alert" id="formErrors"><%=errors%></div>
             <%}%>
             <% String success = (String) session.getAttribute("formSuccess");
                 if(success != null) { %>
-            <div class="alert alert-success" role="alert" id="formSuccess"><%=success%></div>
+            <div class="alert alert-success mysuccess" role="alert" id="formSuccess"><%=success%></div>
             <%}%>
 
             <%--Title--%>
-            <div class="main-body-content">
-                <h1><%="View Classes"%></h1>
+            <div class="main-body-content myheader neat">
+                <h1 class="myheader neat"><%="View Classes"%></h1>
                 <br/>
-                <p class="main-body-text">
+                <p class="formTextCenter myPara neat">
                     <%="From here, you can view all Classes you are a tutor for."%>
                 </p>
                 <br/>
@@ -131,38 +131,39 @@
                 <%List<ClassBean> allClasses = (List<ClassBean>) session.getAttribute("allClasses");
                     if (allClasses.size() > 0)
                     { for (ClassBean allClass : allClasses) { %>
-                        <div class="card">
+                        <div class="card shadow p-3 mb-5 bg-white rounded">
                             <div class="card-body">
-                                <h5 class="card-title"><%="Class #" + allClass.getEventId() + ": " + allClass.getName()%></h5>
+                                <h5 class="card-title formPara"><%="Class #" + allClass.getEventId() + ": " + allClass.getName()%></h5>
                                 <p class="card-text-center">
                                 </p>
                             </div>
-                            <div class="" style="padding-bottom: 5%">
-                                <a class="btn btn-primary"
+                            <div class="myformbtn" style="padding-bottom: 5%">
+                                <a class="btn btn-primary formParaText classFormBtn"
                                    href=${pageContext.request.contextPath}/servlets/childclass/RetrieveClass?classId=<%=allClass.getEventId()%>>&nbsp;More info&nbsp;
                                 </a>
-                                <a class="btn btn-primary"
+                                <a class="btn btn-primary formParaText classFormBtn"
                                    href="${pageContext.request.contextPath}/servlets/Redirects?location=homework-assign&class=<%=allClass.getEventId()%>">Assign Homework
                                 </a>
                             </div>
                         </div>
                         <br/>
                     <% } } else { %>
-                        <%="There are no classes here."%>
+                        <p class="formParaText">
+                            <%="There are no classes here."%>
+                        </p>
                         <br/>
                 <% } %>
-
                 <div>
                     <br/>
                     <p>
-                        <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=class-add>&nbsp;Add New Class&nbsp;</a>
+                        <a class="btn btn-primary formParaText classFormBtn" href=${pageContext.request.contextPath}/servlets/Redirects?location=class-add>&nbsp;Add New Class&nbsp;</a>
                     </p>
                 </div>
-
             </div>
         </div>
+        <div id="background"></div>
 
-        <footer class="footer">
+        <footer class="footer formPara">
             <div class="">
                 <span class="text-muted">CT6039 Project by S1707031 &copy;2021</span>
                 <a href=${pageContext.request.contextPath}/servlets/Redirects?location=home>&nbsp;Return Home&nbsp;</a>

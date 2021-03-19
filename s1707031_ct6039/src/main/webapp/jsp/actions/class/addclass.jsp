@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="../../../css/main.css">
 
         <div class="content">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light mynav">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="${pageContext.request.contextPath}/servlets/Redirects?location=home"><%="School Site"%></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -110,69 +110,73 @@
 
             <% String errors = (String) session.getAttribute("formErrors");
                 if(errors != null) { %>
-            <div class="alert alert-danger" role="alert" id="formErrors"><%=errors%></div>
+            <div class="alert alert-danger myalert" role="alert" id="formErrors"><%=errors%></div>
             <%}%>
             <% String success = (String) session.getAttribute("formSuccess");
                 if(success != null) { %>
-            <div class="alert alert-success" role="alert" id="formSuccess"><%=success%></div>
+            <div class="alert alert-success mysuccess" role="alert" id="formSuccess"><%=success%></div>
             <%}%>
 
             <%--Title--%>
-            <div class="main-body-content">
-                <h1><%="Add Class"%></h1>
+            <div class="main-body-content myheader neat">
+                <h1 class="myheader neat"><%="Add Class"%></h1>
                 <br/>
-            </div>
-
-            <p class="main-body-text">
-                <%="From here, you can add a new Class."%>
-            </p>
-
-            <form class="reg-form" action="${pageContext.request.contextPath}/servlets/childclass/AddClass" method="POST">
+                <p class="formTextCenter myPara neat">
+                    <%="From here, you can add a new Class."%>
+                </p>
                 <br/>
-                <h3>Class Details</h3>
-                <br/>
-                <label for="className" class="form-label"><%="Name of Class"%></label>
-                <input type="text" name="className" id="className" class="form-control" placeholder="E.g. 'Year 5 Mathematics'" required/>
-                <br/>
-                <label for="email" class="form-label"><%="Tutor"%></label>
-                <input type="email" name="email" id="email" class="form-control" value="<%=email%>" disabled required/>
-                <br/>
-                <label for="tutor" class="form-label"><%="Year"%></label>
-                <select class="form-control" class="select-css" name="tutor" id="tutor" required>
-                    <%--Iterate each year, Use these for options --%>
-                    <option value="">None</option>
-                    <% Map<String,String> allYears = (Map<String,String>) session.getAttribute("allYears");
-                        if(allYears != null) {
-                            for (Map.Entry<String, String> entry : allYears.entrySet())
-                            {%>
-                    <option value="<%=entry.getKey()%>"><%=entry.getValue()%></option>
-                    <%}
-                    }%>
-                </select>
-                <br/>
-                <label for="childSelect[]" class="form-label"><%="Children"%></label>
-                <select class="form-control select-css selectpicker" name="childSelect[]" id="childSelect[]" multiple data-live-search="true">
-                    <%--Get all children, allow multi select--%>
-                    <option value=""></option>
-                    <% Map<String,String> allChildren = (Map<String,String>) session.getAttribute("allChildren");
-                        if(allChildren != null) {
-                            for (Map.Entry<String, String> entry : allChildren.entrySet())
-                            {%>
-                    <option value="<%=entry.getKey()%>"><%=entry.getValue()%></option>
-                    <%}
-                    }%>
-                </select>
-                <br/>
-                <div class="body-main-content">
-                    <br>
-                    <input class="btn btn-primary" type="reset" value="Clear">
-                    <input class="btn btn-primary" type="submit" value="Submit">
+                <div class="card shadow p-3 mb-5 bg-white rounded">
+                    <form class="reg-form" action="${pageContext.request.contextPath}/servlets/childclass/AddClass" method="POST">
+                        <br/>
+                        <div class="card-body">
+                            <h3 class="formPara formHeader">Class Details</h3>
+                            <br/>
+                            <label for="className" class="form-label formPara"><%="Name of Class"%></label>
+                            <input type="text" name="className" id="className" class="form-control formParaText" placeholder="E.g. 'Year 5 Mathematics'" required/>
+                            <br/>
+                            <label for="email" class="form-label formPara"><%="Tutor"%></label>
+                            <input type="email" name="email" id="email" class="form-control formParaText" value="<%=email%>" disabled required/>
+                            <br/>
+                            <label for="tutor" class="form-label formPara"><%="Year"%></label>
+                            <select class="form-control formParaText" class="select-css" name="tutor" id="tutor" required>
+                                <%--Iterate each year, Use these for options --%>
+                                <option class="formParaText" value="">None</option>
+                                <% Map<String,String> allYears = (Map<String,String>) session.getAttribute("allYears");
+                                    if(allYears != null) {
+                                        for (Map.Entry<String, String> entry : allYears.entrySet())
+                                        {%>
+                                <option class="formParaText" value="<%=entry.getKey()%>"><%=entry.getValue()%></option>
+                                <%}
+                                }%>
+                            </select>
+                            <br/>
+                            <label for="childSelect[]" class="form-label formPara"><%="Children"%></label>
+                            <select class="form-control select-css selectpicker formParaText" name="childSelect[]" id="childSelect[]" multiple data-live-search="true">
+                                <%--Get all children, allow multi select--%>
+                                <option class="formParaText" value=""></option>
+                                <% Map<String,String> allChildren = (Map<String,String>) session.getAttribute("allChildren");
+                                    if(allChildren != null) {
+                                        for (Map.Entry<String, String> entry : allChildren.entrySet())
+                                        {%>
+                                <option class="formParaText" value="<%=entry.getKey()%>"><%=entry.getValue()%></option>
+                                <%}
+                                }%>
+                            </select>
+                            <br/>
+                        </div>
+                        <div class="body-main-content myformbtn">
+                            <br>
+                            <input class="btn btn-primary formBtn formParaText" type="reset" value="Clear">
+                            <input class="btn btn-primary formBtn formParaText" type="submit" value="Submit">
+                        </div>
+                        <br/>
+                    </form>
                 </div>
-                <br/>
-            </form>
+            </div>
         </div>
+        <div id="background"></div>
 
-        <footer class="footer">
+        <footer class="footer formPara">
             <div class="">
                 <span class="text-muted">CT6039 Project by S1707031 &copy;2021</span>
                 <a href=${pageContext.request.contextPath}/servlets/Redirects?location=home>&nbsp;Return Home&nbsp;</a>

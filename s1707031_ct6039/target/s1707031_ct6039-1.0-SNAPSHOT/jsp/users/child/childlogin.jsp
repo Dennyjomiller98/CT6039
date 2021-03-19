@@ -127,7 +127,7 @@
                 <%="From this portal, you can log in with your Child account credentials."%>
             </p>
             <br/>
-            <div class="card myform">
+            <div class="card myform shadow p-3 mb-5 bg-white rounded">
                 <form class="login-form" action="${pageContext.request.contextPath}/servlets/users/child/ChildLogin" method="GET">
                     <div class="card-body">
                         <label for="email" class="form-label formPara"><%="Email"%></label>

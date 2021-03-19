@@ -1,23 +1,11 @@
 
-…
-java:S4144Ì"gUpdate this method so that its implementation is not identical to "getAllHomeworkForChild" on line 326.(†®¡õ8¯ïŒƒ/
 O
-java:S1481¾"1Remove this unused "submissionId" local variable.(¿²Çø8¯ïŒƒ/
-~
-java:S1488È"[Immediately return this expression instead of assigning it to the temporary variable "ret".(“éŞºøÿÿÿÿ8¯ïŒƒ/
-O
-java:S1172Ì"1Remove this unused method parameter "childEmail".(†®¡õ8¯ïŒƒ/
+java:S1481©"1Remove this unused "submissionId" local variable.(¿²Çø8¯ïŒƒ/
 ^
-java:S1854¾"@Remove this useless assignment to local variable "submissionId".(¿²Çø8¯ïŒƒ/
+java:S1854©"@Remove this useless assignment to local variable "submissionId".(¿²Çø8¯ïŒƒ/
+‰
+java:S1488Ÿ"fImmediately return this expression instead of assigning it to the temporary variable "allSubmissions".(ØÑÛœÿÿÿÿÿ8ºİÙƒ/
+y
+java:S1488­"[Immediately return this expression instead of assigning it to the temporary variable "ret".(†Æ›É8ºİÙƒ/
 T
-java:S1172Ò"1Remove this unused method parameter "childEmail".(îŠ£ûüÿÿÿÿ8¯ïŒƒ/
-Š
-java:S4144Ò"gUpdate this method so that its implementation is not identical to "getAllHomeworkForChild" on line 326.(îŠ£ûüÿÿÿÿ8¯ïŒƒ/
-~
-java:S1488Ô"[Immediately return this expression instead of assigning it to the temporary variable "ret".(“éŞºøÿÿÿÿ8¯ïŒƒ/
-~
-java:S1488Â"[Immediately return this expression instead of assigning it to the temporary variable "ret".(“éŞºøÿÿÿÿ8¯ïŒƒ/
-~
-java:S1488Î"[Immediately return this expression instead of assigning it to the temporary variable "ret".(“éŞºøÿÿÿÿ8¯ïŒƒ/
-N
-java:S1172Æ"1Remove this unused method parameter "childEmail".(¡ğ­8¯ïŒƒ/
+java:S1172"1Remove this unused method parameter "homeworkId".(øÒÅ¥úÿÿÿÿ8ºİÙƒ/

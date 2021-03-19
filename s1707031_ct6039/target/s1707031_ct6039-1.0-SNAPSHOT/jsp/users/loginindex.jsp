@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="../../css/main.css">
 
         <div class="content">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light mynav">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="${pageContext.request.contextPath}/servlets/Redirects?location=home"><%="School Site"%></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -110,80 +110,80 @@
 
             <% String errors = (String) session.getAttribute("formErrors");
                 if(errors != null) { %>
-            <div class="alert alert-danger" role="alert" id="formErrors"><%=errors%></div>
+            <div class="alert alert-danger myalert" role="alert" id="formErrors"><%=errors%></div>
             <%}%>
             <% String success = (String) session.getAttribute("formSuccess");
                 if(success != null) { %>
-            <div class="alert alert-success" role="alert" id="formSuccess"><%=success%></div>
+            <div class="alert alert-success mysuccess" role="alert" id="formSuccess"><%=success%></div>
             <%}%>
 
             <%--Title--%>
-            <div class="main-body-content">
-                <h1><%="Login Index"%></h1>
+            <div class="main-body-content myheader neat">
+                <h1 class="myheader neat"><%="Login Index"%></h1>
                 <br/>
             </div>
 
-            <p class="main-body-text">
+            <p class="main-body-text myPara neat">
                 <%="Please select how you want to log in."%>
             </p>
             <br/>
 
-            <div class="row card-index" style="width: 100%">
+            <div class="row card-index myheader neat" style="width: 100%">
                 <div style="width: 12.5%">
                 </div>
                 <div class="d-flex align-items-stretch" style="width:25%; display: inline-block">
-                    <div class="card">
+                    <div class="card shadow p-3 mb-5 bg-white rounded">
                         <form class="" action="${pageContext.request.contextPath}/servlets/users/parent/ParentLogin" method="GET">
-                            <div class="card-body">
-                                <h5 class="card-title">For Parents</h5>
-                                <label for="parentEmail" class="form-label"><%="Email"%></label>
-                                <input class="form-control" type="email" name="parentEmail" id="parentEmail" required/>
+                            <div class="card-body formParaText">
+                                <h5 class="card-title formPara">For Parents</h5>
+                                <label for="parentEmail" class="form-label formPara"><%="Email"%></label>
+                                <input class="form-control formParaText" type="email" name="parentEmail" id="parentEmail" required/>
                                 <br/>
-                                <label for="parentPword" class="form-label"><%="Password"%></label>
-                                <input class="form-control" type="password" name="parentPword" id="parentPword" minlength="8" required/>
+                                <label for="parentPword" class="form-label formPara"><%="Password"%></label>
+                                <input class="form-control formParaText" type="password" name="parentPword" id="parentPword" minlength="8" required/>
                                 <br/>
                             </div>
-                            <div class="" style="margin:auto; padding-bottom: 10%">
-                                <input class="btn btn-primary" type="reset" value="Clear">
-                                <input class="btn btn-primary" type="submit" value="Submit">
+                            <div class="myformbtn" style="margin:auto; padding-bottom: 10%">
+                                <input class="btn btn-primary classFormBtn formParaText" type="reset" value="Clear">
+                                <input class="btn btn-primary classFormBtn formParaText" type="submit" value="Submit">
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="d-flex align-items-stretch" style="width:25%; display: inline-block">
-                    <div class="card">
+                    <div class="card shadow p-3 mb-5 bg-white rounded">
                         <form class="" action="${pageContext.request.contextPath}/servlets/users/child/ChildLogin" method="GET">
-                            <div class="card-body">
-                                <h5 class="card-title">For Children</h5>
-                                <label for="childEmail" class="form-label"><%="Email"%></label>
-                                <input class="form-control" type="email" name="childEmail" id="childEmail" required/>
+                            <div class="card-body formParaText">
+                                <h5 class="card-title formPara">For Children</h5>
+                                <label for="childEmail" class="form-label formPara"><%="Email"%></label>
+                                <input class="form-control formParaText" type="email" name="childEmail" id="childEmail" required/>
                                 <br/>
-                                <label for="childPword" class="form-label"><%="Password"%></label>
-                                <input class="form-control" type="password" name="childPword" id="childPword" minlength="8" required/>
+                                <label for="childPword" class="form-label formPara"><%="Password"%></label>
+                                <input class="form-control formParaText" type="password" name="childPword" id="childPword" minlength="8" required/>
                                 <br/>
                             </div>
-                            <div class="" style="margin:auto; padding-bottom: 10%">
-                                <input class="btn btn-primary" type="reset" value="Clear">
-                                <input class="btn btn-primary" type="submit" value="Submit">
+                            <div class="myformbtn" style="margin:auto; padding-bottom: 10%">
+                                <input class="btn btn-primary classFormBtn formParaText" type="reset" value="Clear">
+                                <input class="btn btn-primary classFormBtn formParaText" type="submit" value="Submit">
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="d-flex align-items-stretch" style="width:25%; display: inline-block">
-                    <div class="card">
+                    <div class="card shadow p-3 mb-5 bg-white rounded">
                         <form class="" action="${pageContext.request.contextPath}/servlets/users/teacher/TeacherLogin" method="GET">
-                            <div class="card-body">
-                                <h5 class="card-title">For Teachers</h5>
-                                <label for="teacherEmail" class="form-label"><%="Email"%></label>
-                                <input class="form-control" type="email" name="teacherEmail" id="teacherEmail" required/>
+                            <div class="card-body formParaText">
+                                <h5 class="card-title formPara">For Teachers</h5>
+                                <label for="teacherEmail" class="form-label formPara"><%="Email"%></label>
+                                <input class="form-control formParaText" type="email" name="teacherEmail" id="teacherEmail" required/>
                                 <br/>
-                                <label for="teacherPword" class="form-label"><%="Password"%></label>
-                                <input class="form-control" type="password" name="teacherPword" id="teacherPword" minlength="8" required/>
+                                <label for="teacherPword" class="form-label formPara"><%="Password"%></label>
+                                <input class="form-control formParaText" type="password" name="teacherPword" id="teacherPword" minlength="8" required/>
                                 <br/>
                             </div>
-                            <div class="" style="margin:auto; padding-bottom: 10%">
-                                <input class="btn btn-primary" type="reset" value="Clear">
-                                <input class="btn btn-primary" type="submit" value="Submit">
+                            <div class="myformbtn" style="margin:auto; padding-bottom: 10%">
+                                <input class="btn btn-primary classFormBtn formParaText" type="reset" value="Clear">
+                                <input class="btn btn-primary classFormBtn formParaText" type="submit" value="Submit">
                             </div>
                         </form>
                     </div>
@@ -193,7 +193,9 @@
             </div>
             <br/>
         </div>
-        <footer class="footer">
+        <div id="background"></div>
+
+        <footer class="footer formPara">
             <div class="">
                 <span class="text-muted">CT6039 Project by S1707031 &copy;2021</span>
                 <a href=${pageContext.request.contextPath}/servlets/Redirects?location=home>&nbsp;Return Home&nbsp;</a>

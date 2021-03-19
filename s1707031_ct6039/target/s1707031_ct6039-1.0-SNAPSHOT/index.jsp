@@ -131,41 +131,41 @@
                     <div style="width: 12.5%">
                     </div>
                     <div class="d-flex align-items-stretch" style="width:25%; display: inline-block">
-                        <div class="card">
+                        <div class="card shadow p-3 mb-5 bg-white rounded">
                             <div class="card-body formParaText">
                                 <h5 class="card-title formPara">For Parents/Guardians</h5>
                                 <p class="card-text-center formParaText">Using this Portal allows you to check your child's progress, including homework submission dates.</p>
                             </div>
-                            <div class="myformbtn" style="margin:auto; padding-bottom: 10%">
-                                <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=parent-login>&nbsp;Parent Login&nbsp;</a>
+                            <div class="myindexformbtn" style="margin:auto; padding-bottom: 10%">
+                                <a class="btn btn-primary formBtn formParaText automargin" href=${pageContext.request.contextPath}/servlets/Redirects?location=parent-login>&nbsp;Parent Login&nbsp;</a>
                                 &nbsp;
-                                <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=parent-register>&nbsp;Register Parent&nbsp;</a>
+                                <a class="btn btn-primary formBtn formParaText automargin" href=${pageContext.request.contextPath}/servlets/Redirects?location=parent-register>&nbsp;Register Parent&nbsp;</a>
                             </div>
                         </div>
                     </div>
                     <div class="d-flex align-items-stretch" style="width:25%; display: inline-block">
-                        <div class="card">
+                        <div class="card shadow p-3 mb-5 bg-white rounded">
                             <div class="card-body formParaText">
                                 <h5 class="card-title formPara">For Children</h5>
-                                <p class="card-text-center formParaText">If you are a child accessing this site, please use the following links:</p>
+                                <p class="card-text-center formParaText">Children accessing this site can use this portal to log in below.</p>
                             </div>
-                            <div class="myformbtn" style="margin:auto; padding-bottom: 10%">
-                                <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=child-login>&nbsp;Child Login&nbsp;</a>
+                            <div class="myindexformbtn" style="margin:auto; padding-bottom: 10%">
+                                <a class="btn btn-primary formBtn automargin" href=${pageContext.request.contextPath}/servlets/Redirects?location=child-login>&nbsp;Child Login&nbsp;</a>
                                 &nbsp;
-                                <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=child-register>&nbsp;Child Register&nbsp;</a>
+                                <a class="btn btn-primary formBtn automargin" href=${pageContext.request.contextPath}/servlets/Redirects?location=child-register>&nbsp;Child Register&nbsp;</a>
                             </div>
                         </div>
                     </div>
                     <div class="d-flex align-items-stretch" style="width:25%; display: inline-block">
-                        <div class="card">
+                        <div class="card shadow p-3 mb-5 bg-white rounded">
                             <div class="card-body formParaText">
                                 <h5 class="card-title formPara">For Teachers</h5>
                                 <p class="card-text-center formParaText">Teachers accessing this site can update Homework and Lesson Files from their account.</p>
                             </div>
-                            <div class="myformbtn" style="margin:auto; padding-bottom: 10%">
-                                <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=teacher-login>&nbsp;Teacher Login&nbsp;</a>
+                            <div class="myindexformbtn" style="margin:auto; padding-bottom: 10%">
+                                <a class="btn btn-primary formBtn automargin" href=${pageContext.request.contextPath}/servlets/Redirects?location=teacher-login>&nbsp;Teacher Login&nbsp;</a>
                                 &nbsp;
-                                <a class="btn btn-primary" href=${pageContext.request.contextPath}/servlets/Redirects?location=teacher-register>&nbsp;Teacher Register&nbsp;</a>
+                                <a class="btn btn-primary formBtn automargin" href=${pageContext.request.contextPath}/servlets/Redirects?location=teacher-register>&nbsp;Teacher Register&nbsp;</a>
                             </div>
                         </div>
                     </div>

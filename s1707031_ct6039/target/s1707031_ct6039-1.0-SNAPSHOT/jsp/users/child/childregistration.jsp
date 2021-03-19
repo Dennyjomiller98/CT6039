@@ -127,7 +127,7 @@
                 <%="From here, you can register a child account and assign them to a year."%>
             </p>
             <br/>
-            <div class="card myform">
+            <div class="card myform shadow p-3 mb-5 bg-white rounded">
                 <form class="reg-form" action="${pageContext.request.contextPath}/servlets/users/child/ChildRegistration" method="POST">
                     <br/>
                     <div class="card-body">
@@ -152,7 +152,7 @@
                         <br/>
                         <br/>
                         <label for="year" class="form-label formPara"><%="Year"%></label>
-                        <select class="select-css form-control" name="year" id="year" required>
+                        <select class="select-css form-control formParaText" name="year" id="year" required>
                             <%--Iterate each year, Use these for options --%>
                             <option class="formParaText" value="">None</option>
                             <% Map<String,String> allYears = (Map<String,String>) session.getAttribute("allYears");
@@ -176,7 +176,6 @@
                         <input class="btn btn-primary formBtn" type="reset" value="Clear">
                         <input class="btn btn-primary formBtn" type="submit" id="submit-btn" value="Submit">
                     </div>
-
                 </form>
                 <br/>
             </div>

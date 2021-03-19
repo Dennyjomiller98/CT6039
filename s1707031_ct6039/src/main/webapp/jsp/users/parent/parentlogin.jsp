@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="../../../css/main.css">
 
         <div class="content">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light mynav">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="${pageContext.request.contextPath}/servlets/Redirects?location=home"><%="School Site"%></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -111,36 +111,45 @@
 
             <% String success = (String) session.getAttribute("formSuccess");
                 if(success != null) { %>
-            <div class="alert alert-success" role="alert" id="formSuccess"><%=success%></div>
+            <div class="alert alert-success mysuccess" role="alert" id="formSuccess"><%=success%></div>
             <%}%>
             <% String errors = (String) session.getAttribute("formErrors");
                 if(errors != null) { %>
-            <div class="alert alert-danger" role="alert" id="formErrors"><%=errors%></div>
+            <div class="alert alert-danger myalert" role="alert" id="formErrors"><%=errors%></div>
             <%}%>
 
             <%--Title--%>
-            <div class="main-body-content">
-                <h1><%="Parent Account Login Portal"%></h1>
+            <div class="main-body-content myheader neat">
+                <h1 class="myheader neat"><%="Parent Account Login Portal"%></h1>
                 <br/>
             </div>
 
-            <p class="main-body-text">
+            <p class="main-body-text myPara neat">
                 <%="From this portal, you can log in with your Parent account credentials."%>
             </p>
+            <br/>
 
-            <form class="login-form" action="${pageContext.request.contextPath}/servlets/users/parent/ParentLogin" method="GET">
-                <label for="email" class="form-label"><%="Email"%></label>
-                <input class="form-control" type="email" name="email" id="email" required/>
+            <div class="card myform shadow p-3 mb-5 bg-white rounded">
+                <form class="login-form" action="${pageContext.request.contextPath}/servlets/users/parent/ParentLogin" method="GET">
+                    <div class="card-body">
+                        <label for="email" class="form-label formPara"><%="Email"%></label>
+                        <input class="form-control formParaText" type="email" name="email" id="email" required/>
+                        <br/>
+                        <label for="pword" class="form-label formPara"><%="Password"%></label>
+                        <input class="form-control formParaText" type="password" name="pword" id="pword" minlength="8" required/>
+                    </div>
+                    <div class="myformbtn">
+                        <input class="btn btn-primary formBtn" type="reset" value="Clear">
+                        <input class="btn btn-primary formBtn" type="submit" value="Submit">
+                    </div>
+                    <br/>
+                </form>
                 <br/>
-                <label for="pword" class="form-label"><%="Password"%></label>
-                <input class="form-control" type="password" name="pword" id="pword" minlength="8" required/>
-                <br/>
-                <input class="btn btn-primary" type="reset" value="Clear">
-                <input class="btn btn-primary" type="submit" value="Submit">
-            </form>
+            </div>
         </div>
+        <div id="background"></div>
 
-        <footer class="footer">
+        <footer class="footer formPara">
             <div class="">
                 <span class="text-muted">CT6039 Project by S1707031 &copy;2021</span>
                 <a href=${pageContext.request.contextPath}/servlets/Redirects?location=home>&nbsp;Return Home&nbsp;</a>

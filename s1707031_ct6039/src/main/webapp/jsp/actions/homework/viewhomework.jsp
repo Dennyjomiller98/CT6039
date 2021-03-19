@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="../../../css/main.css">
 
         <div class="content">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light mynav">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="${pageContext.request.contextPath}/servlets/Redirects?location=home"><%="School Site"%></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -112,106 +112,114 @@
 
             <% String errors = (String) session.getAttribute("formErrors");
                 if(errors != null) { %>
-            <div class="alert alert-danger" role="alert" id="formErrors"><%=errors%></div>
+            <div class="alert alert-danger myalert" role="alert" id="formErrors"><%=errors%></div>
             <%}%>
             <% String success = (String) session.getAttribute("formSuccess");
                 if(success != null) { %>
-            <div class="alert alert-success" role="alert" id="formSuccess"><%=success%></div>
+            <div class="alert alert-success mysuccess" role="alert" id="formSuccess"><%=success%></div>
             <%}%>
 
             <%--Title--%>
-            <div class="main-body-content">
-                <h1><%="View Homework"%></h1>
+            <div class="main-body-content myheader neat">
+                <h1 class="myheader neat"><%="View Homework"%></h1>
                 <br/>
             </div>
 
             <%if(isChild != null)
             { %>
             <%--Children Homework Cards--%>
-            <p class="main-body-text">
+            <p class="main-body-text myPara neat">
                 <%="From here, you can view Homework, both required and submitted."%>
             </p>
             <br/>
 
-            <div class="main-body-content">
+            <div class="main-body-content myPara neat">
                 <%List<HomeworkBean> allHomework = (List<HomeworkBean>) session.getAttribute("allHomeworks");
                     List<SubmissionBean> allSubmissions = (List<SubmissionBean>) session.getAttribute("allSubmissions");
                     if (allHomework.size() > 0 && allSubmissions.size() > 0)
                     {%>
-                <%--List all Unsubmitted/Due Homework--%>
-                <h3>Unsubmitted Homework</h3>
-                <% for (HomeworkBean homeworkTask : allHomework) {
-                    SubmissionBean matchingSubmission = null;
-                    for (SubmissionBean submission : allSubmissions) {
-                        if(homeworkTask.getEventId().equals(submission.getEventId()))
-                        {
-                            matchingSubmission = submission;
-                        }
-                    }
-                    if(matchingSubmission != null && matchingSubmission.getSubmissionId() == null){%>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title"><%="Homework #" + homeworkTask.getEventId() + ": " + homeworkTask.getName()%></h5>
-                        <p class="card-text-center">
-                            Set Date: <%=homeworkTask.getSetDate()%> <br/>
-                            Description: <%=homeworkTask.getDescription()%> <br/>
-                            Submission Status: Not submitted. <br/>
-                            Due Date: <%=homeworkTask.getDueDate()%> <br/>
-                        </p>
-                    </div>
-                    <div class="" style="padding-bottom: 5%">
-                        <a class="btn btn-primary"
-                           href=${pageContext.request.contextPath}/servlets/homework/SubmitHomework?homeworkId=<%=homeworkTask.getEventId()%>>&nbsp;Submit Homework&nbsp;
-                        </a>
-                    </div>
-                </div>
-                <br/>
-                <%}
-                } %>
 
+                <%--List all Unsubmitted/Due Homework--%>
+                <div class="shadow p-3 mb-5 bg-white rounded unsubmittedHomework">
+                    <h3 class="formPara formHeader">Unsubmitted Homework</h3>
+                    <% for (HomeworkBean homeworkTask : allHomework) {
+                        SubmissionBean matchingSubmission = null;
+                        for (SubmissionBean submission : allSubmissions) {
+                            if(homeworkTask.getEventId().equals(submission.getEventId()))
+                            {
+                                matchingSubmission = submission;
+                            }
+                        }
+                        if(matchingSubmission != null && matchingSubmission.getSubmissionId() == null){%>
+                    <div class="card shadow p-3 mb-5 bg-white rounded">
+                        <div class="card-body">
+                            <h5 class="card-title formPara"><%="Homework #" + homeworkTask.getEventId() + ": " + homeworkTask.getName()%></h5>
+                            <p class="card-text-center formParaText">
+                                Set Date: <%=homeworkTask.getSetDate()%> <br/>
+                                Description: <%=homeworkTask.getDescription()%> <br/>
+                                Submission Status: Not submitted. <br/>
+                                Due Date: <%=homeworkTask.getDueDate()%> <br/>
+                            </p>
+                        </div>
+                        <div class="myformbtn" style="padding-bottom: 5%">
+                            <a class="btn btn-primary formParaText formBtn"
+                               href=${pageContext.request.contextPath}/servlets/homework/SubmitHomework?homeworkId=<%=homeworkTask.getEventId()%>>&nbsp;Submit Homework&nbsp;
+                            </a>
+                        </div>
+                    </div>
+                    <br/>
+                    <%}
+                    } %>
+                </div>
                 <br/>
                 <%--List all Submitted/Completed Homework--%>
-                <h3>Submitted Homework</h3>
                 <% if(!allHomework.isEmpty()){
-                	for (HomeworkBean homeworkTask : allHomework) {
-                    SubmissionBean matchingSubmission = null;
-                    for (SubmissionBean submission : allSubmissions) {
-                        if(homeworkTask.getEventId().equals(submission.getEventId()))
-                        {
-                            matchingSubmission = submission;
+                    for (HomeworkBean homeworkTask : allHomework) {
+                        SubmissionBean matchingSubmission = null;
+                        for (SubmissionBean submission : allSubmissions) {
+                            if(homeworkTask.getEventId().equals(submission.getEventId()))
+                            {
+                                matchingSubmission = submission;
+                            }
                         }
-                    }
-                    if(matchingSubmission != null && matchingSubmission.getSubmissionId() != null){%>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title"><%="Homework #" + homeworkTask.getEventId() + ": " + homeworkTask.getName()%></h5>
-                        <p class="card-text-center">
-                            Set Date: <%=homeworkTask.getSetDate()%> <br/>
-                            Description: <%=homeworkTask.getDescription()%> <br/>
-                            Submission Status: Submitted: #<%=matchingSubmission.getSubmissionId()%> <br/>
-                            Due Date: <%=homeworkTask.getDueDate()%> <br/>
-                            Submission Date: <%=matchingSubmission.getSubmissionDate()%> <br/>
-                            <%if(matchingSubmission.getGrade() != null){ %>
-                            Grade: <%=matchingSubmission.getGrade()%> <br/>
-                            <% } else{ %>
-                            Grade: Not Provided Yet <br/>
-                            <% } %>
-                        </p>
+                        if(matchingSubmission != null && matchingSubmission.getSubmissionId() != null){%>
+                <div class="shadow p-3 mb-5 bg-white rounded submittedHomework">
+                    <h3 class="formPara formHeader">Submitted Homework</h3>
+                           <div class="card shadow p-3 mb-5 bg-white rounded">
+                        <div class="card-body">
+                            <h5 class="card-title formPara"><%="Homework #" + homeworkTask.getEventId() + ": " + homeworkTask.getName()%></h5>
+                            <p class="card-text-center formParaText">
+                                Set Date: <%=homeworkTask.getSetDate()%> <br/>
+                                Description: <%=homeworkTask.getDescription()%> <br/>
+                                Submission Status: Submitted: #<%=matchingSubmission.getSubmissionId()%> <br/>
+                                Due Date: <%=homeworkTask.getDueDate()%> <br/>
+                                Submission Date: <%=matchingSubmission.getSubmissionDate()%> <br/>
+                                <%if(matchingSubmission.getGrade() != null){ %>
+                                Grade: <%=matchingSubmission.getGrade()%> <br/>
+                                <% } else{ %>
+                                Grade: Not Provided Yet <br/>
+                                <% } %>
+                            </p>
+                        </div>
+                        <div class="myformbtn" style="padding-bottom: 5%">
+                            <a class="btn btn-primary formParaText formBtn"
+                               href=${pageContext.request.contextPath}/servlets/homework/DownloadHomework?homeworkId=<%=homeworkTask.getEventId()%>>&nbsp;Download Submission&nbsp;
+                            </a>
+                        </div>
                     </div>
-                    <div class="" style="padding-bottom: 5%">
-                        <a class="btn btn-primary"
-                           href=${pageContext.request.contextPath}/servlets/homework/DownloadHomework?homeworkId=<%=homeworkTask.getEventId()%>>&nbsp;Download Submission&nbsp;
-                        </a>
-                    </div>
+                    <br/>
+                    <%}
+                    }%>
                 </div>
-                <br/>
-                <%}
-                }
-                }else { %>
+               <%}else { %>
+                <p class="formParaText">
                     <%="You have no Submissions."%>
+                </p>
                 <% } %>
                 <% } else { %>
-                <%="There are no Homeworks for you."%>
+                <p class="formParaText">
+                    <%="There are no Homeworks for you."%>
+                </p>
                 <br/>
                 <% } %>
             </div>
@@ -220,7 +228,7 @@
             else if(isTeacher != null)
             { %>
             <%--Teacher Homework Cards--%>
-            <p class="main-body-text">
+            <p class="main-body-text myPara neat">
                 <%="From here, you can view assigned Homework and Childrens submissions."%>
             </p>
             <br/>
@@ -229,13 +237,13 @@
                 <%List<HomeworkBean> allHomework = (List<HomeworkBean>) session.getAttribute("allHomeworksTeacher");
                     if (allHomework.size() > 0)
                     {%>
-                <h3><%="Assigned Homeworks"%></h3>
-                <% if(!allHomework.isEmpty()){
-                	for (HomeworkBean homeworkTask : allHomework){%>
-                    <div class="card">
+                    <br/>
+                    <% if(!allHomework.isEmpty()){
+                        for (HomeworkBean homeworkTask : allHomework){%>
+                    <div class="card shadow p-3 mb-5 bg-white rounded">
                         <div class="card-body">
-                            <h5 class="card-title"><%="Homework #" + homeworkTask.getEventId() + ": " + homeworkTask.getName()%></h5>
-                            <p class="card-text-center">
+                            <h5 class="card-title formPara"><%="Homework #" + homeworkTask.getEventId() + ": " + homeworkTask.getName()%></h5>
+                            <p class="card-text-center formParaText">
                                 Set Date: <%=homeworkTask.getSetDate()%> <br/>
                                 Due Date: <%=homeworkTask.getDueDate()%> <br/>
                                 <%if(homeworkTask.getClassId().equals("0")){%>
@@ -246,27 +254,32 @@
                                 Description: <%=homeworkTask.getDescription()%> <br/>
                             </p>
                         </div>
-                        <div class="" style="padding-bottom: 5%">
-                            <a class="btn btn-primary"
+                        <div class="myformbtn" style="padding-bottom: 5%">
+                            <a class="btn btn-primary formParaText formBtn"
                                href=${pageContext.request.contextPath}/servlets/homework/ViewSubmissions?homeworkId=<%=homeworkTask.getEventId()%>>&nbsp;View Submissions&nbsp;
                             </a>
                         </div>
                     </div>
                     <br/>
-                <%}
-                }else{ %>
-                    <%="There are no Assigned Homeworks for you."%>
-                <% }%>
+                    <%}
+                    }else{ %>
+                    <p class="formParaText">
+                        <%="There are no Assigned Homeworks for you."%>
+                    </p>
+                    <% }%>
                 <br/>
                 <% } else { %>
-                <%="No Homework Assignments could be found."%>
+                <p class="formParaText">
+                    <%="No Homework Assignments could be found."%>
+                </p>
                 <br/>
                 <% } %>
             </div>
             <% } %>
         </div>
+        <div id="background"></div>
 
-        <footer class="footer">
+        <footer class="footer formPara">
             <div class="">
                 <span class="text-muted">CT6039 Project by S1707031 &copy;2021</span>
                 <a href=${pageContext.request.contextPath}/servlets/Redirects?location=home>&nbsp;Return Home&nbsp;</a>
