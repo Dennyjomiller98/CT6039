@@ -276,6 +276,7 @@ public class ClassConnections extends AbstractOracleConnections
 
 	public void updateClass(ClassBean beanToUpdate)
 	{
+		setOracleDriver();
 		try
 		{
 			AbstractOracleConnections conn = new AbstractOracleConnections();

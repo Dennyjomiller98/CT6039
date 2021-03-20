@@ -61,6 +61,5 @@ public class RetrieveHomework extends HttpServlet
 		request.getSession(true).removeAttribute("formErrors");
 		request.getSession(true).removeAttribute("formSuccess");
 		request.getSession(true).removeAttribute("retrievedSubmissions");
-
 	}
 }

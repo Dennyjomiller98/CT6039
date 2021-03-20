@@ -202,16 +202,28 @@
                         <h3 class="formPara formHeader">Email Settings</h3>
                         <br/>
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" name="homeworkEmail" id="homeworkEmail" <%if(homeworkEmail){ %> checked <% } %> >
-                            <label class="custom-control-label formParaText" for="homeworkEmail">Email me for Homework updates</label>
+                            <div style="width: 25%">
+                            </div>
+                                <input type="checkbox" class="custom-control-input" name="homeworkEmail" id="homeworkEmail" <%if(homeworkEmail){ %> checked <% } %> >
+                                <label class="custom-control-label formParaText" for="homeworkEmail">Email me for Homework updates</label>
+                            <div style="width: 25%">
+                            </div>
                         </div>
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" name="calendarEmail" id="calendarEmail" <%if(calendarEmail){ %> checked <% } %> >
-                            <label class="custom-control-label formParaText" for="calendarEmail">Email me for Calendar updates</label>
+                            <div style="width: 25%">
+                            </div>
+                                <input type="checkbox" class="custom-control-input" name="calendarEmail" id="calendarEmail" <%if(calendarEmail){ %> checked <% } %> >
+                                <label class="custom-control-label formParaText" for="calendarEmail">Email me for Calendar updates</label>
+                            <div style="width: 25%">
+                            </div>
                         </div>
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" name="profileEmail" id="profileEmail" <%if(profileEmail){ %> checked <% } %> >
-                            <label class="custom-control-label formParaText" for="profileEmail">Email me for Account updates</label>
+                            <div style="width: 25%">
+                            </div>
+                                <input type="checkbox" class="custom-control-input" name="profileEmail" id="profileEmail" <%if(profileEmail){ %> checked <% } %> >
+                                <label class="custom-control-label formParaText" for="profileEmail">Email me for Account updates</label>
+                            <div style="width: 25%">
+                            </div>
                         </div>
                         <br/>
                     </div>

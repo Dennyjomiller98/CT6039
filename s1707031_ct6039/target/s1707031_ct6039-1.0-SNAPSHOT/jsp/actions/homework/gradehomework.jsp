@@ -131,6 +131,8 @@
                             <input type="text" name="childEmail" id="childEmail" value="<%=childEmail%>" hidden/>
                             <label for="submissionId" hidden></label>
                             <input type="text" name="submissionId" id="submissionId" value="<%=submissionBean.getSubmissionId()%>" hidden/>
+                            <label for="homeworkId" hidden></label>
+                            <input type="text" name="homeworkId" id="homeworkId" value="<%=submissionBean.getEventId()%>" hidden/>
                             <br/>
                             <label for="email" class="formPara"><%="Child Email"%></label><br/>
                             <input class="formParaText form-control" type="text" name="email" id="email" value="<%=childEmail%>" disabled/>
@@ -140,6 +142,7 @@
                             <br>
                             <label for="grade" class="form-label formPara"><%="Homework Grade"%></label>
                             <select class="form-control formParaText selectpicker" name="grade" id="grade" data-live-search="true">
+                                <option class="formParaText" value="" ><%="Select Grade..."%></option>
                                 <option class="formParaText gradeGreen" value="green">Green</option>
                                 <option class="formParaText gradeAmber" value="amber">Amber</option>
                                 <option class="formParaText gradeRed" value="red">Red</option>
@@ -167,5 +170,41 @@
                 <a href=${pageContext.request.contextPath}/servlets/Redirects?location=teacher-login>&nbsp;Teacher Login&nbsp;</a>
             </div>
         </footer>
+        <script>
+            //Title "Other" input
+            let gradeSelect = $("#grade");
+            gradeSelect.on('change', function(){
+                let val = gradeSelect.val();
+                console.log(val);
+                if(val === "green")
+                {
+                    let selectElement = $(".btn.dropdown-toggle.btn-light");
+                    selectElement.removeClass("gradeAmber");
+                    selectElement.removeClass("gradeRed");
+                    selectElement.addClass("gradeGreen");
+                }
+                else if(val === "amber")
+                {
+                    let selectElement = $(".btn.dropdown-toggle.btn-light");
+                    selectElement.removeClass("gradeRed");
+                    selectElement.removeClass("gradeGreen");
+                    selectElement.addClass("gradeAmber");
+                }
+                else if(val === "red")
+                {
+                    let selectElement = $(".btn.dropdown-toggle.btn-light");
+                    selectElement.removeClass("gradeAmber");
+                    selectElement.removeClass("gradeGreen");
+                    selectElement.addClass("gradeRed");
+                }
+                else
+                {
+                    let selectElement = $(".btn.dropdown-toggle.btn-light");
+                    selectElement.removeClass("gradeAmber");
+                    selectElement.removeClass("gradeGreen");
+                    selectElement.removeClass("gradeRed");
+                }
+            });
+        </script>
     </body>
 </html>

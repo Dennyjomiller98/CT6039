@@ -589,7 +589,7 @@ public class HomeworkConnections extends AbstractOracleConnections
 			{
 				String query = "DELETE FROM " + HOMEWORKS_COLLECTION
 						+ " WHERE Event_Id='" + homeworkId + "'";
-				executeDeleteQuery(oracleClient, query);
+				executeUpdateQuery(oracleClient, query);
 			}
 			else
 			{
@@ -613,7 +613,7 @@ public class HomeworkConnections extends AbstractOracleConnections
 			{
 				String query = "DELETE FROM " + HOMEWORK_SUBMISSIONS_COLLECTION
 						+ " WHERE Event_Id='" + submissionId + "' AND Child_Email='"+childEmail+"'";
-				executeDeleteQuery(oracleClient, query);
+				executeUpdateQuery(oracleClient, query);
 			}
 			else
 			{
@@ -637,7 +637,7 @@ public class HomeworkConnections extends AbstractOracleConnections
 			{
 				String query = "DELETE FROM " + HOMEWORK_FILES_COLLECTION
 						+ " WHERE Submission_Id='" + submissionId + "'";
-				executeDeleteQuery(oracleClient, query);
+				executeUpdateQuery(oracleClient, query);
 			}
 			else
 			{
@@ -648,19 +648,6 @@ public class HomeworkConnections extends AbstractOracleConnections
 		{
 			LOG.error("Unable to delete homework in oracle DB");
 		}
-	}
-
-	private void executeDeleteQuery(Connection oracleClient, String query) throws SQLException
-	{
-		try (Statement statement = oracleClient.createStatement())
-		{
-			statement.executeUpdate(query);
-		}
-		catch(Exception e)
-		{
-			LOG.error("Query failure, using query: " + query, e);
-		}
-		oracleClient.close();
 	}
 
 	//Used for teachers, click on a task to see submissions, table view of childrens submissions
@@ -765,5 +752,43 @@ public class HomeworkConnections extends AbstractOracleConnections
 			is.close();
 			out.close();
 		}
+	}
+
+	//Updates DB value of HW submission with grade value (Traffic lights green/amber/red)
+	public void gradeHomeworkSubmission(String submissionId, String childEmail, String grade)
+	{
+		setOracleDriver();
+		try
+		{
+			AbstractOracleConnections conn = new AbstractOracleConnections();
+			Connection oracleClient = conn.getOracleClient();
+			if (oracleClient != null)
+			{
+				String query = "UPDATE " + HOMEWORK_SUBMISSIONS_COLLECTION + " SET Grade ='" + grade
+						+"' WHERE Submission_Id='"+ submissionId +"' AND Child_Email='"+childEmail+"'";
+				executeUpdateQuery(oracleClient, query);
+			}
+			else
+			{
+				LOG.error("connection failure");
+			}
+		}
+		catch(Exception e)
+		{
+			LOG.error("Unable to update homework submission grade");
+		}
+	}
+
+	private void executeUpdateQuery(Connection oracleClient, String query) throws SQLException
+	{
+		try (Statement statement = oracleClient.createStatement())
+		{
+			statement.executeUpdate(query);
+		}
+		catch(Exception e)
+		{
+			LOG.error("Query failure, using query: " + query, e);
+		}
+		oracleClient.close();
 	}
 }
