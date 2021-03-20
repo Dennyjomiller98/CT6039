@@ -7,8 +7,10 @@ import com.uog.miller.s1707031_ct6039.oracle.CalendarConnections;
 import com.uog.miller.s1707031_ct6039.oracle.HomeworkConnections;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Paths;
 import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import org.apache.log4j.Logger;
 
+@MultipartConfig
 @WebServlet(name = "SubmitHomework")
+
 public class SubmitHomework extends HttpServlet
 {
 	static final Logger LOG = Logger.getLogger(SubmitHomework.class);
@@ -32,8 +36,8 @@ public class SubmitHomework extends HttpServlet
 
 		try
 		{
-			Part filePart = request.getPart("photo");
-			String filename = filePart.getName();
+			Part filePart = request.getPart("homeworkFile");
+			String filename = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
 			InputStream inputStream = filePart.getInputStream();
 			HomeworkConnections connections = new HomeworkConnections();
 			SubmissionBean bean = new SubmissionBean();
@@ -56,11 +60,23 @@ public class SubmitHomework extends HttpServlet
 
 			//Remove alerts and redirect after submitting to DB
 			removeAlerts(request);
+			//Repopulate Homework and submissions
+			List<HomeworkBean> allHomeworkForChild = connections.getAllHomeworkForChild(email);
+			List<SubmissionBean> allHomeworkSubmissionsForChild = connections.getAllHomeworkSubmissionsForChild(email);
+			if(!allHomeworkForChild.isEmpty())
+			{
+				request.getSession(true).setAttribute("allHomeworks", allHomeworkForChild);
+			}
+			if(!allHomeworkSubmissionsForChild.isEmpty())
+			{
+				request.getSession(true).setAttribute("allSubmissions", allHomeworkSubmissionsForChild);
+			}
 			redirectAfterSubmission(response, request, result);
 		}
 		catch (IOException | ServletException e)
 		{
 			LOG.error("Error retrieving uploaded file", e);
+			redirectAfterSubmissionFailure(response, request);
 		}
 	}
 
@@ -69,11 +85,24 @@ public class SubmitHomework extends HttpServlet
 		request.getSession(true).setAttribute("formSuccess", result);
 		try
 		{
-			response.sendRedirect(request.getContextPath() + "/jsp/actions/homework/uploadhomework.jsp");
+			response.sendRedirect(request.getContextPath() + "/jsp/actions/homework/viewhomework.jsp");
 		}
 		catch (IOException e)
 		{
 			LOG.error(result,e);
+		}
+	}
+
+	private void redirectAfterSubmissionFailure(HttpServletResponse response, HttpServletRequest request)
+	{
+		request.getSession(true).setAttribute("formError", "Unknown error");
+		try
+		{
+			response.sendRedirect(request.getContextPath() + "/jsp/actions/homework/uploadhomework.jsp");
+		}
+		catch (IOException e)
+		{
+			LOG.error("Unknown error",e);
 		}
 	}
 

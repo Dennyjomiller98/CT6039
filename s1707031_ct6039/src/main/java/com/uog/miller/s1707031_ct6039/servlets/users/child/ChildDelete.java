@@ -91,6 +91,17 @@ public class ChildDelete extends HttpServlet
 		request.getSession(true).removeAttribute("isChild");
 
 		request.getSession(true).removeAttribute("formErrors");
-		request.getSession(true).removeAttribute("formSuccess");
+
+		request.getSession(true).removeAttribute("allYears");
+		request.getSession(true).removeAttribute("allChildren");
+
+		request.getSession(true).removeAttribute("allHomeworks");
+		request.getSession(true).removeAttribute("allSubmissions");
+
+		request.getSession(true).removeAttribute("homeworkIdUpload");
+		request.getSession(true).removeAttribute("homeworkName");
+		request.getSession(true).removeAttribute("homeworkSetDate");
+		request.getSession(true).removeAttribute("homeworkDueDate");
+		request.getSession(true).removeAttribute("homeworhomeworkTeacherkIdUpload");
 	}
 }

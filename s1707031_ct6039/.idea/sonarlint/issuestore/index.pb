@@ -267,3 +267,7 @@ v
 Fsrc/main/java/com/uog/miller/s1707031_ct6039/beans/SubmissionBean.java,d\4\d458c6e6de8d87847c98087444be37b48e2c560a
 d
 4src/main/webapp/jsp/actions/homework/addhomework.jsp,a\c\ac66db768a3c59de2445a718e171ff1fc9b1c68e
+h
+8src/main/webapp/jsp/actions/homework/viewsubmissions.jsp,f\e\fec087a933982dede68aaedc1842d67304b519ec
+Å
+Qsrc/main/java/com/uog/miller/s1707031_ct6039/servlets/childclass/DeleteClass.java,a\5\a5e6503365ad883e1dbb6c836b7e71d1d40aa372

@@ -243,17 +243,7 @@ public class Redirects extends HttpServlet
 			String childEmail = (String) request.getSession(true).getAttribute("email");
 			if(childEmail != null)
 			{
-				HomeworkConnections connections = new HomeworkConnections();
-				List<HomeworkBean> allHomeworkForChild = connections.getAllHomeworkForChild(childEmail);
-				List<SubmissionBean> allHomeworkSubmissionsForChild = connections.getAllHomeworkSubmissionsForChild(childEmail);
-				if(!allHomeworkForChild.isEmpty())
-				{
-					request.getSession(true).setAttribute("allHomeworks", allHomeworkForChild);
-				}
-				if(!allHomeworkSubmissionsForChild.isEmpty())
-				{
-					request.getSession(true).setAttribute("allSubmissions", allHomeworkSubmissionsForChild);
-				}
+				retrieveChildHomeworkForSession(request, childEmail);
 			}
 		}
 		else if (isTeacher != null)
@@ -268,9 +258,34 @@ public class Redirects extends HttpServlet
 					request.getSession(true).setAttribute("allHomeworksTeacher", allHomeworks);
 				}
 			}
+		}
+	}
 
+	private void retrieveChildHomeworkForSession(HttpServletRequest request, String childEmail)
+	{
+		HomeworkConnections connections = new HomeworkConnections();
+		List<HomeworkBean> allHomeworkForChild = connections.getAllHomeworkForChild(childEmail);
+		List<SubmissionBean> allHomeworkSubmissionsForChild = connections.getAllHomeworkSubmissionsForChild(childEmail);
+		if(!allHomeworkForChild.isEmpty())
+		{
+			request.getSession(true).setAttribute("allHomeworks", allHomeworkForChild);
+		}
+		if(!allHomeworkSubmissionsForChild.isEmpty())
+		{
+			request.getSession(true).setAttribute("allSubmissions", allHomeworkSubmissionsForChild);
 		}
 
-
+		//Check for Specific HW
+		String homeworkId = request.getParameter("homeworkId");
+		if(homeworkId != null)
+		{
+			HomeworkConnections homeworkConnections = new HomeworkConnections();
+			HomeworkBean homeworkTaskFromId = homeworkConnections.getHomeworkTaskFromId(homeworkId);
+			request.getSession(true).setAttribute("homeworkName", homeworkTaskFromId.getName());
+			request.getSession(true).setAttribute("homeworkSetDate", homeworkTaskFromId.getSetDate());
+			request.getSession(true).setAttribute("homeworkDueDate", homeworkTaskFromId.getDueDate());
+			request.getSession(true).setAttribute("homeworkTeacher", homeworkTaskFromId.getTeacher());
+			request.getSession(true).setAttribute("homeworkIdUpload", homeworkId);
+		}
 	}
 }

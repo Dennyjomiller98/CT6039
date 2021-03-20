@@ -3,10 +3,7 @@ package com.uog.miller.s1707031_ct6039.oracle;
 import com.uog.miller.s1707031_ct6039.beans.HomeworkBean;
 import com.uog.miller.s1707031_ct6039.beans.SubmissionBean;
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -204,8 +201,7 @@ public class HomeworkConnections extends AbstractOracleConnections
 					AbstractOracleConnections conn2 = new AbstractOracleConnections();
 					Connection oracleClient2 = conn2.getOracleClient();
 					bean.setSubmissionId(fileId);
-					String sql = "INSERT INTO "+HOMEWORK_SUBMISSIONS_COLLECTION+" (Date_Submitted, Submission_Id) values (?, ?) WHERE Child_Email='"+bean.getEmail()+"' AND Event_Id='"+bean.getEventId()+"'";
-					result = addChildSubmissionToDB(oracleClient2, sql, bean);
+					result = addChildSubmissionToDB(oracleClient2, bean);
 				}
 			}
 			else
@@ -221,14 +217,12 @@ public class HomeworkConnections extends AbstractOracleConnections
 		return result;
 	}
 
-	private String addChildSubmissionToDB(Connection oracleClient, String sql, SubmissionBean bean) throws SQLException
+	private String addChildSubmissionToDB(Connection oracleClient, SubmissionBean bean) throws SQLException
 	{
 		String ret = null;
+		String sql = "UPDATE "+HOMEWORK_SUBMISSIONS_COLLECTION+" SET Date_Submitted='"+bean.getSubmissionDate()+"', Submission_Id='"+bean.getSubmissionId()+"' WHERE Child_Email='"+bean.getEmail()+"' AND Event_Id='"+bean.getEventId()+"'";
 		try(PreparedStatement statement = oracleClient.prepareStatement(sql))
 		{
-			statement.setString(1, bean.getSubmissionDate());
-			statement.setString(2, bean.getSubmissionId());
-
 			// sends the statement to the database server
 			int row = statement.executeUpdate();
 			if (row > 0)
@@ -258,7 +252,7 @@ public class HomeworkConnections extends AbstractOracleConnections
 		try(PreparedStatement statement = oracleClient.prepareStatement(sql))
 		{
 			statement.setBlob(1, inputStream);
-			statement.setString(1, filename);
+			statement.setString(2, filename);
 			statement.executeUpdate();
 
 			//Get ID of uploaded file
@@ -282,7 +276,8 @@ public class HomeworkConnections extends AbstractOracleConnections
 		AbstractOracleConnections conn = new AbstractOracleConnections();
 		String sql = "SELECT * FROM "+ HOMEWORK_FILES_COLLECTION + " WHERE Submission_Id = ( SELECT MAX(Submission_Id) FROM " +HOMEWORK_FILES_COLLECTION+ " )";
 		//SELECT * FROM HOMEWORK_FILES_COLLECTION WHERE Event_Id = ( SELECT MAX(Event_Id) FROM HOMEWORK_FILES_COLLECTION )
-		try (Connection oracleClient = conn.getOracleClient(); PreparedStatement statement = oracleClient.prepareStatement(sql))
+		try (Connection oracleClient = conn.getOracleClient();
+			 PreparedStatement statement = oracleClient.prepareStatement(sql))
 		{
 			ResultSet resultSet = statement.executeQuery();
 			//Get ID of uploaded file
@@ -536,11 +531,114 @@ public class HomeworkConnections extends AbstractOracleConnections
 
 
 
+	public void deleteHomework(String homeworkId)
+	{
+		setOracleDriver();
+		try
+		{
+			AbstractOracleConnections conn = new AbstractOracleConnections();
+			Connection oracleClient = conn.getOracleClient();
+			if (oracleClient != null)
+			{
+				String query = "DELETE FROM " + HOMEWORKS_COLLECTION
+						+ " WHERE Event_Id='" + homeworkId + "'";
+				executeDeleteQuery(oracleClient, query);
+			}
+			else
+			{
+				LOG.error("connection failure");
+			}
+		}
+		catch(Exception e)
+		{
+			LOG.error("Unable to delete homework in oracle DB");
+		}
+	}
 
+	public void deleteSubmission(String submissionId, String childEmail)
+	{
+		setOracleDriver();
+		try
+		{
+			AbstractOracleConnections conn = new AbstractOracleConnections();
+			Connection oracleClient = conn.getOracleClient();
+			if (oracleClient != null)
+			{
+				String query = "DELETE FROM " + HOMEWORK_SUBMISSIONS_COLLECTION
+						+ " WHERE Event_Id='" + submissionId + "' AND Child_Email='"+childEmail+"'";
+				executeDeleteQuery(oracleClient, query);
+			}
+			else
+			{
+				LOG.error("connection failure");
+			}
+		}
+		catch(Exception e)
+		{
+			LOG.error("Unable to delete homework in oracle DB");
+		}
+	}
 
+	public void deleteSubmissionFile(String submissionId)
+	{
+		setOracleDriver();
+		try
+		{
+			AbstractOracleConnections conn = new AbstractOracleConnections();
+			Connection oracleClient = conn.getOracleClient();
+			if (oracleClient != null)
+			{
+				String query = "DELETE FROM " + HOMEWORK_FILES_COLLECTION
+						+ " WHERE Submission_Id='" + submissionId + "'";
+				executeDeleteQuery(oracleClient, query);
+			}
+			else
+			{
+				LOG.error("connection failure");
+			}
+		}
+		catch(Exception e)
+		{
+			LOG.error("Unable to delete homework in oracle DB");
+		}
+	}
+
+	private void executeDeleteQuery(Connection oracleClient, String query) throws SQLException
+	{
+		try (Statement statement = oracleClient.createStatement())
+		{
+			statement.executeUpdate(query);
+		}
+		catch(Exception e)
+		{
+			LOG.error("Query failure, using query: " + query, e);
+		}
+		oracleClient.close();
+	}
+
+	//Used for teachers, click on a task to see submissions, table view of childrens submissions
 	public List<SubmissionBean> getAllSubmissionsForHomeworkTask(String homeworkId)
 	{
 		List<SubmissionBean> allSubmissions = new ArrayList<>();
+		try
+		{
+			AbstractOracleConnections conn = new AbstractOracleConnections();
+			Connection oracleClient = conn.getOracleClient();
+			if (oracleClient != null)
+			{
+				String query = "SELECT * FROM " + HOMEWORK_SUBMISSIONS_COLLECTION + " WHERE Event_Id='" + homeworkId +"'";
+				ArrayList<SubmissionBean> submissionBeans = executeHomeworkSubmissionQuery(oracleClient, query);
+				allSubmissions.addAll(submissionBeans);
+			}
+			else
+			{
+				LOG.error("connection failure");
+			}
+		}
+		catch(Exception e)
+		{
+			LOG.error("Unable to update class information");
+		}
 		return allSubmissions;
 	}
 

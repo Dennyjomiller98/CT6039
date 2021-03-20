@@ -126,6 +126,42 @@
                 </p>
                 <br/>
                 <%--homework form (containing ID of HW child needs to submit)--%>
+                <% String homeworkIdUpload = (String) session.getAttribute("homeworkIdUpload");%>
+                <% String name = (String) session.getAttribute("homeworkName");%>
+                <% String setDate = (String) session.getAttribute("homeworkSetDate");%>
+                <% String dueDate = (String) session.getAttribute("homeworkDueDate");%>
+                <% String teacher = (String) session.getAttribute("homeworkTeacher");%>
+                <div class="card shadow p-3 mb-5 bg-white rounded">
+                    <form class="reg-form" action="${pageContext.request.contextPath}/servlets/homework/SubmitHomework" method="POST" enctype="multipart/form-data">
+                        <br/>
+                        <div class="card-body">
+                            <br/>
+                            <label for="homeworkId" hidden></label>
+                            <input type="text" name="homeworkId" id="homeworkId" value="<%=homeworkIdUpload%>" hidden/>
+                            <label for="email" hidden></label>
+                            <input type="text" name="email" id="email" value="<%=email%>" hidden/>
+                            <label for="today" hidden></label>
+                            <input type="text" name="today" id="today" hidden/>
+
+                            <div class="form-group">
+                                <p class="formParaText">
+                                    <label class="font-weight-bold">Submission Name:</label> <%=name%> <br/>
+                                    <label class="font-weight-bold">Set Date:</label> <%=setDate%> <br/>
+                                    <label class="font-weight-bold">Due Date:</label> <%=dueDate%> <br/>
+                                    <label class="font-weight-bold">Set by Teacher:</label> <%=teacher%> <br/>
+                                </p>
+                                <label for="homeworkFile" class="formPara">Submission File</label>
+                                <input type="file" class="form-control-file formParaText formTextCenter" name="homeworkFile" id="homeworkFile">
+                            </div>
+                        </div>
+                        <div class="body-main-content myformbtn">
+                            <br>
+                            <a class="btn btn-primary formBtn formParaText" href="${pageContext.request.contextPath}/servlets/Redirects?location=homework-view">Back</a>
+                            <input class="btn btn-primary formBtn formParaText" type="submit" value="Submit">
+                        </div>
+                        <br/>
+                    </form>
+                </div>
             </div>
         </div>
         <div id="background"></div>
@@ -139,5 +175,24 @@
                 <a href=${pageContext.request.contextPath}/servlets/Redirects?location=teacher-login>&nbsp;Teacher Login&nbsp;</a>
             </div>
         </footer>
+        <script>
+            //Child Selection
+            $(document).ready(
+                function () {
+                    //Todays date (set date) for Homework Assign
+                    let curday = function(){
+                        let today = new Date();
+                        let dd = today.getDate();
+                        let mm = today.getMonth()+1;
+                        let yyyy = today.getFullYear();
+
+                        if(dd<10) dd='0'+dd;
+                        if(mm<10) mm='0'+mm;
+                        console.log("date:" + yyyy+"-"+mm+"-"+dd);
+                        return (yyyy+"-"+mm+"-"+dd);
+                    };
+                    $('#today').val(curday());
+                });
+        </script>
     </body>
 </html>
