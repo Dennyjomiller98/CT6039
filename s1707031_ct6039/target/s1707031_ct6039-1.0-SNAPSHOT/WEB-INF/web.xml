@@ -258,6 +258,15 @@
         <servlet-name>downloadHomework</servlet-name>
         <url-pattern>/servlets/homework/DownloadHomework</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>gradeHomework</servlet-name>
+        <servlet-class>com.uog.miller.s1707031_ct6039.servlets.homework.GradeHomework</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>gradeHomework</servlet-name>
+        <url-pattern>/servlets/homework/GradeHomework</url-pattern>
+    </servlet-mapping>
+
     <!--Child Progress-->
     <servlet>
         <servlet-name>progressActions</servlet-name>

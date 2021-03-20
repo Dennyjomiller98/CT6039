@@ -194,3 +194,18 @@ body {
     background-color: #9bc464 !important;
     color: black;
 }
+.gradeAmber{
+    background-color: orange !important;
+    color: black;
+    font-size: 20px;
+}
+.gradeRed{
+    background-color: #ea766a !important;
+    color: black;
+    font-size: 20px;
+}
+.gradeGreen{
+    background-color: #9bc464 !important;
+    color: black;
+    font-size: 20px;
+}
