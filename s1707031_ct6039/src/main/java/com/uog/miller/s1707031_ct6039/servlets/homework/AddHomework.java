@@ -101,6 +101,7 @@ public class AddHomework extends HttpServlet
 
 		//Redirect
 		removeAlerts(request);
+		addAttributesForTeacherHomeworks(request);
 		request.getSession(true).setAttribute("formSuccess", "Homework Assigned to Class");
 		try
 		{
@@ -109,6 +110,20 @@ public class AddHomework extends HttpServlet
 		catch (IOException e)
 		{
 			LOG.error("Unable to redirect back to Homework view page after class hw creation.",e);
+		}
+	}
+
+	private void addAttributesForTeacherHomeworks(HttpServletRequest request)
+	{
+		String teacherEmail = (String) request.getSession(true).getAttribute("email");
+		if(teacherEmail != null)
+		{
+			HomeworkConnections connections = new HomeworkConnections();
+			List<HomeworkBean> allHomeworks = connections.getAllHomeworkForTeacher(teacherEmail);
+			if(!allHomeworks.isEmpty())
+			{
+				request.getSession(true).setAttribute("allHomeworksTeacher", allHomeworks);
+			}
 		}
 	}
 

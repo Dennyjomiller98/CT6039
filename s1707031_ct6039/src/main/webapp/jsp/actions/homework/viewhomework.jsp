@@ -40,14 +40,14 @@
                             </li>
                             <%if(isChild != null) {%>
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=homework-view">Homework</a>
+                                <a class="nav-link active" href="${pageContext.request.contextPath}/servlets/Redirects?location=homework-view">Homework</a>
                             </li>
                             <% } else if(isTeacher != null) {%>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/servlets/Redirects?location=class-view">My Classes</a>
+                                <a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/servlets/Redirects?location=class-view">My Classes</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=homework-view">Homework</a>
+                                <a class="nav-link active" href="${pageContext.request.contextPath}/servlets/Redirects?location=homework-view">Homework</a>
                             </li>
                             <% } else if(isParent != null) {%>
                             <li class="nav-item">
@@ -177,7 +177,7 @@
                 <% } %>
                 <br/>
                 <%--List all Submitted/Completed Homework--%>
-                <% if(!allHomework.isEmpty()){%>
+                <% if(allHomework != null && !allHomework.isEmpty()){%>
                 <div class="shadow p-3 mb-5 bg-white rounded submittedHomework">
                     <h3 class="formPara formHeader">Submitted Homework</h3>
                     <%for (HomeworkBean homeworkTask : allHomework) {
@@ -239,7 +239,7 @@
 
             <div class="main-body-content">
                 <%List<HomeworkBean> allHomework = (List<HomeworkBean>) session.getAttribute("allHomeworksTeacher");
-                    if (allHomework.size() > 0)
+                    if (allHomework != null && allHomework.size() > 0)
                     {%>
                     <br/>
                     <% if(!allHomework.isEmpty()){

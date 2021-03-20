@@ -71,6 +71,8 @@ public class DeleteHomework extends HttpServlet
 
 	private void repopulateHomeworks(HttpServletRequest request)
 	{
+		request.getSession(true).removeAttribute("allHomeworksTeacher");
+
 		String teacherEmail = (String) request.getSession(true).getAttribute("email");
 		if(teacherEmail != null)
 		{

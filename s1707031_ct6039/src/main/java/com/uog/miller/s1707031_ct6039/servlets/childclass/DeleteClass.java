@@ -1,7 +1,10 @@
 package com.uog.miller.s1707031_ct6039.servlets.childclass;
 
 import com.uog.miller.s1707031_ct6039.beans.ClassBean;
+import com.uog.miller.s1707031_ct6039.beans.HomeworkBean;
+import com.uog.miller.s1707031_ct6039.beans.SubmissionBean;
 import com.uog.miller.s1707031_ct6039.oracle.ClassConnections;
+import com.uog.miller.s1707031_ct6039.oracle.HomeworkConnections;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.annotation.WebServlet;
@@ -25,8 +28,31 @@ public class DeleteClass extends HttpServlet
 			ClassConnections connections = new ClassConnections();
 			//Remove class DB
 			connections.deleteClass(classId);
-			//Also remove classLinks, as children assigned to class are no longer neeeded
+			//Also remove classLinks, as children assigned to class are no longer needed
 			connections.deleteClassLinks(classId);
+
+			//Must delete HW information when class is deleted
+			HomeworkConnections homeworkConnections = new HomeworkConnections();
+			List<HomeworkBean> allHomeworkForClass = homeworkConnections.getAllHomeworkForClass(classId);
+			for (HomeworkBean homeworkForClass : allHomeworkForClass)
+			{
+				//Get submissions
+				List<SubmissionBean> allSubmissionsForHomeworkTask = homeworkConnections.getAllSubmissionsForHomeworkTask(homeworkForClass.getEventId());
+				for (SubmissionBean submissionBean : allSubmissionsForHomeworkTask)
+				{
+					//Delete submission File
+					if(submissionBean.getSubmissionId() != null)
+					{
+						homeworkConnections.deleteSubmissionFile(submissionBean.getSubmissionId());
+					}
+
+					//Delete Submission
+					homeworkConnections.deleteSubmission(submissionBean.getEventId(), submissionBean.getEmail());
+				}
+				//Then delete Homework
+				homeworkConnections.deleteHomework(homeworkForClass.getEventId());
+			}
+
 			removeAlerts(request);
 			//Repopulate all Classes
 			request.getSession(true).removeAttribute("allClasses");

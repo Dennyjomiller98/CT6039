@@ -2,8 +2,10 @@ package com.uog.miller.s1707031_ct6039.servlets.users.child;
 
 import com.uog.miller.s1707031_ct6039.beans.ClassLinkBean;
 import com.uog.miller.s1707031_ct6039.beans.LinkBean;
+import com.uog.miller.s1707031_ct6039.beans.SubmissionBean;
 import com.uog.miller.s1707031_ct6039.oracle.ChildConnections;
 import com.uog.miller.s1707031_ct6039.oracle.ClassConnections;
+import com.uog.miller.s1707031_ct6039.oracle.HomeworkConnections;
 import com.uog.miller.s1707031_ct6039.oracle.LinkedConnections;
 import java.io.IOException;
 import java.util.List;
@@ -45,6 +47,15 @@ public class ChildDelete extends HttpServlet
 			for (ClassLinkBean childClassLink : allLinkBeans)
 			{
 				classConnections.deleteClassLinks(childClassLink.getEventId());
+			}
+
+			//Remove Homework submissions and files for child
+			HomeworkConnections homeworkConnections = new HomeworkConnections();
+			List<SubmissionBean> allHomeworkSubmissionsForChild = homeworkConnections.getAllHomeworkSubmissionsForChild(email);
+			for (SubmissionBean submissionBean : allHomeworkSubmissionsForChild)
+			{
+				homeworkConnections.deleteSubmissionFile(submissionBean.getSubmissionId());
+				homeworkConnections.deleteSubmission(submissionBean.getEventId(), email);
 			}
 
 			removeSessionAttributes(request);

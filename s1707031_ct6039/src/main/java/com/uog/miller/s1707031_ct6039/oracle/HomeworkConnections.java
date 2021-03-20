@@ -1,5 +1,6 @@
 package com.uog.miller.s1707031_ct6039.oracle;
 
+import com.uog.miller.s1707031_ct6039.beans.ClassLinkBean;
 import com.uog.miller.s1707031_ct6039.beans.HomeworkBean;
 import com.uog.miller.s1707031_ct6039.beans.SubmissionBean;
 import java.io.InputStream;
@@ -343,6 +344,41 @@ public class HomeworkConnections extends AbstractOracleConnections
 		return ret;
 	}
 
+	public List<HomeworkBean> getAllHomeworkForClass(String classId)
+	{
+		ArrayList<HomeworkBean> ret = new ArrayList<>();
+		setOracleDriver();
+		try
+		{
+			AbstractOracleConnections conn = new AbstractOracleConnections();
+			Connection oracleClient = conn.getOracleClient();
+			if(oracleClient != null)
+			{
+				//Select all Query
+				String query = "SELECT * FROM " + HOMEWORKS_COLLECTION + " WHERE Class_Id='" + classId +"'";
+
+				//Execute query
+				ArrayList<HomeworkBean> allLinks = executeHomeworkQuery(oracleClient, query);
+				if(!allLinks.isEmpty())
+				{
+					ret = allLinks;
+				}
+				else
+				{
+					LOG.debug("No Links Exists, cannot retrieve event.");
+				}
+			}
+			else
+			{
+				LOG.error("connection failure");
+			}
+		}
+		catch(Exception e)
+		{
+			LOG.error("Unable to find existing homeworks", e);
+		}
+		return ret;	}
+
 	//Retrieves List<SubmissionBean> allowing user info on if each HW task is submitted or not
 	public List<SubmissionBean> getAllHomeworkSubmissionsForChild(String childEmail)
 	{
@@ -385,21 +421,28 @@ public class HomeworkConnections extends AbstractOracleConnections
 		StringBuilder whereClause = null;
 		if(!allHomeworkSubmissionsForChild.isEmpty())
 		{
-			for (int i = 0; i < allHomeworkSubmissionsForChild.size(); i++)
+			if(allHomeworkSubmissionsForChild.size() == 1)
 			{
-				if(whereClause == null)
+				whereClause = new StringBuilder("WHERE Event_Id='").append(allHomeworkSubmissionsForChild.get(0).getEventId()).append("'");
+			}
+			else
+			{
+				for (int i = 0; i < allHomeworkSubmissionsForChild.size(); i++)
 				{
-					whereClause = new StringBuilder("WHERE Event_Id='");
-				}
-				else
-				{
-					if(i == allHomeworkSubmissionsForChild.size() - 1)
+					if(whereClause == null)
 					{
-						whereClause.append(allHomeworkSubmissionsForChild.get(i).getEventId()).append("'");
+						whereClause = new StringBuilder("WHERE Event_Id='").append(allHomeworkSubmissionsForChild.get(i).getEventId());
 					}
 					else
 					{
-						whereClause.append(allHomeworkSubmissionsForChild.get(i).getEventId()).append("' OR Event_Id='");
+						if(i == allHomeworkSubmissionsForChild.size() - 1)
+						{
+							whereClause.append(allHomeworkSubmissionsForChild.get(i).getEventId()).append("'");
+						}
+						else
+						{
+							whereClause.append(allHomeworkSubmissionsForChild.get(i).getEventId()).append("' OR Event_Id='");
+						}
 					}
 				}
 			}
