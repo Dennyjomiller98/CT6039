@@ -206,9 +206,7 @@
                                 </p>
                             </div>
                             <div class="myformbtn" style="padding-bottom: 5%">
-                                <a class="btn btn-primary formParaText formBtn"
-                                   href=${pageContext.request.contextPath}/servlets/homework/DownloadHomework?homeworkId=<%=homeworkTask.getEventId()%>>&nbsp;Download Submission&nbsp;
-                                </a>
+                                <a class="btn btn-primary formParaText formBtn" href="${pageContext.request.contextPath}/servlets/homework/DownloadHomework?submissionId=<%=matchingSubmission.getSubmissionId()%>"><%="Download Submission"%></a>
                             </div>
                         </div>
                         <br/>
@@ -263,7 +261,7 @@
                                href=${pageContext.request.contextPath}/servlets/homework/DeleteHomework?homeworkId=<%=homeworkTask.getEventId()%>>&nbsp;Delete&nbsp;
                             </a>
                             <a class="btn btn-primary formParaText formBtn"
-                               href=${pageContext.request.contextPath}/servlets/homework/ViewSubmissions?homeworkId=<%=homeworkTask.getEventId()%>>&nbsp;View Submissions&nbsp;
+                               href=${pageContext.request.contextPath}/servlets/homework/RetrieveHomework?homeworkId=<%=homeworkTask.getEventId()%>>&nbsp;View Submissions&nbsp;
                             </a>
                         </div>
                     </div>
@@ -283,6 +281,75 @@
                 <% } %>
             </div>
             <% } %>
+            <%List<SubmissionBean> allRetrievedSubmissions = (List<SubmissionBean>) session.getAttribute("retrievedSubmissions"); %>
+            <%String homeworkId = (String) session.getAttribute("homeworkId"); %>
+            <%if(allRetrievedSubmissions != null && allRetrievedSubmissions.size() > 0) { %>
+            <%--Script to load modal (or won't popup)--%>
+            <script>
+                $(window).on('load', function(){
+                    $('#exampleModalCenter').removeClass("hide").modal('show');
+                    $("#exampleModalCenter").appendTo("body");
+                });
+            </script>
+            <div class="modal fade calendarPopup" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content shadow p-3 mb-5 bg-white rounded">
+                        <div class="modal-header">
+                            <h5 class="modal-title formPara" id="exampleModalLongTitle">Homework #<%=homeworkId%></h5>
+                            <button type="button" class="close close-btn" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <%--Content for modal popup containing homework submission information (in table)--%>
+                            <table class="table table-sm table-hover thead-light">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Child Email</th>
+                                        <th scope="col">Submission Date</th>
+                                        <th scope="col">Submission File</th>
+                                        <th scope="col">Grade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for (SubmissionBean submission : allRetrievedSubmissions) { %>
+                                        <tr>
+                                            <td><%=submission.getEmail()%></td>
+                                            <%--Submission date/file link--%>
+                                            <%if(submission.getSubmissionDate() != null){ %>
+                                                <td><%=submission.getSubmissionDate()%></td>
+                                                <td><a href="${pageContext.request.contextPath}/servlets/homework/DownloadHomework?submissionId=<%=submission.getSubmissionId()%>"><%="Download"%></a></td>
+                                                <%--Grade--%>
+                                                <%if(submission.getGrade() != null){ %>
+                                                <td><%=submission.getGrade()%></td>
+                                                <% }else{ %>
+                                                <td><a href=${pageContext.request.contextPath}/servlets/Redirects?location=homework-grade&homeworkId=<%=submission.getEventId()%>&child=<%=submission.getEmail()%>><%="Mark"%></a></td>
+                                                <% } %>
+                                            <% }else{ %>
+                                                <td><%="Not Submitted"%></td>
+                                                <td><%="None"%></td>
+                                                <td></td>
+                                            <% } %>
+                                        </tr>
+                                    <% } %>
+                                </tbody>
+                            </table>
+                            <br/>
+                        </div>
+                        <div class="modal-footer">
+                            <a type="button" class="btn close-btn btn-secondary formParaText" data-dismiss="modal" aria-label="Close">
+                                Close
+                            </a>
+                            <script>
+                                $(".close-btn").on('click', function (){
+                                    $("#exampleModalCenter").modal('hide');
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%}%>
         </div>
         <div id="background"></div>
 

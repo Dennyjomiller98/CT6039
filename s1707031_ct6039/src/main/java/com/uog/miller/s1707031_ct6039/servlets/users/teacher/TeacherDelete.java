@@ -89,5 +89,15 @@ public class TeacherDelete extends HttpServlet
 
 		request.getSession(true).removeAttribute("formErrors");
 		request.getSession(true).removeAttribute("formSuccess");
+
+		request.getSession(true).removeAttribute("allYears");
+		request.getSession(true).removeAttribute("allChildren");
+		request.getSession(true).removeAttribute("allClasses");
+
+		request.getSession(true).removeAttribute("allHomeworks");
+		request.getSession(true).removeAttribute("allHomeworksTeacher");
+		request.getSession(true).removeAttribute("allSubmissions");
+		request.getSession(true).removeAttribute("retrievedSubmissions");
+		request.getSession(true).removeAttribute("homeworkForGrading");
 	}
 }

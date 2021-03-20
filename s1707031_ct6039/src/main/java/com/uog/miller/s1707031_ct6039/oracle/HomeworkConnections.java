@@ -1,14 +1,12 @@
 package com.uog.miller.s1707031_ct6039.oracle;
 
-import com.uog.miller.s1707031_ct6039.beans.ClassLinkBean;
 import com.uog.miller.s1707031_ct6039.beans.HomeworkBean;
 import com.uog.miller.s1707031_ct6039.beans.SubmissionBean;
-import java.io.InputStream;
+import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpServletResponse;
 
 public class HomeworkConnections extends AbstractOracleConnections
 {
@@ -427,23 +425,29 @@ public class HomeworkConnections extends AbstractOracleConnections
 			}
 			else
 			{
-				for (int i = 0; i < allHomeworkSubmissionsForChild.size(); i++)
+				whereClause = multiValWhereClause(allHomeworkSubmissionsForChild, whereClause);
+			}
+		}
+		return whereClause;
+	}
+
+	private StringBuilder multiValWhereClause(List<SubmissionBean> allHomeworkSubmissionsForChild, StringBuilder whereClause)
+	{
+		for (int i = 0; i < allHomeworkSubmissionsForChild.size(); i++)
+		{
+			if(whereClause == null)
+			{
+				whereClause = new StringBuilder("WHERE Event_Id='").append(allHomeworkSubmissionsForChild.get(i).getEventId());
+			}
+			else
+			{
+				if(i == allHomeworkSubmissionsForChild.size() - 1)
 				{
-					if(whereClause == null)
-					{
-						whereClause = new StringBuilder("WHERE Event_Id='").append(allHomeworkSubmissionsForChild.get(i).getEventId());
-					}
-					else
-					{
-						if(i == allHomeworkSubmissionsForChild.size() - 1)
-						{
-							whereClause.append(allHomeworkSubmissionsForChild.get(i).getEventId()).append("'");
-						}
-						else
-						{
-							whereClause.append(allHomeworkSubmissionsForChild.get(i).getEventId()).append("' OR Event_Id='");
-						}
-					}
+					whereClause.append(allHomeworkSubmissionsForChild.get(i).getEventId()).append("'");
+				}
+				else
+				{
+					whereClause.append(allHomeworkSubmissionsForChild.get(i).getEventId()).append("' OR Event_Id='");
 				}
 			}
 		}
@@ -685,17 +689,81 @@ public class HomeworkConnections extends AbstractOracleConnections
 		return allSubmissions;
 	}
 
-
-
-
-
-	public Object getHomeworkUpload(SubmissionBean bean)
+	public void downloadHomework(String submissionId, PrintWriter out, HttpServletResponse response)
 	{
-		String submissionId = bean.getSubmissionId();
 		//Search homework_files DB for submission ID, return data here
+		setOracleDriver();
+		try
+		{
+			AbstractOracleConnections conn = new AbstractOracleConnections();
+			Connection oracleClient = conn.getOracleClient();
+			if (oracleClient != null)
+			{
+				String query = "SELECT * FROM " + HOMEWORK_FILES_COLLECTION
+						+ " WHERE Submission_Id='" + submissionId + "'";
+				executeFileQuery(oracleClient, query, out, response);
 
-		//This is the childs submission (file/jsp/etc)
-		Map<String, String> ret = new HashMap<>();
-		return ret;
+			}
+			else
+			{
+				LOG.error("connection failure");
+			}
+		}
+		catch(Exception e)
+		{
+			LOG.error("Unable to delete homework in oracle DB");
+		}
+	}
+
+	private void executeFileQuery(Connection oracleClient, String query, PrintWriter out, HttpServletResponse response) throws SQLException
+	{
+		//Executes SQL Query, any Children found will populate the ArrayList.
+		try (PreparedStatement preparedStatement = oracleClient.prepareStatement(query))
+		{
+			String filename = null;
+			ResultSet resultSet = preparedStatement.executeQuery(query);
+			InputStream is = null;
+			while (resultSet.next())
+			{
+				//Get data
+				filename = resultSet.getString("Filename");
+
+				is = resultSet.getBinaryStream("File_Data");
+			}
+
+			if(filename != null && is != null)
+			{
+				response.setHeader("Content-Disposition", "attachment; filename=\""
+						+ filename + "\"");
+				readFileForDownload(out, is);
+			}
+		}
+		catch(Exception e)
+		{
+			LOG.error("Query failure, using query: " + query, e);
+		}
+		oracleClient.close();
+	}
+
+	private void readFileForDownload(PrintWriter out, InputStream is) throws IOException
+	{
+		try
+		{
+			int i;
+			while((i = is.read()) != -1)
+			{
+				out.write(i);
+			}
+
+		}
+		catch(IOException e)
+		{
+			LOG.error("Error retrieving File from database", e);
+		}
+		finally
+		{
+			is.close();
+			out.close();
+		}
 	}
 }

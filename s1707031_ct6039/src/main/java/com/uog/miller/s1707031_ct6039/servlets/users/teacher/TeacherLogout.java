@@ -46,6 +46,7 @@ public class TeacherLogout extends HttpServlet
 		request.getSession(true).removeAttribute("isTeacher");
 
 		request.getSession(true).removeAttribute("formErrors");
+		request.getSession(true).removeAttribute("formSuccess");
 
 		request.getSession(true).removeAttribute("allYears");
 		request.getSession(true).removeAttribute("allChildren");
@@ -54,5 +55,7 @@ public class TeacherLogout extends HttpServlet
 		request.getSession(true).removeAttribute("allHomeworks");
 		request.getSession(true).removeAttribute("allHomeworksTeacher");
 		request.getSession(true).removeAttribute("allSubmissions");
+		request.getSession(true).removeAttribute("retrievedSubmissions");
+		request.getSession(true).removeAttribute("homeworkForGrading");
 	}
 }

@@ -141,6 +141,10 @@ public class Redirects extends HttpServlet
 				addSessionAttributesForHomeworksAndSubmissions(request);
 				ret = "/jsp/actions/homework/uploadhomework.jsp";
 				break;
+				case "homework-grade":
+				addSessionAttributesForGrading(request);
+				ret = "/jsp/actions/homework/gradehomework.jsp";
+				break;
 
 			case "class-view":
 				addSessionAttributesForClass(request);
@@ -173,6 +177,25 @@ public class Redirects extends HttpServlet
 				break;
 		}
 		return ret;
+	}
+
+	private void addSessionAttributesForGrading(HttpServletRequest request)
+	{
+		String homeworkId = request.getParameter("homeworkId");
+		String child = request.getParameter("child");
+		if (homeworkId != null)
+		{
+			HomeworkConnections connections = new HomeworkConnections();
+			List<SubmissionBean> allSubmissionsForHomeworkTask = connections.getAllSubmissionsForHomeworkTask(homeworkId);
+			for (SubmissionBean submissionBean : allSubmissionsForHomeworkTask)
+			{
+				if(submissionBean.getEventId().equals(homeworkId) && submissionBean.getEmail().equals(child))
+				{
+					request.getSession(true).setAttribute("homeworkForGrading", submissionBean);
+					request.getSession(true).setAttribute("childForGrading", child);
+				}
+			}
+		}
 	}
 
 	private void getSelectedClass(HttpServletRequest request)
