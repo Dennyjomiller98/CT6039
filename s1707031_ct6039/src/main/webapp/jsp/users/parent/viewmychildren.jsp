@@ -1,5 +1,6 @@
 <%@ page import="com.uog.miller.s1707031_ct6039.beans.ChildBean" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="com.uog.miller.s1707031_ct6039.beans.ProgressBean" %><%--
   Created by IntelliJ IDEA.
   User: Denny-Jo
   Date: 06/03/2021
@@ -27,7 +28,7 @@
                     <div class="collapse navbar-collapse" id="navbarText">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/servlets/Redirects?location=home">Home</a>
+                                <a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/servlets/Redirects?location=home">Home</a>
                             </li>
                             <%--If logged in, show nav links, else just have home & account signup/login visible--%>
                             <% String email = (String) session.getAttribute("email");
@@ -51,7 +52,7 @@
                             </li>
                             <% } else if(isParent != null) {%>
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/servlets/Redirects?location=view-child">My Children</a>
+                                <a class="nav-link active" href="${pageContext.request.contextPath}/servlets/Redirects?location=view-child">My Children</a>
                             </li>
                             <%}%>
 
@@ -155,7 +156,55 @@
                 <br/>
                 <% } %>
             </div>
-            <%--Create cards for each linked child?--%>
+
+            <%--Modal popup for child progress--%>
+            <%ProgressBean childProgressBean = (ProgressBean) session.getAttribute("childProgress"); %>
+            <%if(childProgressBean != null) { %>
+            <%--Script to load modal (or won't popup)--%>
+            <script>
+                $(window).on('load', function(){
+                    $('#exampleModalCenter').removeClass("hide").modal('show');
+                    $("#exampleModalCenter").appendTo("body");
+                });
+            </script>
+            <div class="modal fade calendarPopup" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content shadow p-3 mb-5 bg-white rounded">
+                        <div class="modal-header">
+                            <h5 class="modal-title formPara formHeader automargin" id="exampleModalLongTitle">Progress for Child: <%=childProgressBean.getChild()%></h5>
+                            <button type="button" class="close close-btn" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body automargin">
+                            <%--Content for modal popup containing homework submission information (in table)--%>
+                            <label for="totalHomeworks" class="form-label formPara"><%="Total Homeworks:"%></label>
+                            <span type="text" id="totalHomeworks" class="formParaText"><%=childProgressBean.getTotalHomeworks()%></span>
+                            <br/>
+                            <label for="totalGreen" class="form-label formPara"><%="Total Green Results:"%></label>
+                            <span type="text" id="totalGreen" class="formParaText"><%=childProgressBean.getTotalGreen()%></span>
+                            <br/>
+                            <label for="totalAmber" class="form-label formPara"><%="Total Amber Results:"%></label>
+                            <span type="text" id="totalAmber" class="formParaText"><%=childProgressBean.getTotalAmber()%></span>
+                            <br/>
+                            <label for="totalRed" class="form-label formPara"><%="Total Red Results:"%></label>
+                            <span type="text" id="totalRed" class="formParaText"><%=childProgressBean.getTotalRed()%></span>
+                            <br/>
+                        </div>
+                        <div class="modal-footer">
+                            <a type="button" class="btn close-btn btn-secondary formParaText" data-dismiss="modal" aria-label="Close">
+                                Close
+                            </a>
+                            <script>
+                                $(".close-btn").on('click', function (){
+                                    $("#exampleModalCenter").modal('hide');
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%}%>
         </div>
         <div id="background"></div>
 

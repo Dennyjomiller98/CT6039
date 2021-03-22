@@ -1,105 +1,107 @@
 
+Xjavascript:S3516“";Refactor this function to not always return the same value.(¹Èü
+Tjavascript:S1854ì%"2Remove this useless assignment to variable "elem".(ë’´Ôıÿÿÿÿ
+Hjavascript:S1117‰"+'i' is already declared in the upper scope.(¦îÎ‹
+Mjavascript:S1117ˆ"+'i' is already declared in the upper scope.(ØÙšèşÿÿÿÿ
+Hjavascript:S1117Å"+'i' is already declared in the upper scope.(Ş¼Ş¢
+Kjavascript:S1117§#".'name' is already declared in the upper scope.(–Øîõ
+Xjavascript:S1854è"6Remove this useless assignment to variable "fragment".(ğêşıÿÿÿÿ
+cjavascript:S2137ô"ADo not use "undefined" to declare a parameter - use another name.(Ÿ©Ë©øÿÿÿÿ
+Hjavascript:S1117Ğ"+'i' is already declared in the upper scope.(Ë½ĞÌ
+Rjavascript:S1117ô"0'window' is already declared in the upper scope.(Ÿ©Ë©øÿÿÿÿ
+Hjavascript:S1117¢"+'i' is already declared in the upper scope.(Æïşº
+Tjavascript:S1854ı"2Remove this useless assignment to variable "name".(ÅàÉ¿ıÿÿÿÿ
+Yjavascript:S1854Ë"7Remove this useless assignment to variable "nodeIndex".(«Ë†ûÿÿÿÿ
+Hjavascript:S1117¬B"+'_' is already declared in the upper scope.(ğ¡Åµ
 Mjavascript:S1117¾"+'i' is already declared in the upper scope.(İ˜¼‹ùÿÿÿÿ
+Gjavascript:S1117"+'i' is already declared in the upper scope.(Ú§×
+Mjavascript:S1117Å
+"+'i' is already declared in the upper scope.(»š”Øüÿÿÿÿ
+Mjavascript:S1117à"+'i' is already declared in the upper scope.(ÏÆüÿÿÿÿ
+Ojavascript:S1117‚"2'document' is already declared in the upper scope.(×ªÔ
+Mjavascript:S1117ú"+'i' is already declared in the upper scope.(ãÌ²ÿüÿÿÿÿ
+Qjavascript:S1117Í"/'rtrim' is already declared in the upper scope.( äŸôùÿÿÿÿ
+Mjavascript:S1117Å"+'i' is already declared in the upper scope.(ÈÖ§ıÿÿÿÿ
+Ljavascript:S1117ûK"/'value' is already declared in the upper scope.(×¾ü
+1javascript:S108™	"Empty block statement.(ô÷‹`
+Mjavascript:S1117î"+'i' is already declared in the upper scope.(ÈÖ§ıÿÿÿÿ
+Ojavascript:S1117Ä
+"-'arr' is already declared in the upper scope.(¢ÄùØúÿÿÿÿ
+Qjavascript:S1117ã"/'value' is already declared in the upper scope.(›Í·Ûúÿÿÿÿ
+Njavascript:S1854º
+"1Remove this useless assignment to variable "div".(„”È¦
+Kjavascript:S1117‚".'node' is already declared in the upper scope.(µñÈ§
+Qjavascript:S1117—/"/'value' is already declared in the upper scope.(Şâ¼ÿÿÿÿÿ
+Hjavascript:S1117¨"+'i' is already declared in the upper scope.(Æïşº
+Pjavascript:S18541"3Remove this useless assignment to variable "first".(•²ßÖ
+Hjavascript:S1117•"+'i' is already declared in the upper scope.(Æïşº
+Ujavascript:S1854ƒ3"9Remove this useless assignment to variable "srcElements".(ö’Ğy
+Mjavascript:S1117’"+'i' is already declared in the upper scope.(ÈÖ§ıÿÿÿÿ
+Sjavascript:S1854è"1Remove this useless assignment to variable "all".(ğêşıÿÿÿÿ
+Njavascript:S1117“"1'matches' is already declared in the upper scope.(·¨Éº
+bjavascript:S2137"ADo not use "undefined" to declare a parameter - use another name.(Ÿ©Ë©øÿÿÿÿ
+Yjavascript:S1854¸"7Remove this useless assignment to variable "nodeIndex".(«Ë†ûÿÿÿÿ
+Sjavascript:S1117ö"1'matches' is already declared in the upper scope.(å„ •ûÿÿÿÿ
+Sjavascript:S1117ƒ"1'docElem' is already declared in the upper scope.(ƒ‹áŞùÿÿÿÿ
+Vjavascript:S1117ë"4'rquickExpr' is already declared in the upper scope.(õ¢øµıÿÿÿÿ
+Pjavascript:S1117¤.".'elem' is already declared in the upper scope.(ù˜¤ƒÿÿÿÿÿ
+Qjavascript:S1117ú/"/'value' is already declared in the upper scope.(Şâ¼ÿÿÿÿÿ
+Mjavascript:S1117Æ"+'i' is already declared in the upper scope.(İ˜¼‹ùÿÿÿÿ
+Ujavascript:S1117ô"3'undefined' is already declared in the upper scope.(Ÿ©Ë©øÿÿÿÿ
+Mjavascript:S1117–"+'i' is already declared in the upper scope.(ıÉÊ–ÿÿÿÿÿ
+Mjavascript:S1117á"+'i' is already declared in the upper scope.(ÈÖ§ıÿÿÿÿ
+gjavascript:S905Š	"FExpected an assignment or function call and instead saw an expression.(§—Áíúÿÿÿÿ
+Ljavascript:S1117…"/'isXML' is already declared in the upper scope.(è”Äõ
+Njavascript:S1854¡-"1Remove this useless assignment to variable "cur".(¹ÙŞŒ
+Mjavascript:S1117"+'i' is already declared in the upper scope.(•øüúÿÿÿÿ
+Mjavascript:S1117¶"+'i' is already declared in the upper scope.(ŞŒÖùÿÿÿÿ
+Mjavascript:S2189ç"$'list' is not modified in this loop.(ìâŸšúÿÿÿÿ8ğı‹ÿ„/
+Kjavascript:S1117ÎE"/'index' is already declared in the upper scope.(›ãöq
+Kjavascript:S1117´#".'name' is already declared in the upper scope.(–Øîõ
+Sjavascript:S1117†"1'matches' is already declared in the upper scope.(Ã¤ĞÀùÿÿÿÿ
+gjavascript:S905µ$"FExpected an assignment or function call and instead saw an expression.(¦ó³§şÿÿÿÿ
+Qjavascript:S1117ö5"/'value' is already declared in the upper scope.(Î‰Ç§ıÿÿÿÿ
+Ljavascript:S1117‘"/'isXML' is already declared in the upper scope.(í³ã€
+Mjavascript:S1117â"+'i' is already declared in the upper scope.(Œ«Øÿúÿÿÿÿ
+Mjavascript:S1117¢	"+'i' is already declared in the upper scope.(ñã·®üÿÿÿÿ
+Sjavascript:S1854ä"7Remove this useless assignment to variable "marginDiv".(ÇÎH
+Mjavascript:S1117ñE"0'length' is already declared in the upper scope.(Ñ™éŒ
+Mjavascript:S1117ÏE"0'length' is already declared in the upper scope.(¥ø‹‘
+Njavascript:S1854ƒ4"1Remove this useless assignment to variable "tmp".(ú«”è
+Tjavascript:S1854µ"2Remove this useless assignment to variable "diff".(¨ğ¶Àøÿÿÿÿ
+Sjavascript:S1854è"1Remove this useless assignment to variable "opt".(ğêşıÿÿÿÿ
+Sjavascript:S1854ä"7Remove this useless assignment to variable "container".(ÇÎH
+Njavascript:S1264¿",Replace this "for" loop with a "while" loop.(ÒöÁşøÿÿÿÿ
+Vjavascript:S1854ƒ3":Remove this useless assignment to variable "destElements".(ö’Ğy
+Pjavascript:S1117|"4'rootjQuery' is already declared in the upper scope.(ŒÜ€£
+Ojavascript:S1117ã"-'key' is already declared in the upper scope.(›Í·Ûúÿÿÿÿ
+Rjavascript:S1117ÖK"0'method' is already declared in the upper scope.(Æ¸áÌûÿÿÿÿ
+Ljavascript:S1117§!"/'value' is already declared in the upper scope.(ÿÜÛİ
+Njavascript:S1854ƒ3"2Remove this useless assignment to variable "node".(ö’Ğy
+Ijavascript:S2189­."%'until' is not modified in this loop.(æ¿î§8ğı‹ÿ„/
+Vjavascript:S1854è"4Remove this useless assignment to variable "select".(ğêşıÿÿÿÿ
+Sjavascript:S18541"6Remove this useless assignment to variable "fragment".(•²ßÖ
 Hjavascript:S1117®"+'i' is already declared in the upper scope.(­¢¤ê
 Qjavascript:S1117÷"/'isXML' is already declared in the upper scope.(åÍÏ•ùÿÿÿÿ
+Kjavascript:S1117ã".'data' is already declared in the upper scope.(º—ê±
+Ujavascript:S1854è"3Remove this useless assignment to variable "input".(ğêşıÿÿÿÿ
+ajavascript:S905±$"FExpected an assignment or function call and instead saw an expression.(ö„ã!
+Jjavascript:S1117îE"/'index' is already declared in the upper scope.(ã¿
+Kjavascript:S1117ĞG".'prop' is already declared in the upper scope.(ß¾¬Ó
+2javascript:S108ö"Empty block statement.(Ô‰íÌ
+Njavascript:S1117ÓJ"1'docElem' is already declared in the upper scope.(÷ËûÌ
+Mjavascript:S1854ä"1Remove this useless assignment to variable "tds".(ÇÎH
+Hjavascript:S1117ù"+'j' is already declared in the upper scope.(ïÑ®Â
 Ojavascript:S1117ÖK"-'val' is already declared in the upper scope.(Æ¸áÌûÿÿÿÿ
+Kjavascript:S1117ûK".'type' is already declared in the upper scope.(×¾ü
+Ijavascript:S1264Ç",Replace this "for" loop with a "while" loop.(ï¾Ü
 Mjavascript:S1117ù"+'i' is already declared in the upper scope.(óÕ„–ùÿÿÿÿ
 Njavascript:S1854º
 "1Remove this useless assignment to variable "div".(„”È¦
-Qjavascript:S1117Í"/'rtrim' is already declared in the upper scope.( äŸôùÿÿÿÿ
-Mjavascript:S1117á"+'i' is already declared in the upper scope.(ÈÖ§ıÿÿÿÿ
-Sjavascript:S1854ä"7Remove this useless assignment to variable "container".(ÇÎH
-Mjavascript:S1117"+'i' is already declared in the upper scope.(•øüúÿÿÿÿ
-Pjavascript:S1117ö5".'name' is already declared in the upper scope.(Î‰Ç§ıÿÿÿÿ
-Sjavascript:S1117†"1'matches' is already declared in the upper scope.(Ã¤ĞÀùÿÿÿÿ
-Ljavascript:S1117§!"/'value' is already declared in the upper scope.(ÿÜÛİ
-Mjavascript:S1117¶"+'i' is already declared in the upper scope.(ŞŒÖùÿÿÿÿ
-Ljavascript:S1117ûK"/'value' is already declared in the upper scope.(×¾ü
 Hjavascript:S1117  "+'j' is already declared in the upper scope.(ïÑ®Â
-2javascript:S108ö"Empty block statement.(Ô‰íÌ
-Ojavascript:S1117ã"-'key' is already declared in the upper scope.(›Í·Ûúÿÿÿÿ
-Rjavascript:S1117ô"0'window' is already declared in the upper scope.(Ÿ©Ë©øÿÿÿÿ
-Gjavascript:S1117"+'i' is already declared in the upper scope.(Ú§×
-Mjavascript:S1117Å"+'i' is already declared in the upper scope.(ÈÖ§ıÿÿÿÿ
-Vjavascript:S1854ƒ3":Remove this useless assignment to variable "destElements".(ö’Ğy
-Hjavascript:S1117¨"+'i' is already declared in the upper scope.(Æïşº
-Sjavascript:S18541"6Remove this useless assignment to variable "fragment".(•²ßÖ
-Hjavascript:S1117Ğ"+'i' is already declared in the upper scope.(Ë½ĞÌ
-Kjavascript:S1117‚".'node' is already declared in the upper scope.(µñÈ§
-Mjavascript:S1117à"+'i' is already declared in the upper scope.(ÏÆüÿÿÿÿ
-Sjavascript:S1854è"1Remove this useless assignment to variable "all".(ğêşıÿÿÿÿ
-Mjavascript:S1117Æ"+'i' is already declared in the upper scope.(İ˜¼‹ùÿÿÿÿ
-Njavascript:S1854ƒ3"2Remove this useless assignment to variable "node".(ö’Ğy
-gjavascript:S905µ$"FExpected an assignment or function call and instead saw an expression.(¦ó³§şÿÿÿÿ
-Njavascript:S1117“"1'matches' is already declared in the upper scope.(·¨Éº
-Mjavascript:S1117â"+'i' is already declared in the upper scope.(Œ«Øÿúÿÿÿÿ
-Ljavascript:S1117‘"/'isXML' is already declared in the upper scope.(í³ã€
-bjavascript:S2137"ADo not use "undefined" to declare a parameter - use another name.(Ÿ©Ë©øÿÿÿÿ
-Ojavascript:S1117Ä
-"-'arr' is already declared in the upper scope.(¢ÄùØúÿÿÿÿ
-Njavascript:S1117ÓJ"1'docElem' is already declared in the upper scope.(÷ËûÌ
-Pjavascript:S1117¤.".'elem' is already declared in the upper scope.(ù˜¤ƒÿÿÿÿÿ
-Pjavascript:S18541"3Remove this useless assignment to variable "first".(•²ßÖ
-Yjavascript:S1854Ë"7Remove this useless assignment to variable "nodeIndex".(«Ë†ûÿÿÿÿ
-Ijavascript:S1264Ç",Replace this "for" loop with a "while" loop.(ï¾Ü
-Kjavascript:S1117ÎE"/'index' is already declared in the upper scope.(›ãöq
-Xjavascript:S3516“";Refactor this function to not always return the same value.(¹Èü
-Hjavascript:S1117•"+'i' is already declared in the upper scope.(Æïşº
-Mjavascript:S1117ÏE"0'length' is already declared in the upper scope.(¥ø‹‘
-Tjavascript:S1854µ"2Remove this useless assignment to variable "diff".(¨ğ¶Àøÿÿÿÿ
-Hjavascript:S1117—	"+'i' is already declared in the upper scope.(Ş¼Ş¢
-Hjavascript:S1117‰"+'i' is already declared in the upper scope.(¦îÎ‹
-Yjavascript:S1854¸"7Remove this useless assignment to variable "nodeIndex".(«Ë†ûÿÿÿÿ
-Mjavascript:S1117’"+'i' is already declared in the upper scope.(ÈÖ§ıÿÿÿÿ
-Tjavascript:S1854ì%"2Remove this useless assignment to variable "elem".(ë’´Ôıÿÿÿÿ
-Njavascript:S1854ƒ4"1Remove this useless assignment to variable "tmp".(ú«”è
-Njavascript:S1264¿",Replace this "for" loop with a "while" loop.(ÒöÁşøÿÿÿÿ
-Kjavascript:S1117ĞG".'prop' is already declared in the upper scope.(ß¾¬Ó
-Rjavascript:S1117ÖK"0'method' is already declared in the upper scope.(Æ¸áÌûÿÿÿÿ
 gjavascript:S905ğ"FExpected an assignment or function call and instead saw an expression.(öÇ…Õøÿÿÿÿ
-Qjavascript:S1854è"/Remove this useless assignment to variable "a".(ğêşıÿÿÿÿ
-Pjavascript:S1117|"4'rootjQuery' is already declared in the upper scope.(ŒÜ€£
-Kjavascript:S1117ã".'data' is already declared in the upper scope.(º—ê±
-Ujavascript:S1854ƒ3"9Remove this useless assignment to variable "srcElements".(ö’Ğy
-Sjavascript:S1117ƒ"1'docElem' is already declared in the upper scope.(ƒ‹áŞùÿÿÿÿ
-Hjavascript:S1117¬B"+'_' is already declared in the upper scope.(ğ¡Åµ
-Sjavascript:S1854è"1Remove this useless assignment to variable "opt".(ğêşıÿÿÿÿ
-Mjavascript:S1117–"+'i' is already declared in the upper scope.(ıÉÊ–ÿÿÿÿÿ
-Mjavascript:S1117ñE"0'length' is already declared in the upper scope.(Ñ™éŒ
-Hjavascript:S1117ù"+'j' is already declared in the upper scope.(ïÑ®Â
-Mjavascript:S1117î"+'i' is already declared in the upper scope.(ÈÖ§ıÿÿÿÿ
-Mjavascript:S1854ä"1Remove this useless assignment to variable "tds".(ÇÎH
-Hjavascript:S1117¢"+'i' is already declared in the upper scope.(Æïşº
-Sjavascript:S1117ö"1'matches' is already declared in the upper scope.(å„ •ûÿÿÿÿ
-cjavascript:S2137ô"ADo not use "undefined" to declare a parameter - use another name.(Ÿ©Ë©øÿÿÿÿ
-gjavascript:S905Š	"FExpected an assignment or function call and instead saw an expression.(§—Áíúÿÿÿÿ
-Tjavascript:S1854ı"2Remove this useless assignment to variable "name".(ÅàÉ¿ıÿÿÿÿ
-Vjavascript:S1117ë"4'rquickExpr' is already declared in the upper scope.(õ¢øµıÿÿÿÿ
-Mjavascript:S1117Å
-"+'i' is already declared in the upper scope.(»š”Øüÿÿÿÿ
-Qjavascript:S1117—/"/'value' is already declared in the upper scope.(Şâ¼ÿÿÿÿÿ
-Mjavascript:S1117ˆ"+'i' is already declared in the upper scope.(ØÙšèşÿÿÿÿ
-Qjavascript:S1117ã"/'value' is already declared in the upper scope.(›Í·Ûúÿÿÿÿ
-Ljavascript:S1117…"/'isXML' is already declared in the upper scope.(è”Äõ
-Xjavascript:S1854è"6Remove this useless assignment to variable "fragment".(ğêşıÿÿÿÿ
-Njavascript:S1854¡-"1Remove this useless assignment to variable "cur".(¹ÙŞŒ
-Qjavascript:S1117ú/"/'value' is already declared in the upper scope.(Şâ¼ÿÿÿÿÿ
 Jjavascript:S1117¼:"-'val' is already declared in the upper scope.(Æ›¹È
-Sjavascript:S1854ä"7Remove this useless assignment to variable "marginDiv".(ÇÎH
-Hjavascript:S1117Å"+'i' is already declared in the upper scope.(Ş¼Ş¢
-Ujavascript:S1854è"3Remove this useless assignment to variable "input".(ğêşıÿÿÿÿ
-Kjavascript:S1117§#".'name' is already declared in the upper scope.(–Øîõ
-ajavascript:S905±$"FExpected an assignment or function call and instead saw an expression.(ö„ã!
-Kjavascript:S1117ûK".'type' is already declared in the upper scope.(×¾ü
-Kjavascript:S1117´#".'name' is already declared in the upper scope.(–Øîõ
+Pjavascript:S1117ö5".'name' is already declared in the upper scope.(Î‰Ç§ıÿÿÿÿ
+Qjavascript:S1854è"/Remove this useless assignment to variable "a".(ğêşıÿÿÿÿ
 Tjavascript:S1117à."2'document' is already declared in the upper scope.(öÉÁ…ÿÿÿÿÿ
-1javascript:S108™	"Empty block statement.(ô÷‹`
-Ujavascript:S1117ô"3'undefined' is already declared in the upper scope.(Ÿ©Ë©øÿÿÿÿ
-Njavascript:S1854º
-"1Remove this useless assignment to variable "div".(„”È¦
-Mjavascript:S1117ú"+'i' is already declared in the upper scope.(ãÌ²ÿüÿÿÿÿ
-Vjavascript:S1854è"4Remove this useless assignment to variable "select".(ğêşıÿÿÿÿ
-Jjavascript:S1117îE"/'index' is already declared in the upper scope.(ã¿
-Ojavascript:S1117‚"2'document' is already declared in the upper scope.(×ªÔ
-Mjavascript:S1117¢	"+'i' is already declared in the upper scope.(ñã·®üÿÿÿÿ
-Qjavascript:S1117ö5"/'value' is already declared in the upper scope.(Î‰Ç§ıÿÿÿÿ
+Hjavascript:S1117—	"+'i' is already declared in the upper scope.(Ş¼Ş¢

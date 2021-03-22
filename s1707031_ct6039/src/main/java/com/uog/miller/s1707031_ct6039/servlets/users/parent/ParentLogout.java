@@ -45,6 +45,7 @@ public class ParentLogout extends HttpServlet
 		request.getSession(true).removeAttribute("isParent");
 
 		request.getSession(true).removeAttribute("formErrors");
+		request.getSession(true).removeAttribute("formSuccess");
 
 		request.getSession(true).removeAttribute("allYears");
 		request.getSession(true).removeAttribute("allChildren");
@@ -53,5 +54,6 @@ public class ParentLogout extends HttpServlet
 
 		request.getSession(true).removeAttribute("allHomeworks");
 		request.getSession(true).removeAttribute("allSubmissions");
+		request.getSession(true).removeAttribute("childProgress");
 	}
 }
