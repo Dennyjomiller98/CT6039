@@ -176,7 +176,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body automargin">
                             <%--Content for modal popup containing homework submission information (in table)--%>
                             <label for="totalHomeworks" class="form-label formPara"><%="Total Homeworks:"%></label>
                             <span type="text" id="totalHomeworks" class="formParaText"><%=childProgressBean.getTotalHomeworks()%></span>
