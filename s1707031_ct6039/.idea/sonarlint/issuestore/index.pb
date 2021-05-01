@@ -117,8 +117,6 @@ g
 Ktarget/s1707031_ct6039-1.0-SNAPSHOT/WEB-INF/classes/Config/log4j.properties,b\e\be43fc1687e0394d48ab08a4dc517c7c8ad7d22d
 V
 &target/classes/Config/log4j.properties,e\c\ec7ae2507fb3a09f60b44797381fff572ea427a5
-h
-8target/s1707031_ct6039-1.0-SNAPSHOT/META-INF/MANIFEST.MF,e\8\e8fd365c2d6c048418b245b5ce77ab5d6ce013dc
 ƒ
 Ssrc/main/java/com/uog/miller/s1707031_ct6039/servlets/progress/ProgressActions.java,6\a\6ae2f88508ca8aee234a86880668f8fa9e41f490
 g
@@ -299,3 +297,11 @@ f
 6src/main/webapp/jsp/actions/homework/gradehomework.jsp,a\2\a2db7b7a750d45a7e0a0fe1005bfa1ade93fcf1a
 „
 Tsrc/main/java/com/uog/miller/s1707031_ct6039/servlets/homework/RetrieveHomework.java,6\0\60f775a2bd1dd7e4ff0bc2839057ea72cd6ece96
+‚
+Rtarget/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst,8\a\8ae396f369da14bb5c0973286facff8fb2c70d56
+C
+heroku-settings.xml,e\0\e030a049e02309ca176e60c909edb1ae920f49c8
+T
+$target/maven-archiver/pom.properties,5\a\5acbe6c306dee4498a010b1ca2096853e29e16a4
+8
+Procfile,b\c\bc3c68e880d1a01632bce79f69dd1387c7ba9c54

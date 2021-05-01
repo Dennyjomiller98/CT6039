@@ -85,6 +85,18 @@
             <artifactId>gson</artifactId>
             <version>2.8.5</version>
         </dependency>
+        <!--Javamail-->
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+        <!--Heroku Deployment for remote-->
+        <dependency>
+            <groupId>com.heroku.sdk</groupId>
+            <artifactId>heroku-maven-plugin</artifactId>
+            <version>2.0.16</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -122,26 +134,6 @@
             <id>npm</id>
             <build>
                 <plugins>
-                    <plugin>
-                        <groupId>com.local.application</groupId>
-                        <artifactId>CT6013_S1707031_Source</artifactId>
-                        <!-- Use the latest released version:
-                        https://repo1.maven.org/maven2/com/github/eirslett/frontend-maven-plugin/ -->
-                        <version>1.0-SNAPSHOT</version>
-                        <executions>
-                            <execution>
-                                <id>install node and npm</id>
-                                <goals>
-                                    <goal>install-node-and-npm</goal>
-                                </goals>
-                                <!-- optional: default phase is "generate-resources" -->
-                                <phase>generate-resources</phase>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <nodeVersion>v12.13.0</nodeVersion>
-                        </configuration>
-                    </plugin>
                 </plugins>
             </build>
         </profile>
