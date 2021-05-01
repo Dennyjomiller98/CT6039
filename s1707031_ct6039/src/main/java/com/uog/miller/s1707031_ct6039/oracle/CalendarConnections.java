@@ -1,17 +1,13 @@
 package com.uog.miller.s1707031_ct6039.oracle;
 
 import com.uog.miller.s1707031_ct6039.beans.CalendarItemBean;
-import com.uog.miller.s1707031_ct6039.mail.IEmailer;
+import com.uog.miller.s1707031_ct6039.mail.Emailer;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.inject.Inject;
 
 public class CalendarConnections extends AbstractOracleConnections
 {
-	@Inject
-	private IEmailer fMail;
-
 	//Used for requests to Calendar, such as Viewing or adding to calendar
 	public CalendarConnections()
 	{
@@ -44,7 +40,8 @@ public class CalendarConnections extends AbstractOracleConnections
 				executeAdditionQuery(oracleClient, query);
 
 				//Process Mail to inform user of Update
-				fMail.generateMailForCalendarCreate(user, name, dateForUpdate);
+				Emailer emailer = new Emailer();
+				emailer.generateMailForCalendarCreate(user, name, dateForUpdate);
 			}
 			else
 			{

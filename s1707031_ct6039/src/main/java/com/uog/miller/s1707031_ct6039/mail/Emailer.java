@@ -6,7 +6,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import org.apache.log4j.Logger;
 
-public class Emailer implements IEmailer
+public class Emailer
 {
 	static final Logger LOG = Logger.getLogger(Emailer.class);
 	private static final String USERNAME = "s1707031uog@gmail.com";
@@ -17,7 +17,6 @@ public class Emailer implements IEmailer
 		//Empty Constructor
 	}
 
-	@Override
 	public void generateMailForCalendarCreate(String recipient, String calendarEventName, String dueDate)
 	{
 		String subject = "An event has been created";

@@ -8,7 +8,6 @@ com\uog\miller\s1707031_ct6039\oracle\CalendarConnections.class
 com\uog\miller\s1707031_ct6039\beans\ParentBean.class
 com\uog\miller\s1707031_ct6039\servlets\users\teacher\TeacherDelete.class
 com\uog\miller\s1707031_ct6039\oracle\YearConnections.class
-com\uog\miller\s1707031_ct6039\mail\IEmailer.class
 com\uog\miller\s1707031_ct6039\servlets\users\child\ChildDelete.class
 com\uog\miller\s1707031_ct6039\servlets\users\teacher\TeacherLogout.class
 com\uog\miller\s1707031_ct6039\servlets\childclass\RetrieveClass.class
