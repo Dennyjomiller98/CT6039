@@ -8,6 +8,7 @@ com\uog\miller\s1707031_ct6039\oracle\CalendarConnections.class
 com\uog\miller\s1707031_ct6039\beans\ParentBean.class
 com\uog\miller\s1707031_ct6039\servlets\users\teacher\TeacherDelete.class
 com\uog\miller\s1707031_ct6039\oracle\YearConnections.class
+com\uog\miller\s1707031_ct6039\mail\IEmailer.class
 com\uog\miller\s1707031_ct6039\servlets\users\child\ChildDelete.class
 com\uog\miller\s1707031_ct6039\servlets\users\teacher\TeacherLogout.class
 com\uog\miller\s1707031_ct6039\servlets\childclass\RetrieveClass.class
@@ -21,6 +22,7 @@ com\uog\miller\s1707031_ct6039\servlets\users\teacher\TeacherLogin.class
 com\uog\miller\s1707031_ct6039\oracle\LinkedConnections.class
 com\uog\miller\s1707031_ct6039\servlets\resources\ResourceActions.class
 com\uog\miller\s1707031_ct6039\servlets\users\child\ChildLogin.class
+com\uog\miller\s1707031_ct6039\mail\Emailer$1.class
 com\uog\miller\s1707031_ct6039\servlets\users\parent\ParentProfile.class
 com\uog\miller\s1707031_ct6039\servlets\homework\RetrieveHomework.class
 com\uog\miller\s1707031_ct6039\servlets\homework\SubmitHomework.class
@@ -45,6 +47,7 @@ com\uog\miller\s1707031_ct6039\servlets\childclass\UpdateClass.class
 com\uog\miller\s1707031_ct6039\servlets\calendar\DeleteCalendarEvent.class
 com\uog\miller\s1707031_ct6039\beans\ClassBean.class
 com\uog\miller\s1707031_ct6039\beans\LinkBean.class
+com\uog\miller\s1707031_ct6039\mail\Emailer.class
 com\uog\miller\s1707031_ct6039\oracle\ResourceConnections.class
 com\uog\miller\s1707031_ct6039\oracle\ClassConnections.class
 com\uog\miller\s1707031_ct6039\servlets\users\parent\ParentRegistration.class
