@@ -1,5 +1,8 @@
 package com.uog.miller.s1707031_ct6039.mail;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -9,12 +12,31 @@ import org.apache.log4j.Logger;
 public class Emailer
 {
 	static final Logger LOG = Logger.getLogger(Emailer.class);
-	private static final String USERNAME = "s1707031uog@gmail.com";
-	private static final String PASSWORD = "s1707031@";
+	private String username;
+	private String password;
 
 	public Emailer()
 	{
-		//Empty Constructor
+		Properties props = new Properties();
+		try
+		{
+			InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream("/config/config.properties");
+			if(resourceAsStream != null)
+			{
+				props.load(resourceAsStream);
+				username = props.getProperty("mailsender");
+				password = props.getProperty("mailpword");
+			}
+			else
+			{
+				throw new FileNotFoundException("Could not find properties file for configuring smtp mail");
+			}
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+
 	}
 
 	public void generateMailForCalendarCreate(String recipient, String calendarEventName, String dueDate)
@@ -56,7 +78,7 @@ public class Emailer
 				new javax.mail.Authenticator() {
 					@Override
 					protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-						return new PasswordAuthentication(USERNAME, PASSWORD);
+						return new PasswordAuthentication(username, password);
 					}
 				});
 		try {
