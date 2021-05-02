@@ -4,6 +4,7 @@
 <html lang="en">
 <head>
     <title>Homepage</title>
+    <link rel="icon" type="image/gif" href="${pageContext.request.contextPath}/imgs/favicon.ico">
 </head>
     <body class="d-flex flex-column">
         <jsp:include page="jsp/required.jsp"/>
