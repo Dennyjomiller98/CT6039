@@ -130,9 +130,12 @@
             <br/>
 
             <div class="main-body-content">
-                <% List<ChildBean> myChildrenBeans = (List<ChildBean>) session.getAttribute("myChildrenBeans");
+                <% if(session.getAttribute("myChildrenBeans") != null)
+                {
+                    List<ChildBean> myChildrenBeans = (List<ChildBean>) session.getAttribute("myChildrenBeans");
                     if (myChildrenBeans.size() > 0)
-                    { for (ChildBean child : myChildrenBeans) { %>
+                    { for (ChildBean child : myChildrenBeans) {%>
+
                 <div class="card shadow p-3 mb-5 bg-white rounded">
                     <div class="card-body">
                         <h5 class="card-title formParaText"><%="User: " + child.getEmail()%></h5>
@@ -151,6 +154,12 @@
                 </div>
                 <br/>
                 <% } } else { %>
+                <p class="formParaText">
+                    <%="You have no linked children, please update your Profile."%>
+                </p>
+                <br/>
+                <% }
+                }else { %>
                 <p class="formParaText">
                     <%="You have no linked children, please update your Profile."%>
                 </p>
