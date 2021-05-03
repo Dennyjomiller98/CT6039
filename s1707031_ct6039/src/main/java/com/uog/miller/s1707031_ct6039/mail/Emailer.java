@@ -37,6 +37,31 @@ public class Emailer
 		{
 			e.printStackTrace();
 		}
+	}
+
+	public Emailer(HttpServletRequest request)
+	{
+		Properties props = new Properties();
+		try
+		{
+			InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream("/config/config.properties");
+			if(resourceAsStream != null)
+			{
+				props.load(resourceAsStream);
+				username = props.getProperty("mailsender");
+				password = props.getProperty("mailpword");
+				request.getSession(true).setAttribute("shouldNotifyErr", "We have props:" + props + props.getProperty("mailsender"));
+			}
+			else
+			{
+				request.getSession(true).setAttribute("shouldNotifyErr", "We have no props:");
+				throw new FileNotFoundException("Could not find properties file for configuring smtp mail");
+			}
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 
 	}
 
@@ -45,7 +70,7 @@ public class Emailer
 		String subject = "An event has been created";
 		String message = "A new Calendar event (Event Name: " + calendarEventName + ") has been created. \r\n" + "This event deadline is: " + dueDate + ".";
 		request.getSession(true).setAttribute("shouldNotify", "UserShouldBeNotified - email info: '" + username + "' and '" + password + "'");
-		generateMail1(subject, message, recipient, request);
+		generateMail(subject, message, recipient);
 	}
 
 	public void generateMailForProfileCreate(String recipient, String firstname)
@@ -127,40 +152,6 @@ public class Emailer
 			LOG.debug("Sent message successfully");
 		} catch (MessagingException e) {
 			LOG.error(e);
-		}
-	}
-
-	private void generateMail1(String subject, String messageContent, String recipientAddress, HttpServletRequest request)
-	{
-		//Generate plain/text mail (no need for HTML)
-		String from = "s1707031uog@gmail.com";
-		Properties props = new Properties();
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.port", "587");
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-		Session session = Session.getInstance(props,
-				new javax.mail.Authenticator() {
-					@Override
-					protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-						return new PasswordAuthentication(username, password);
-					}
-				});
-		try {
-			// Create a default MimeMessage object.
-			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(from));
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipientAddress));
-			message.setSubject(subject);
-			messageContent = messageContent + "\r\n \r\n " + "This mail was sent automatically as part of a University of Gloucestershire Dissertation Project, by Denny-Jo Miller (s1707031). Any personal information provided will not be retained after testing has concluded, and will be purged after the testing and feedback period.";
-			message.setText(messageContent);
-
-			Transport.send(message);
-			LOG.debug("Sent message successfully");
-		} catch (MessagingException e) {
-			LOG.error(e);
-			request.getSession(true).setAttribute("shouldNotifyErr", "error:" + e);
 		}
 	}
 }
