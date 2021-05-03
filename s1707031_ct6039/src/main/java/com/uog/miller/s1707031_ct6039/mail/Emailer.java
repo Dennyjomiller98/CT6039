@@ -119,7 +119,7 @@ public class Emailer
 			message.setFrom(new InternetAddress(from));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipientAddress));
 			message.setSubject(subject);
-			messageContent = messageContent + "\r\n \r\n " + "This mail was sent automatically as part of a University of Gloucestershire Dissertation Project, by Denny-Jo Miller (s1707031). Any personal information provided will not be retained after testing has concluded, and will be purged after the testing and feedback period.";
+			messageContent = messageContent + "\r\n \r\n" + "This mail was sent automatically as part of a University of Gloucestershire Dissertation Project, by Denny-Jo Miller (s1707031). Any personal information provided will not be retained after testing has concluded, and will be purged after the testing and feedback period.";
 			message.setText(messageContent);
 
 			Transport.send(message);

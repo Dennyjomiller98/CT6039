@@ -306,14 +306,6 @@
                 if(success != null) { %>
             <div class="alert alert-success mysuccess" role="alert" id="formSuccess"><%=success%></div>
             <%}%>
-            <% String shouldNotify = (String) session.getAttribute("shouldNotify");
-                if(shouldNotify != null) { %>
-            <div class="alert alert-success mysuccess" role="alert" id="shouldNotify"><%=shouldNotify%></div>
-            <%}%>
-            <% String shouldNotifyErr = (String) session.getAttribute("shouldNotifyErr");
-                if(shouldNotifyErr != null) { %>
-            <div class="alert alert-success mysuccess" role="alert" id="shouldNotifyErr"><%=shouldNotifyErr%></div>
-            <%}%>
 
             <%--Title--%>
             <div class="main-body-content myheader neat">
