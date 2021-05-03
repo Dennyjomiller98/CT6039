@@ -47,7 +47,7 @@ public class Emailer
 			ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
 			if (contextClassLoader != null)
 			{
-				InputStream resourceAsStream = contextClassLoader.getResourceAsStream("/config/config.properties");
+				InputStream resourceAsStream = contextClassLoader.getResourceAsStream("/classes/config.properties");
 				if(resourceAsStream != null)
 				{
 					props.load(resourceAsStream);
@@ -57,7 +57,7 @@ public class Emailer
 				}
 				else
 				{
-					InputStream noSlash = contextClassLoader.getResourceAsStream("config/config.properties");
+					InputStream noSlash = contextClassLoader.getResourceAsStream("classes/config.properties");
 					if(noSlash != null)
 					{
 						props.load(noSlash);
@@ -84,7 +84,7 @@ public class Emailer
 								request.getSession(true).setAttribute("shouldNotifyErr", "NOTHING WORKS");
 							}
 						}
-						request.getSession(true).setAttribute("shouldNotifyErr", "NoSlash didnt work:");
+						//request.getSession(true).setAttribute("shouldNotifyErr", "NoSlash didnt work:");
 					}
 					//throw new FileNotFoundException("Could not find properties file for configuring smtp mail");
 				}
