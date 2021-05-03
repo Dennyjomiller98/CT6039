@@ -100,30 +100,66 @@ public class AbstractOracleConnections
 				ArrayList<ChildBean> allChildren = executeChildQuery(client, childQuery);
 				ArrayList<TeacherBean> allTeachers = executeTeacherQuery(client, teacherQuery);
 				ArrayList<ParentBean> allParents = executeParentQuery(client, parentQuery);
+				boolean foundUser = false;
 				if(!allChildren.isEmpty())
 				{
 					ChildBean bean = allChildren.get(0);
 					//Check Notification Preferences
 					if(notificationType.equals(NotificationType.CALENDAR))
 					{
+						foundUser = true;
 						ret = bean.getEmailForCalendar();
 					}
 					else if(notificationType.equals(NotificationType.HOMEWORK))
 					{
+						foundUser = true;
 						ret = bean.getEmailForHomework();
 					}
 					else if(notificationType.equals(NotificationType.PROFILE))
 					{
+						foundUser = true;
 						ret = bean.getEmailForProfile();
 					}
 				}
-				if(!allParents.isEmpty())
+				if(!foundUser)
 				{
-					ret = false;
-				}
-				if(!allTeachers.isEmpty())
-				{
-					ret = false;
+					if(!allParents.isEmpty())
+					{
+						ParentBean bean = allParents.get(0);
+						//Check Notification Preferences
+						if(notificationType.equals(NotificationType.CALENDAR))
+						{
+							foundUser = true;
+							ret = bean.getEmailForCalendar();
+						}
+						else if(notificationType.equals(NotificationType.HOMEWORK))
+						{
+							foundUser = true;
+							ret = bean.getEmailForHomework();
+						}
+						else if(notificationType.equals(NotificationType.PROFILE))
+						{
+							foundUser = true;
+							ret = bean.getEmailForProfile();
+						}
+					}
+					if (!foundUser && !allTeachers.isEmpty())
+					{
+						TeacherBean bean = allTeachers.get(0);
+						//Check Notification Preferences
+						if (notificationType.equals(NotificationType.CALENDAR))
+						{
+							ret = bean.getEmailForCalendar();
+						}
+						else if (notificationType.equals(NotificationType.HOMEWORK))
+						{
+							ret = bean.getEmailForHomework();
+						}
+						else if (notificationType.equals(NotificationType.PROFILE))
+						{
+							ret = bean.getEmailForProfile();
+						}
+					}
 				}
 			}
 			else
