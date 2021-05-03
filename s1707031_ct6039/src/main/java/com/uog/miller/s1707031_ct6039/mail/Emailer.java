@@ -7,6 +7,7 @@ import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 
 public class Emailer
@@ -39,11 +40,12 @@ public class Emailer
 
 	}
 
-	public void generateMailForCalendarCreate(String recipient, String calendarEventName, String dueDate)
+	public void generateMailForCalendarCreate(String recipient, String calendarEventName, String dueDate, HttpServletRequest request)
 	{
 		String subject = "An event has been created";
 		String message = "A new Calendar event (Event Name: " + calendarEventName + ") has been created. \r\n" + "This event deadline is: " + dueDate + ".";
-		generateMail(subject, message, recipient);
+		request.getSession(true).setAttribute("shouldNotify", "UserShouldBeNotified - email info: '" + username + "' and '" + password + "'");
+		generateMail1(subject, message, recipient, request);
 	}
 
 	public void generateMailForProfileCreate(String recipient, String firstname)
@@ -125,6 +127,40 @@ public class Emailer
 			LOG.debug("Sent message successfully");
 		} catch (MessagingException e) {
 			LOG.error(e);
+		}
+	}
+
+	private void generateMail1(String subject, String messageContent, String recipientAddress, HttpServletRequest request)
+	{
+		//Generate plain/text mail (no need for HTML)
+		String from = "s1707031uog@gmail.com";
+		Properties props = new Properties();
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+		Session session = Session.getInstance(props,
+				new javax.mail.Authenticator() {
+					@Override
+					protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+						return new PasswordAuthentication(username, password);
+					}
+				});
+		try {
+			// Create a default MimeMessage object.
+			MimeMessage message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(from));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipientAddress));
+			message.setSubject(subject);
+			messageContent = messageContent + "\r\n \r\n " + "This mail was sent automatically as part of a University of Gloucestershire Dissertation Project, by Denny-Jo Miller (s1707031). Any personal information provided will not be retained after testing has concluded, and will be purged after the testing and feedback period.";
+			message.setText(messageContent);
+
+			Transport.send(message);
+			LOG.debug("Sent message successfully");
+		} catch (MessagingException e) {
+			LOG.error(e);
+			request.getSession(true).setAttribute("shouldNotifyErr", "error:" + e);
 		}
 	}
 }

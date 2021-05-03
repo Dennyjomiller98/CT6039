@@ -1,6 +1,7 @@
 com\uog\miller\s1707031_ct6039\servlets\users\child\ChildRegistration.class
 com\uog\miller\s1707031_ct6039\servlets\homework\GradeHomework.class
 com\uog\miller\s1707031_ct6039\beans\CalendarItemBean.class
+com\uog\miller\s1707031_ct6039\mail\Emailer$2.class
 com\uog\miller\s1707031_ct6039\beans\ClassLinkBean.class
 com\uog\miller\s1707031_ct6039\beans\HomeworkBean.class
 com\uog\miller\s1707031_ct6039\servlets\childclass\DeleteClass.class
