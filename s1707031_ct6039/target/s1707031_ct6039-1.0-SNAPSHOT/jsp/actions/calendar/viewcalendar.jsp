@@ -10,6 +10,7 @@
 <html lang="en">
     <head>
         <title>My Calendar</title>
+        <link rel="icon" type="image/gif" href="${pageContext.request.contextPath}/imgs/favicon.ico">
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
