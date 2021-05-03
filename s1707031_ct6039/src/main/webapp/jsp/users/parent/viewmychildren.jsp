@@ -12,6 +12,7 @@
 <html lang="en">
     <head>
         <title>My Children</title>
+        <link rel="icon" type="image/gif" href="${pageContext.request.contextPath}/imgs/favicon.ico">
     </head>
 
     <body>

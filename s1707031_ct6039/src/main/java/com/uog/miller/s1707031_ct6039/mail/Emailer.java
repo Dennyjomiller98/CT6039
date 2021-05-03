@@ -42,11 +42,11 @@ public class Emailer
 	public void generateMailForCalendarCreate(String recipient, String calendarEventName, String dueDate)
 	{
 		String subject = "An event has been created";
-		String message = "A new Calendar event (Event Name: " + calendarEventName + ") has been created. \r\n This event deadline is: " + dueDate + ".";
+		String message = "A new Calendar event (Event Name: '" + calendarEventName + "') has been created. \r\n This event deadline is: " + dueDate + ".";
 		generateMail(subject, message, recipient);
 	}
 
-	public void generateMailForHomeworkCreate()
+	public void generateMailForHomeworkGrade()
 	{
 
 	}

@@ -13,6 +13,7 @@
 <html lang="en">
     <head>
         <title>My Account - Parent</title>
+        <link rel="icon" type="image/gif" href="${pageContext.request.contextPath}/imgs/favicon.ico">
     </head>
     <body>
         <jsp:include page="../../required.jsp"/>
