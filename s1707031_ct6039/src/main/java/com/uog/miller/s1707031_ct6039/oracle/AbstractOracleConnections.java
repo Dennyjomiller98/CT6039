@@ -97,9 +97,19 @@ public class AbstractOracleConnections
 				String teacherQuery = "SELECT * FROM " + TEACHERS_COLLECTION + " WHERE Email='" + email.replace("'", "''") +"'";
 				String parentQuery = "SELECT * FROM " + PARENTS_COLLECTION + " WHERE Email='" + email.replace("'", "''") +"'";
 				//Execute query
-				ArrayList<ChildBean> allChildren = executeChildQuery(client, childQuery);
-				ArrayList<TeacherBean> allTeachers = executeTeacherQuery(client, teacherQuery);
-				ArrayList<ParentBean> allParents = executeParentQuery(client, parentQuery);
+				ArrayList<ChildBean> allChildren = new ArrayList<>();
+				try
+				{
+					allChildren = executeChildQuery(client, childQuery);
+				}
+				catch (Exception e)
+				{
+					LOG.error("exception thrown checking child user preferences", e);
+				}
+				finally
+				{
+					client.close();
+				}
 				boolean foundUser = false;
 				if(!allChildren.isEmpty())
 				{
@@ -121,8 +131,19 @@ public class AbstractOracleConnections
 						ret = bean.getEmailForProfile();
 					}
 				}
+
 				if(!foundUser)
 				{
+					ArrayList<ParentBean> allParents = new ArrayList<>();
+					try(Connection parentClient = getOracleClient())
+					{
+						allParents = executeParentQuery(parentClient, parentQuery);
+					}
+					catch (Exception e)
+					{
+						LOG.error("exception thrown checking child user preferences", e);
+					}
+
 					if(!allParents.isEmpty())
 					{
 						ParentBean bean = allParents.get(0);
@@ -143,21 +164,34 @@ public class AbstractOracleConnections
 							ret = bean.getEmailForProfile();
 						}
 					}
-					if (!foundUser && !allTeachers.isEmpty())
+
+					if (!foundUser)
 					{
-						TeacherBean bean = allTeachers.get(0);
-						//Check Notification Preferences
-						if (notificationType.equals(NotificationType.CALENDAR))
+						ArrayList<TeacherBean> allTeachers = new ArrayList<>();
+						try(Connection teacherClient = getOracleClient())
 						{
-							ret = bean.getEmailForCalendar();
+							allTeachers = executeTeacherQuery(teacherClient, teacherQuery);
 						}
-						else if (notificationType.equals(NotificationType.HOMEWORK))
+						catch (Exception e)
 						{
-							ret = bean.getEmailForHomework();
+							LOG.error("exception thrown checking child user preferences", e);
 						}
-						else if (notificationType.equals(NotificationType.PROFILE))
+						if(!allTeachers.isEmpty())
 						{
-							ret = bean.getEmailForProfile();
+							TeacherBean bean = allTeachers.get(0);
+							//Check Notification Preferences
+							if (notificationType.equals(NotificationType.CALENDAR))
+							{
+								ret = bean.getEmailForCalendar();
+							}
+							else if (notificationType.equals(NotificationType.HOMEWORK))
+							{
+								ret = bean.getEmailForHomework();
+							}
+							else if (notificationType.equals(NotificationType.PROFILE))
+							{
+								ret = bean.getEmailForProfile();
+							}
 						}
 					}
 				}

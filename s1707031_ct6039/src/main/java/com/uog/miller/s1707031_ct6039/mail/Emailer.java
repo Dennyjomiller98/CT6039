@@ -7,7 +7,6 @@ import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 
 public class Emailer
@@ -90,7 +89,7 @@ public class Emailer
 	public void generateMailForHomeworkSubmit(String email, String filename)
 	{
 		String subject = "Homework Submission Confirmation";
-		String message = "This is an automated response confirming your homework submission (File:" + filename + "has been submitted. \r\n" + "If this was not done by you, please get in contact to resolve this.";
+		String message = "This is an automated response confirming your homework submission (File:" + filename + ") has been submitted. \r\n" + "If this was not done by you, please get in contact to resolve this.";
 		generateMail(subject, message, email);
 	}
 

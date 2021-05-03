@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="s1707031_ct6039:war">
+    <output-path>$PROJECT_DIR$/s1707031_ct6039/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>s1707031_ct6039</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="s1707031_ct6039-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="s1707031_ct6039:war exploded" />
+    </root>
+  </artifact>
+</component>

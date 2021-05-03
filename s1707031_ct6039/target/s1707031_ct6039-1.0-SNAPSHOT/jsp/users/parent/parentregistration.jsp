@@ -125,10 +125,10 @@
                 <%= "From here, you can register an account for parents and guardians."%>
             </p>
             <br/>
-            <div class="card myform">
+            <div class="card myform shadow p-3 mb-5 bg-white rounded">
                 <form class="reg-form" action="${pageContext.request.contextPath}/servlets/users/parent/ParentRegistration" method="POST">
                     <br/>
-                    <div class="card-body shadow p-3 mb-5 bg-white rounded">
+                    <div class="card-body">
                         <h3 class="formPara formHeader">Profile Settings</h3>
                         <br/>
                         <label for="firstname" class="form-label formPara"><%="Firstname"%></label>
