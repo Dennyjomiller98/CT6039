@@ -2,6 +2,7 @@ package com.uog.miller.s1707031_ct6039.oracle;
 
 import com.uog.miller.s1707031_ct6039.beans.HomeworkBean;
 import com.uog.miller.s1707031_ct6039.beans.SubmissionBean;
+import com.uog.miller.s1707031_ct6039.mail.Emailer;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -201,6 +202,15 @@ public class HomeworkConnections extends AbstractOracleConnections
 					Connection oracleClient2 = conn2.getOracleClient();
 					bean.setSubmissionId(fileId);
 					result = addChildSubmissionToDB(oracleClient2, bean);
+
+					//Email (Based on user account preferences)
+					boolean shouldEmail = shouldUserBeNotified(bean.getEmail(), NotificationType.HOMEWORK);
+					if(shouldEmail)
+					{
+						//Process Mail to inform user of Update
+						Emailer emailer = new Emailer();
+						emailer.generateMailForHomeworkSubmit(bean.getEmail(), filename);
+					}
 				}
 			}
 			else
@@ -767,6 +777,15 @@ public class HomeworkConnections extends AbstractOracleConnections
 				String query = "UPDATE " + HOMEWORK_SUBMISSIONS_COLLECTION + " SET Grade ='" + grade
 						+"' WHERE Submission_Id='"+ submissionId +"' AND Child_Email='"+childEmail+"'";
 				executeUpdateQuery(oracleClient, query);
+
+				//Email (Based on user account preferences)
+				boolean shouldEmail = shouldUserBeNotified(childEmail, NotificationType.HOMEWORK);
+				if(shouldEmail)
+				{
+					//Process Mail to inform user of Update
+					Emailer emailer = new Emailer();
+					emailer.generateMailForHomeworkGrade(childEmail, grade);
+				}
 			}
 			else
 			{

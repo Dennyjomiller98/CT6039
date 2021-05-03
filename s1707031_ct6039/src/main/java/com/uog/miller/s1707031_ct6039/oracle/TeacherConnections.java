@@ -1,6 +1,7 @@
 package com.uog.miller.s1707031_ct6039.oracle;
 
 import com.uog.miller.s1707031_ct6039.beans.TeacherBean;
+import com.uog.miller.s1707031_ct6039.mail.Emailer;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -53,6 +54,14 @@ public class TeacherConnections extends AbstractOracleConnections
 		boolean userExists = checkUserExists(beanToRegister.getEmail());
 		if(userExists)
 		{
+			//Email (Based on user account preferences)
+			boolean shouldEmail = shouldUserBeNotified(beanToRegister.getEmail(), NotificationType.PROFILE);
+			if(shouldEmail)
+			{
+				//Process Mail to inform user of Update
+				Emailer emailer = new Emailer();
+				emailer.generateMailForProfileCreate(beanToRegister.getEmail(), beanToRegister.getFirstname());
+			}
 			ret = true;
 		}
 		return ret;
@@ -228,6 +237,15 @@ public class TeacherConnections extends AbstractOracleConnections
 						+"', Profile_Email='"+ teacherBean.getEmailForProfile()
 						+"' WHERE Email='"+ teacherBean.getEmail() +"'";
 				executeUpdateQuery(oracleClient, query);
+
+				//Email (Based on user account preferences)
+				boolean shouldEmail = shouldUserBeNotified(teacherBean.getEmail(), NotificationType.PROFILE);
+				if(shouldEmail)
+				{
+					//Process Mail to inform user of Update
+					Emailer emailer = new Emailer();
+					emailer.generateMailForProfileUpdate(teacherBean.getEmail(), teacherBean.getFirstname());
+				}
 			}
 			else
 			{

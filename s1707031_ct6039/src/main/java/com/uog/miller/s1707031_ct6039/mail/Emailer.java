@@ -42,25 +42,56 @@ public class Emailer
 	public void generateMailForCalendarCreate(String recipient, String calendarEventName, String dueDate)
 	{
 		String subject = "An event has been created";
-		String message = "A new Calendar event (Event Name: '" + calendarEventName + "') has been created. \r\n This event deadline is: " + dueDate + ".";
+		String message = "A new Calendar event (Event Name: " + calendarEventName + ") has been created. \r\n" + "This event deadline is: " + dueDate + ".";
 		generateMail(subject, message, recipient);
 	}
 
-	public void generateMailForHomeworkGrade()
+	public void generateMailForProfileCreate(String recipient, String firstname)
 	{
-
+		String subject = "New Account Creation";
+		String message = "Hello " + firstname + ". Your email has been used to create a new account on our system. \r\n" + "If this was not done by you, please get in contact to resolve this.";
+		generateMail(subject, message, recipient);
 	}
 
-	public void generateMailForHomeworkSubmit()
-	{
-
-	}
-
-	public void generateMailForProfileUpdate(String pin, String recipient)
+	public void generateMailForProfileUpdate(String recipient, String firstname)
 	{
 		String subject = "Your Profile has been updated";
-		String message = "Test";
+		String message = firstname + ", this is an automated notification alerting you that your account Profile has recently been updated. \r\n" + "If this was not done by you, please get in contact to resolve this.";
 		generateMail(subject, message, recipient);
+	}
+
+	public void generateMailForHomeworkGrade(String childRecipient, String grade)
+	{
+		//Grade is under traffic light "Green/Amber/Red" system. (Follow the "Superb/Good/Keep Trying" convention used previously)
+		String value;
+		if(grade.equalsIgnoreCase("green"))
+		{
+			value = "Superb!";
+		}
+		else if(grade.equalsIgnoreCase("amber"))
+		{
+			value = "Good!";
+		}
+		else if(grade.equalsIgnoreCase("red"))
+		{
+			value = "Keep Trying!";
+		}
+		else
+		{
+			value = "Unknown - Please check your Homework page for results.";
+		}
+		String subject = "Your Teacher has provided Homework Grade";
+		String message = "This is an automated notification alerting you that your Teacher has recently marked your submitted homework. \r\n"
+				+ "Your Grade was: '" + value + "' \r\n"
+				+ "If this was not done by you, please get in contact to resolve this.";
+		generateMail(subject, message, childRecipient);
+	}
+
+	public void generateMailForHomeworkSubmit(String email, String filename)
+	{
+		String subject = "Homework Submission Confirmation";
+		String message = "This is an automated response confirming your homework submission (File:" + filename + "has been submitted. \r\n" + "If this was not done by you, please get in contact to resolve this.";
+		generateMail(subject, message, email);
 	}
 
 	//Generates Mail with pre-defined content
@@ -87,6 +118,7 @@ public class Emailer
 			message.setFrom(new InternetAddress(from));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipientAddress));
 			message.setSubject(subject);
+			messageContent = messageContent + "\r\n \r\n " + "This mail was sent automatically as part of a University of Gloucestershire Dissertation Project, by Denny-Jo Miller (s1707031). Any personal information provided will not be retained after testing has concluded, and will be purged after the testing and feedback period.";
 			message.setText(messageContent);
 
 			Transport.send(message);

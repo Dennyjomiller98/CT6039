@@ -39,9 +39,14 @@ public class CalendarConnections extends AbstractOracleConnections
 				//Execute query
 				executeAdditionQuery(oracleClient, query);
 
-				//Process Mail to inform user of Update
-				Emailer emailer = new Emailer();
-				emailer.generateMailForCalendarCreate(user, name, dateForUpdate);
+				//Email (Based on user account preferences)
+				boolean shouldEmail = shouldUserBeNotified(user, NotificationType.CALENDAR);
+				if(shouldEmail)
+				{
+					//Process Mail to inform user of Update
+					Emailer emailer = new Emailer();
+					emailer.generateMailForCalendarCreate(user, name, dateForUpdate);
+				}
 			}
 			else
 			{
