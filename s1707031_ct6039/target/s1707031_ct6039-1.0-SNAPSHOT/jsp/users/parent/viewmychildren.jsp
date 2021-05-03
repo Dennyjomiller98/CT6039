@@ -154,13 +154,13 @@
                 </div>
                 <br/>
                 <% } } else { %>
-                <p class="formParaText">
+                <p class="main-body-text myPara neat">
                     <%="You have no linked children, please update your Profile."%>
                 </p>
                 <br/>
                 <% }
                 }else { %>
-                <p class="formParaText">
+                <p class="main-body-text myPara neat">
                     <%="You have no linked children, please update your Profile."%>
                 </p>
                 <br/>
