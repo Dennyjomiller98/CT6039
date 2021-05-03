@@ -21,7 +21,7 @@ public class Emailer
 		Properties props = new Properties();
 		try
 		{
-			InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream("/config/config.properties");
+			InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream("/config.properties");
 			if(resourceAsStream != null)
 			{
 				props.load(resourceAsStream);
@@ -37,80 +37,6 @@ public class Emailer
 		{
 			e.printStackTrace();
 		}
-	}
-
-	public Emailer(HttpServletRequest request)
-	{
-		Properties props = new Properties();
-		try
-		{
-			ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
-			if (contextClassLoader != null)
-			{
-				InputStream resourceAsStream = contextClassLoader.getResourceAsStream("/classes/config.properties");
-				if(resourceAsStream != null)
-				{
-					props.load(resourceAsStream);
-					username = props.getProperty("mailsender");
-					password = props.getProperty("mailpword");
-					request.getSession(true).setAttribute("shouldNotifyErr", "We have props:" + props + props.getProperty("mailsender"));
-				}
-				else
-				{
-					InputStream noSlash = contextClassLoader.getResourceAsStream("classes/config.properties");
-					if(noSlash != null)
-					{
-						props.load(noSlash);
-						request.getSession(true).setAttribute("shouldNotifyErr", "NoSlash works:" + props + "Username:" + props.getProperty("mailsender"));
-					}
-					else
-					{
-						InputStream noDir = contextClassLoader.getResourceAsStream("/config.properties");
-						if (noDir != null)
-						{
-							props.load(noDir);
-							request.getSession(true).setAttribute("shouldNotifyErr", "NoDir works:" + props.getProperty("mailsender"));
-						}
-						else
-						{
-							InputStream noDirSlash = contextClassLoader.getResourceAsStream("config.properties");
-							if(noDirSlash != null)
-							{
-								props.load(noDirSlash);
-								request.getSession(true).setAttribute("shouldNotifyErr", "NoDirSlash works:" + props.getProperty("mailsender"));
-							}
-							else
-							{
-								request.getSession(true).setAttribute("shouldNotifyErr", "NOTHING WORKS");
-							}
-						}
-						//request.getSession(true).setAttribute("shouldNotifyErr", "NoSlash didnt work:");
-					}
-					//throw new FileNotFoundException("Could not find properties file for configuring smtp mail");
-				}
-			}
-			//InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream("/config/config.properties");
-			/*if(resourceAsStream != null)
-			{
-				props.load(resourceAsStream);
-				username = props.getProperty("mailsender");
-				password = props.getProperty("mailpword");
-				request.getSession(true).setAttribute("shouldNotifyErr", "We have props:" + props + props.getProperty("mailsender"));
-			}
-			else
-			{
-				Class<? extends Emailer> aClass = this.getClass();
-				ClassLoader classLoader = aClass.getClassLoader();
-				InputStream res = classLoader.getResourceAsStream("config/config.properties");
-				request.getSession(true).setAttribute("shouldNotifyErr", "We have no props: (Class/Classloader/resource): CL:" + aClass + "CL:" + classLoader + "RES:" + res);
-				throw new FileNotFoundException("Could not find properties file for configuring smtp mail");
-			}*/
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-
 	}
 
 	public void generateMailForCalendarCreate(String recipient, String calendarEventName, String dueDate, HttpServletRequest request)
