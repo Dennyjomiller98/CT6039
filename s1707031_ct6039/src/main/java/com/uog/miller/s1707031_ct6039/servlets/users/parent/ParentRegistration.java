@@ -77,12 +77,43 @@ public class ParentRegistration extends HttpServlet
 				bean.setEmailForHomework(true);
 				bean.setEmailForCalendar(true);
 				bean.setEmailForProfile(true);
-				attemptParentRegistration(request, response, bean, String.join(", ", linkedChildIds));
+				if(linkedChildIds != null && linkedChildIds.length > 0)
+				{
+					attemptParentRegistration(bean, String.join(", ", linkedChildIds));
+				}
+				//Use ParentBean to create an account and add to DB
+				ParentConnections parentConnections = new ParentConnections();
+				boolean registerSuccess = parentConnections.registerParent(bean);
+				if(registerSuccess)
+				{
+					//Redirect happy path, remove errors (if any)
+					request.getSession(true).removeAttribute("formErrors");
+					request.getSession(true).setAttribute("formSuccess", "Account created successfully.");
+					try
+					{
+						response.sendRedirect(request.getContextPath() + "/jsp/users/parent/parentlogin.jsp");
+					} catch (IOException e) {
+						LOG.error("Failure to redirect.", e);
+					}
+				}
+				else
+				{
+					LOG.error("Unknown error occurred whilst attempting to create new User: " + bean.getEmail());
+					//Redirect Back to Registration Page
+					request.getSession(true).setAttribute("formErrors", "Unknown Error. The account was not created.");
+					request.getSession(true).removeAttribute("formSuccess");
+					try
+					{
+						response.sendRedirect(request.getContextPath() + "/jsp/users/parent/parentregistration.jsp");
+					} catch (IOException e) {
+						LOG.error("Failure to redirect.", e);
+					}
+				}
 			}
 		}
 	}
 
-	private void attemptParentRegistration(HttpServletRequest request, HttpServletResponse response, ParentBean bean, String linkedChildIds)
+	private void attemptParentRegistration(ParentBean bean, String linkedChildIds)
 	{
 		LOG.debug("Account sane to be created, attempting to register to DB");
 		//Create parent-child link
@@ -93,35 +124,6 @@ public class ParentRegistration extends HttpServlet
 		if(allLinkedIds != null)
 		{
 			bean.setLinkedChildIds(allLinkedIds);
-		}
-
-		//Use ParentBean to create an account and add to DB
-		ParentConnections parentConnections = new ParentConnections();
-		boolean registerSuccess = parentConnections.registerParent(bean);
-		if(registerSuccess)
-		{
-			//Redirect happy path, remove errors (if any)
-			request.getSession(true).removeAttribute("formErrors");
-			request.getSession(true).setAttribute("formSuccess", "Account created successfully.");
-			try
-			{
-				response.sendRedirect(request.getContextPath() + "/jsp/users/parent/parentlogin.jsp");
-			} catch (IOException e) {
-				LOG.error("Failure to redirect.", e);
-			}
-		}
-		else
-		{
-			LOG.error("Unknown error occurred whilst attempting to create new User: " + bean.getEmail());
-			//Redirect Back to Registration Page
-			request.getSession(true).setAttribute("formErrors", "Unknown Error. The account was not created.");
-			request.getSession(true).removeAttribute("formSuccess");
-			try
-			{
-				response.sendRedirect(request.getContextPath() + "/jsp/users/parent/parentregistration.jsp");
-			} catch (IOException e) {
-				LOG.error("Failure to redirect.", e);
-			}
 		}
 	}
 

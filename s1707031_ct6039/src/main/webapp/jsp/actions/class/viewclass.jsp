@@ -146,7 +146,7 @@
                         </div>
                         <br/>
                     <% } } else { %>
-                        <p class="formParaText">
+                        <p class="formTextCenter myPara neat">
                             <%="There are no classes here."%>
                         </p>
                         <br/>
