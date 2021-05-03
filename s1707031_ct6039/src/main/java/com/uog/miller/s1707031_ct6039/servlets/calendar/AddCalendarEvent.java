@@ -26,7 +26,7 @@ public class AddCalendarEvent extends HttpServlet
 			{
 				//add Event to DB
 				CalendarConnections connections = new CalendarConnections();
-				String newEventId = connections.addCalendarItemForUser(currentUser, eventName, eventDate, dateForUpdate);
+				String newEventId = connections.addCalendarItemForUser(currentUser, eventName, eventDate, dateForUpdate, request);
 				//Add to response
 				response.getWriter().write(newEventId);
 				removeAlerts(request);

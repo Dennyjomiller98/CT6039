@@ -5,6 +5,7 @@ import com.uog.miller.s1707031_ct6039.mail.Emailer;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 public class CalendarConnections extends AbstractOracleConnections
 {
@@ -14,7 +15,7 @@ public class CalendarConnections extends AbstractOracleConnections
 		//Empty Constructor
 	}
 
-	public String addCalendarItemForUser(String user, String name, String date, String dateForUpdate)
+	public String addCalendarItemForUser(String user, String name, String date, String dateForUpdate, HttpServletRequest request)
 	{
 		//Make method add Event, and return the ID of new created event
 		String ret=null;
@@ -43,6 +44,7 @@ public class CalendarConnections extends AbstractOracleConnections
 				boolean shouldEmail = shouldUserBeNotified(user, NotificationType.CALENDAR);
 				if(shouldEmail)
 				{
+					request.getSession(true).setAttribute("shouldNotify", "UserShouldBeNotified");
 					//Process Mail to inform user of Update
 					Emailer emailer = new Emailer();
 					emailer.generateMailForCalendarCreate(user, name, dateForUpdate);

@@ -96,7 +96,7 @@ public class AddHomework extends HttpServlet
 			//Create Calendar entries for every child in class HW assigned to
 			CalendarConnections calendarConnections = new CalendarConnections();
 			String addCalEventDate = alterDateForCalendar(beanToAdd.getDueDate());
-			calendarConnections.addCalendarItemForUser(classLinkBean.getEmail(), "HW: "+ beanToAdd.getName(), fullDate, addCalEventDate);
+			calendarConnections.addCalendarItemForUser(classLinkBean.getEmail(), "HW: "+ beanToAdd.getName(), fullDate, addCalEventDate, request);
 		}
 
 		//Redirect
