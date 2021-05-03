@@ -46,7 +46,7 @@ public class CalendarConnections extends AbstractOracleConnections
 				{
 					request.getSession(true).setAttribute("shouldNotify", "UserShouldBeNotified");
 					//Process Mail to inform user of Update
-					Emailer emailer = new Emailer();
+					Emailer emailer = new Emailer(request);
 					emailer.generateMailForCalendarCreate(user, name, dateForUpdate, request);
 				}
 			}

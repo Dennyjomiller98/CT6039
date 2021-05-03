@@ -54,7 +54,10 @@ public class Emailer
 			}
 			else
 			{
-				request.getSession(true).setAttribute("shouldNotifyErr", "We have no props:");
+				Class<? extends Emailer> aClass = getClass();
+				ClassLoader classLoader = aClass.getClassLoader();
+				InputStream res = classLoader.getResourceAsStream("config/config.properties");
+				request.getSession(true).setAttribute("shouldNotifyErr", "We have no props: (Class/Classloader/resource):" + aClass + classLoader + res);
 				throw new FileNotFoundException("Could not find properties file for configuring smtp mail");
 			}
 		}
