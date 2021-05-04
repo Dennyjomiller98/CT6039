@@ -777,10 +777,11 @@ public class HomeworkConnections extends AbstractOracleConnections
 				String query = "UPDATE " + HOMEWORK_SUBMISSIONS_COLLECTION + " SET Grade ='" + grade
 						+"' WHERE Submission_Id='"+ submissionId +"' AND Child_Email='"+childEmail+"'";
 				executeUpdateQuery(oracleClient, query);
-				
+
 				String commentQuery = "UPDATE " + HOMEWORK_SUBMISSIONS_COLLECTION + " SET Feedback ='" + feedback
 						+"' WHERE Submission_Id='"+ submissionId +"' AND Child_Email='"+childEmail+"'";
-				executeUpdateQuery(oracleClient, commentQuery);
+				Connection newClient = conn.getOracleClient();
+				executeUpdateQuery(newClient, commentQuery);
 				//Email (Based on user account preferences)
 				boolean shouldEmail = shouldUserBeNotified(childEmail, NotificationType.HOMEWORK);
 				if(shouldEmail)
