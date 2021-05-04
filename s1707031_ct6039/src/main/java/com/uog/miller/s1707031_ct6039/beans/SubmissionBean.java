@@ -12,7 +12,7 @@ public class SubmissionBean
 	private String fSubmissionDate;
 	private String fSubmissionId;
 	private String fGrade;
-
+	private String fFeedbackComment;
 
 	public SubmissionBean()
 	{
@@ -28,6 +28,7 @@ public class SubmissionBean
 			fSubmissionDate = resultSet.getString("Date_Submitted");
 			fGrade = resultSet.getString("Grade");
 			fSubmissionId = resultSet.getString("Submission_Id");
+			fFeedbackComment = resultSet.getString("Feedback");
 		}
 		catch (SQLException e)
 		{

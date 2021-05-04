@@ -1,6 +1,7 @@
 <%@ page import="com.uog.miller.s1707031_ct6039.beans.HomeworkBean" %>
 <%@ page import="com.uog.miller.s1707031_ct6039.beans.SubmissionBean" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: Denny-Jo
   Date: 19/02/2021
@@ -132,8 +133,24 @@
             <br/>
 
             <div class="main-body-content myPara neat">
-                <%List<HomeworkBean> allHomework = (List<HomeworkBean>) session.getAttribute("allHomeworks");
-                    List<SubmissionBean> allSubmissions = (List<SubmissionBean>) session.getAttribute("allSubmissions");
+                <%  List<HomeworkBean> allHomework;
+                <%  List<SubmissionBean> allSubmissions;
+                    if (session.getAttribute("allHomeworks") != null)
+                    {
+                    	allHomework = (List<HomeworkBean>) session.getAttribute("allHomeworks");
+                    }
+                    else
+                    {
+                        allHomework = new ArrayList<>();
+                    }
+                    if (session.getAttribute("allSubmissions") != null)
+                    {
+                        allSubmissions = (List<SubmissionBean>) session.getAttribute("allSubmissions");
+                    }
+                    else
+                    {
+                        allSubmissions = new ArrayList<>();
+                    }
                     if (allHomework.size() > 0 && allSubmissions.size() > 0)
                     {%>
 

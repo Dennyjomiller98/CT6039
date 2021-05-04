@@ -1,6 +1,7 @@
 <%@ page import="com.uog.miller.s1707031_ct6039.beans.ChildBean" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.uog.miller.s1707031_ct6039.beans.ProgressBean" %><%--
+<%@ page import="com.uog.miller.s1707031_ct6039.beans.ProgressBean" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: Denny-Jo
   Date: 06/03/2021
@@ -132,7 +133,15 @@
             <div class="main-body-content">
                 <% if(session.getAttribute("myChildrenBeans") != null)
                 {
-                    List<ChildBean> myChildrenBeans = (List<ChildBean>) session.getAttribute("myChildrenBeans");
+                    List<ChildBean> myChildrenBeans;
+                    if (session.getAttribute("myChildrenBeans") != null)
+                    {
+                        myChildrenBeans = (List<ChildBean>) session.getAttribute("myChildrenBeans");
+                    }
+                    else
+                    {
+                        myChildrenBeans = new ArrayList<>();
+                    }
                     if (myChildrenBeans.size() > 0)
                     { for (ChildBean child : myChildrenBeans) {%>
 
@@ -168,7 +177,12 @@
             </div>
 
             <%--Modal popup for child progress--%>
-            <%ProgressBean childProgressBean = (ProgressBean) session.getAttribute("childProgress"); %>
+            <%
+                ProgressBean childProgressBean = null;
+                if (session.getAttribute("childProgress") != null)
+                {
+                    childProgressBean = (ProgressBean) session.getAttribute("childProgress");
+                }
             <%if(childProgressBean != null) { %>
             <%--Script to load modal (or won't popup)--%>
             <script>
