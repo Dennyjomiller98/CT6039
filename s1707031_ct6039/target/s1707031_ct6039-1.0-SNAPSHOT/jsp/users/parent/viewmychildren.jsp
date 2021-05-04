@@ -183,7 +183,7 @@
                 {
                     childProgressBean = (ProgressBean) session.getAttribute("childProgress");
                 }
-            <%if(childProgressBean != null) { %>
+                if(childProgressBean != null) { %>
             <%--Script to load modal (or won't popup)--%>
             <script>
                 $(window).on('load', function(){

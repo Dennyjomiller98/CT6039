@@ -134,7 +134,7 @@
 
             <div class="main-body-content myPara neat">
                 <%  List<HomeworkBean> allHomework;
-                <%  List<SubmissionBean> allSubmissions;
+                    List<SubmissionBean> allSubmissions;
                     if (session.getAttribute("allHomeworks") != null)
                     {
                     	allHomework = (List<HomeworkBean>) session.getAttribute("allHomeworks");
