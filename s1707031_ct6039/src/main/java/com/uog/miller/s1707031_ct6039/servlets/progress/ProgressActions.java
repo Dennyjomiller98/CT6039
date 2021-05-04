@@ -46,29 +46,35 @@ public class ProgressActions extends HttpServlet
 					String eventId = bean.getEventId();
 					HomeworkBean homeworkBean = connections.getHomeworkTaskFromId(eventId);
 
-					//Date of submission (if submitted)
-					String dateDue = homeworkBean.getDueDate();
-					String dateSubmitted = bean.getSubmissionDate();
-					checkSubmissionStatus(dateDue, dateSubmitted, onTimeHandins, overdueHandins, notSubmitted, progressBean, submissionId);
+					if(homeworkBean.getDueDate() != null)
+					{
+						String dateDue = homeworkBean.getDueDate();
+						//Date of submission (if submitted)
+						String dateSubmitted = bean.getSubmissionDate();
+						checkSubmissionStatus(dateDue, dateSubmitted, onTimeHandins, overdueHandins, notSubmitted, progressBean, submissionId);
+					}
 
 					//Submission Information
 					String grade = bean.getGrade();
-					switch (grade)
+					if(grade != null)
 					{
-						case "green":
-							totalGreen++;
-							totalHomeworks++;
-							break;
-						case "amber":
-							totalAmber++;
-							totalHomeworks++;
-							break;
-						case "red":
-							totalRed++;
-							totalHomeworks++;
-							break;
-						default:
-							LOG.error("Unknown or null value in DB for Grade. If null, no submission, else error in DB value");
+						switch (grade)
+						{
+							case "green":
+								totalGreen++;
+								totalHomeworks++;
+								break;
+							case "amber":
+								totalAmber++;
+								totalHomeworks++;
+								break;
+							case "red":
+								totalRed++;
+								totalHomeworks++;
+								break;
+							default:
+								LOG.error("Unknown or null value in DB for Grade. If null, no submission, else error in DB value");
+						}
 					}
 
 					//Total hand-ins
@@ -115,8 +121,16 @@ public class ProgressActions extends HttpServlet
 
 	private void checkSubmissionStatus(String dateDue, String dateSubmitted, int onTimeHandins, int overdueHandins, int notSubmitted, ProgressBean progressBean, String submissionId)
 	{
-		String[] dueSplit = dateDue.split("-");
-		String[] submittedSplit = dateSubmitted.split("-");
+		String[] dueSplit = null;
+		String[] submittedSplit = null;
+		if(dateDue != null)
+		{
+			dueSplit = dateDue.split("-");
+		}
+		if(dateSubmitted != null)
+		{
+			submittedSplit = dateSubmitted.split("-");
+		}
 
 		if(submissionId == null)
 		{
