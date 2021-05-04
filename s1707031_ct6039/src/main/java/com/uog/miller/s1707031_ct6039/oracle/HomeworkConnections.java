@@ -765,7 +765,7 @@ public class HomeworkConnections extends AbstractOracleConnections
 	}
 
 	//Updates DB value of HW submission with grade value (Traffic lights green/amber/red)
-	public void gradeHomeworkSubmission(String submissionId, String childEmail, String grade)
+	public void gradeHomeworkSubmission(String submissionId, String childEmail, String grade, String feedback)
 	{
 		setOracleDriver();
 		try
@@ -775,7 +775,7 @@ public class HomeworkConnections extends AbstractOracleConnections
 			if (oracleClient != null)
 			{
 				String query = "UPDATE " + HOMEWORK_SUBMISSIONS_COLLECTION + " SET Grade ='" + grade
-						+"' WHERE Submission_Id='"+ submissionId +"' AND Child_Email='"+childEmail+"'";
+						+"' WHERE Submission_Id='"+ submissionId +"' AND Child_Email='"+childEmail+"' AND Feedback='"+feedback+"'";
 				executeUpdateQuery(oracleClient, query);
 
 				//Email (Based on user account preferences)

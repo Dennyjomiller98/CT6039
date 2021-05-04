@@ -27,8 +27,9 @@ public class GradeHomework extends HttpServlet
 			String childEmail = request.getParameter("childEmail");
 			String submissionId = request.getParameter("submissionId");
 			String homeworkId = request.getParameter("homeworkId");
+			String feedback = request.getParameter("feedback");
 			HomeworkConnections connections = new HomeworkConnections();
-			connections.gradeHomeworkSubmission(submissionId, childEmail, grade);
+			connections.gradeHomeworkSubmission(submissionId, childEmail, grade, feedback);
 
 			//Re-populate submissions and redirect
 			removeAlerts(request);

@@ -149,6 +149,8 @@
                                 <option class="formParaText gradeRed" value="red">Red</option>
                             </select>
                             <br/>
+                            <label for="feedback" class="formPara"><%="Feedback"%></label><br/>
+                            <input class="formParaText form-control" type="text" name="feedback" id="feedback" maxlength="255"/>
                         </div>
                         <div class="body-main-content myformbtn">
                             <br/>

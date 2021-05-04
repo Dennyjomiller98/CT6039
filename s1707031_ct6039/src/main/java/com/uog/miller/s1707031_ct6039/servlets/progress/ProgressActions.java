@@ -27,53 +27,56 @@ public class ProgressActions extends HttpServlet
 		if(childEmail != null)
 		{
 			ProgressBean progressBean = new ProgressBean();
+			progressBean.setChild(childEmail);
 			HomeworkConnections connections = new HomeworkConnections();
 			List<SubmissionBean> allHomework = connections.getAllHomeworkSubmissionsForChild(childEmail);
-			int totalGreen = 0;
-			int totalAmber = 0;
-			int totalRed = 0;
-			int totalHomeworks = 0;
-			int onTimeHandins = 0;
-			int overdueHandins = 0;
-			int notSubmitted = 0;
-			for (SubmissionBean bean : allHomework)
+			if(!allHomework.isEmpty())
 			{
-				progressBean.setChild(childEmail);
-				String submissionId = bean.getSubmissionId();
-
-				String eventId = bean.getEventId();
-				HomeworkBean homeworkBean = connections.getHomeworkTaskFromId(eventId);
-
-				//Date of submission (if submitted)
-				String dateDue = homeworkBean.getDueDate();
-				String dateSubmitted = bean.getSubmissionDate();
-				checkSubmissionStatus(dateDue, dateSubmitted, onTimeHandins, overdueHandins, notSubmitted, progressBean, submissionId);
-
-				//Submission Information
-				String grade = bean.getGrade();
-				switch (grade)
+				int totalGreen = 0;
+				int totalAmber = 0;
+				int totalRed = 0;
+				int totalHomeworks = 0;
+				int onTimeHandins = 0;
+				int overdueHandins = 0;
+				int notSubmitted = 0;
+				for (SubmissionBean bean : allHomework)
 				{
-					case "green":
-						totalGreen++;
-						totalHomeworks++;
-						break;
-					case "amber":
-						totalAmber++;
-						totalHomeworks++;
-						break;
-					case "red":
-						totalRed++;
-						totalHomeworks++;
-						break;
-					default:
-						LOG.error("Unknown or null value in DB for Grade. If null, no submission, else error in DB value");
-				}
+					String submissionId = bean.getSubmissionId();
 
-				//Total hand-ins
-				progressBean.setTotalHomeworks(totalHomeworks);
-				progressBean.setTotalGreen(totalGreen);
-				progressBean.setTotalAmber(totalAmber);
-				progressBean.setTotalRed(totalRed);
+					String eventId = bean.getEventId();
+					HomeworkBean homeworkBean = connections.getHomeworkTaskFromId(eventId);
+
+					//Date of submission (if submitted)
+					String dateDue = homeworkBean.getDueDate();
+					String dateSubmitted = bean.getSubmissionDate();
+					checkSubmissionStatus(dateDue, dateSubmitted, onTimeHandins, overdueHandins, notSubmitted, progressBean, submissionId);
+
+					//Submission Information
+					String grade = bean.getGrade();
+					switch (grade)
+					{
+						case "green":
+							totalGreen++;
+							totalHomeworks++;
+							break;
+						case "amber":
+							totalAmber++;
+							totalHomeworks++;
+							break;
+						case "red":
+							totalRed++;
+							totalHomeworks++;
+							break;
+						default:
+							LOG.error("Unknown or null value in DB for Grade. If null, no submission, else error in DB value");
+					}
+
+					//Total hand-ins
+					progressBean.setTotalHomeworks(totalHomeworks);
+					progressBean.setTotalGreen(totalGreen);
+					progressBean.setTotalAmber(totalAmber);
+					progressBean.setTotalRed(totalRed);
+				}
 			}
 
 			//Remove alerts and redirect

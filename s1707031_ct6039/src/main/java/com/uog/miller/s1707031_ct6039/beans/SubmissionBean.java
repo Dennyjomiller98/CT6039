@@ -80,4 +80,13 @@ public class SubmissionBean
 	{
 		fSubmissionId = subId;
 	}
+
+	public String getFeedback()
+	{
+		return fFeedbackComment;
+	}
+	public void setFeedback(String feedbackComment)
+	{
+		fFeedbackComment = feedbackComment;
+	}
 }
